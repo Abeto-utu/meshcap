@@ -1,0 +1,152 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #092F36;
+    padding: 1em;
+  }
+
+  .logo{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+  }
+
+  .flecha{
+    width: 50px;
+    height: 50px;
+  }
+
+  h1{
+    font-size: 2.5em;
+    color: white;
+  }
+textarea {
+    box-sizing: border-box;
+    resize: none;
+    width: 80%;
+    margin: 2em;
+    padding: 1em;
+    border: none;
+    border-radius: 5px;
+}
+
+form{
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+    border: solid rgb(197, 196, 196,) 1px;
+    background-color: rgb(231, 230, 230);
+    border-radius: 5%;
+    margin: 6em;
+}
+
+input{
+    box-sizing: border-box;
+    width: 80%;
+    margin: 2em;
+    padding: 1.2em;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type=submit]{
+    width: 80%;
+    background-color: rgb(55, 190, 55);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 1em;
+    cursor: pointer;
+    margin: 1em;
+    border: 2px solid rgb(55, 190, 55);
+    
+}
+
+input:focus{
+    outline-color: rgb(40, 222, 242);
+    transition:0.3s ease;
+}
+
+textarea:focus{
+    outline-color: rgb(40, 222, 242);
+    transition:0.3s ease;
+}
+
+input[type=submit]:hover{
+    border-color: rgb(64, 208, 64);
+    transition: 0.3s ease;
+}
+.container_table{
+    display: inline-block;
+    height: 375px; 
+    overflow: auto;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th{
+    font-size: 1.3em;
+    padding: 1em;
+    border: solid 2px rgb(35, 35, 35);
+    background-color: rgb(231, 230, 230);
+    color: black;
+    border: solid 1px rgb(128, 128, 128);
+}
+
+td{
+    padding: 1em;
+    border: solid 2px rgb(35, 35, 35);
+    background-color: rgb(231, 230, 230);
+    max-width: 180px;
+    word-wrap: break-word;
+    color: rgb(0, 0, 0);
+    border: solid 1px rgb(128, 128, 128);
+}
+
+.icon{
+    width: 30px;
+    height: 30px;
+    margin: 1em;
+    padding: 0.6em;
+    transition: 0.6s ease;
+    border: solid black 1px;
+}
+
+.icon:hover{
+    background-color: rgb(229, 39, 39);
+    transition: 0.6s ease;
+    border-radius: 50%;
+}
+
+#edit_icon:hover{
+    border-radius: 0%;
+    background-color: rgb(40, 140, 180);
+}
+
+@media screen and (max-width:1600px){
+    .container_table{
+        max-width: 100%;
+        font-size: 15px;
+    }form{
+        width: 60%;
+    }
+    body{
+        margin: auto;
+    }
+}
+
+@media screen and (max-width:1120px){
+    .container_table{
+        text-align: center;
+        font-size: 9px;
+    }
+}
+

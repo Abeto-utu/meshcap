@@ -1,0 +1,60 @@
+  body{
+    margin: 0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #092F36;
+    padding: 1em;
+  }
+
+  .logo{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+  }
+
+  .flecha{
+    width: 50px;
+    height: 50px;
+  }
+
+  h1{
+    font-size: 2.5em;
+    color: #ffffffff;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10em;
+  }
+  
+  .carta {
+    box-shadow: 0em 0em 0.5em #092F36;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px gray;
+    padding: 7em;
+    color: black;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .carta img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .carta h2 {
+    text-align: center;
+  }
+
+  a{
+    text-decoration: none;
+  }
+  
