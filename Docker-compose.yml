@@ -1,0 +1,35 @@
+version: '3'
+services:
+  php-apache:
+    container_name: aplicacion-php
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - DB_USUARIO=root
+      - DB_CONTRASENA=1234
+      - DB_IP=db
+      - DB_NOMBRE=mesh_cap
+    networks:
+      - red
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: base-de-datos
+    image: mysql:8
+    ports:
+      - "4306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mesh_cap
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - red
+
+networks:
+  red:
+    driver: bridge

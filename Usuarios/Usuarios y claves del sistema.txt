@@ -1,0 +1,6 @@
+N° funcionario	Clave		Cargo		
+1234567890	backoffice	backoffice	
+1010101010	ivan12345	camionero	
+1212121212	Pepito234	almaceneroMontevideo	
+2147483647	123123		almaceneroInterior	
+2112332133	Pepito234	repartidor	
