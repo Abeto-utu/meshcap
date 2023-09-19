@@ -1,35 +1,38 @@
 version: '3'
 services:
-  php-apache:
-    container_name: aplicacion-php
+  web-app:
+    container_name: aplicacion    
     build:
-      context: .
+      context: ./php
       dockerfile: Dockerfile
+    # Indica que se debe construir una imagen de Docker para este servicio utilizando el archivo Dockerfile en el directorio "./php".
+    links:
+      - database
+    # Establece una conexión de red entre este contenedor y el contenedor llamado "database". 
+    # Esto permite que "web-app" se comunique con la base de datos utilizando el nombre de host "database".
     ports:
-      - "80:80"
+      - "8080:80"
+    # Mapea el puerto 8080 del host al puerto 80 del contenedor, lo que significa que puedes acceder a la aplicación web en el puerto 8080 del host.
     environment:
-      - DB_USUARIO=root
-      - DB_CONTRASENA=1234
-      - DB_IP=db
-      - DB_NOMBRE=mesh_cap
-    networks:
-      - red
-    depends_on:
-      - mysql
+      - MYSQL_PORT=3306
+      - MYSQL_HOST=database
+      - MYSQL_DATABASE=meshcap
+    # Define variables de entorno que se utilizarán en el contenedor "web-app". 
+    # Estas variables incluyen la configuración de la base de datos, como el puerto, el nombre de host y el nombre de la base de datos.
 
-  mysql:
+  database:
     container_name: base-de-datos
-    image: mysql:8
-    ports:
-      - "4306:3306"
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    # Indica que se debe construir una imagen de Docker para este servicio utilizando el archivo Dockerfile en el directorio "./mysql".
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=mesh_cap
+      - MYSQL_DATABASE=meshcap
+    # Define variables de entorno para la configuración de la base de datos MySQL, como la contraseña de root y el nombre de la base de datos.
     volumes:
-      - ./mysql:/var/lib/mysql
-    networks:
-      - red
-
-networks:
-  red:
-    driver: bridge
+      - ./mysql/initdb:/docker-entrypoint-initdb.d
+    # Mapea el directorio local "./mysql/initdb" al directorio "/docker-entrypoint-initdb.d" dentro del contenedor. 
+    # Esto se utiliza para proporcionar scripts de inicialización de la base de datos al contenedor MySQL.
+    restart: always
+    # Configura el reinicio automático del contenedor
