@@ -1,0 +1,3 @@
+FROM mysql:8
+
+ENV LANG=C.UTF-8
