@@ -1,6 +1,2 @@
-# MeshCap
-Proyecto UTU
-
-Grupo: Abeto
-
-Integrantes: Genaro Amaral, Iván Caballero, Agustín Casañas
+# MESHCAP
+Aplicacion para la gestion de paquetes de la empresa Quick Carry
