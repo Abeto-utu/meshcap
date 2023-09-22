@@ -1,17 +1,39 @@
-<?php require('../MODELO/db.php'); ?>
+<?php
+    require('../MODELO/db.php');
+
+        if(isset($_GET['matricula'])){
+            $matricula = $_GET['matricula'];
+            $query = "SELECT * FROM vehiculo WHERE matricula = '$matricula'";
+            $resultado = mysqli_query($conn,$query);
+                if(mysqli_num_rows($resultado) == 1){
+                    $fila = mysqli_fetch_array($resultado);
+                    $matricula = $fila['matricula'];
+                    $estado = $fila['estado'];
+                    $tipo = $fila['tipo'];
+                }   
+        }
+        if(isset($_POST['editado'])){
+            $matricula = $_GET['matricula'];
+            $tipo_vehiculo = $_POST['tipo_vehiculo'];
+            $estado = $_POST['estado_vehiculo'];
+
+            $query = "UPDATE vehiculo SET matricula = '$matricula', estado = '$estado', tipo = '$tipo_vehiculo' WHERE matricula = '$matricula'";
+            mysqli_query($conn,$query);
+            header("Location: ../VISTA/crudVehiculos.php");
+        }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Vehiculos</title>
-    <link rel="stylesheet" href ="../CSS/stylesCrudPaquetes.css">
+    <link rel="stylesheet" href ="../CSS/stylesCrudEdit.css">
+    <title>Editar Vehiculo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark p-4 ">
     <div class="container-fluid">
       <a class="navbar-brand" href="../VISTA/index.html" id="logo"><img src="../IMAGES/gorraBlanca.png" alt="">MeshCap</a>
@@ -51,9 +73,9 @@
 </nav>
 
     <div class="container-fluid row" $id="container-total">
-      <form action="../CONTROLADOR/saveCruds.php" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
+      <form action="editVehiculos.php?matricula=<?php echo $matricula?>" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
         <div class="mb-3">
-          <h3 class ="text-light text-center">Registro Vehiculos</h3>
+          <h3 class ="text-light text-center">Editar Vehiculos</h3>
             <label for="exampleInputEmail1" class="form-label mb-3">Tipo de vehiculo:</label>
               <select class="form-select mb-3" aria-label="Default select example" name="vehiculo">
                 <option value="Camion">Camion</option>
@@ -72,42 +94,10 @@
                 <option value="Ocupado">Ocupado</option> 
               </select>
 
-              <button type="submit" class="btn btn-secondary " name="guardar_vehiculo">Guardar</button>
+              <button type="submit" class="btn btn-secondary " name="editado">Guardar</button>
       </form>
         </div>
-
-    <div class="col-8 p-5 text-center">
-          <div style="max-height: 600px; overflow-y: auto;">
-              <table class="table col-8">
-              <thead class="table-dark fs-4">
-                  <tr class="align-middle">
-                    <th scope="col">Matricula</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Tipo de vehiculo</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-              </thead>
-              <tbody>
-                    <?php
-                    $query = "SELECT * FROM vehiculo";
-                    $vehiculo = mysqli_query($conn,$query);
-
-                    while($fila = mysqli_fetch_array($vehiculo)){ ?>
-                            <tr class="align-middle">
-                                <td><?php echo $fila['matricula']?></td>
-                                <td><?php echo $fila['estado']?></td>
-                                <td><?php echo $fila['tipo']?></td>
-                                 <td class="align-middle"> 
-                                 <a href="../CONTROLADOR/editVehiculos.php?matricula=<?php echo $fila['matricula']; ?>" class="btn btn-small btn-warning"><i class="fas fa-pen-nib"></i></a>
-                                 <a href="../CONTROLADOR/deleteCruds.php?matricula=<?php echo $fila['matricula']; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>    
-                                </td>
-                            </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-          </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,42 +1,6 @@
-body{
-    margin: 0;
-    padding:0;
-    font-family: Arial, Helvetica, sans-serif;
+#logo{
+  height: 60px;
 }
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #262626;
-    padding: 10px;
-  }
-  
-  .navbar-icon img {
-    width: 500px;
-    height: 90px;
-  }
-  .meshcap{
-    color: #ffffffff;
-  }
-  .navbar-buttons input[type="button"] {
-    margin-left: 10px;
-    padding: 8px 12px;
-    background-color: #a6a6a6;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.7s;
-  }
-  #inicio{
-    font-size: 1.1em;
-    margin: 0em 3em 0em 0em;
-    padding: 0.5em 1em;
-  }
-  
-  .navbar-buttons input[type="button"]:hover {
-    background-color: #a6a6a6a6;
-  }
 
   .container_total{
     width: 40%;
@@ -47,27 +11,37 @@ body{
     background-color: #262626;
     color: white;
     border-radius: 10px;
+
   }
 
+  .navbar-nav {
+    margin-left: auto;
+  }
+  
   h1{
     margin-bottom: 1em;
+    margin: 1em;
+    padding: 1em;
   }
 
   input[type="number"]{
     display: inline-block;
-    width: 30%;
+    width: 50%;
     font-size: 1em;
     outline: none;
     padding: 1em;
     border-radius: 5px;
     border: none;
+  }
+  ::placeholder{
+    font-size: 0.7em;
   } 
 
   input[type="submit"]{
     display: inline-block;
     margin: 0em 0.5em 2.5em 0.5em;
     width: 15%;
-    padding: 1.35em;
+    padding: 1em;
     border-radius: 5px;
     border: none;
     color: white;
@@ -90,10 +64,4 @@ body{
   hr{
     width: 90%;
     margin-bottom: 2em;
-  }
-
-  input[type="submit"]:hover{
-    cursor: pointer;
-    background-color: #323232;
-    transition: 1s ease;
   }

@@ -1,16 +1,41 @@
-<?php require('../MODELO/db.php'); ?>
+<?php
+    require('../MODELO/db.php');
+
+        if(isset($_GET['id_plataforma'])){
+            $id = $_GET['id_plataforma'];
+            $query = "SELECT * FROM plataforma WHERE id_plataforma = $id";
+            $resultado = mysqli_query($conn,$query);
+                if(mysqli_num_rows($resultado) == 1){
+                    $fila = mysqli_fetch_array($resultado);
+                    $departamento = $fila['nombre'];
+                    $ubicacion = $fila['ubicacion'];
+                }   
+        }
+        if(isset($_POST['editado'])){
+            $id = $_GET['id_plataforma'];
+            $departamento = $_POST['departamento'];
+            $localidad = $_POST['localidad'];
+            $calle = $_POST['calle'];
+            $numero = $_POST['numero'];
+            $ubicacion = "$numero  $calle,  $localidad";
+
+            $query = "UPDATE plataforma SET ubicacion = '$ubicacion', nombre = '$departamento' WHERE id_plataforma = $id";
+            mysqli_query($conn,$query);
+            header("Location: ../VISTA/crudPlataformas.php");
+        }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Plataformas</title>
-    <link rel="stylesheet" href ="../CSS/stylesCrudPaquetes.css">
+    <link rel="stylesheet" href ="../CSS/stylesCrudEdit.css">
+    <title>Editar Plataforma</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark p-4 ">
     <div class="container-fluid">
       <a class="navbar-brand" href="../VISTA/index.html" id="logo"><img src="../IMAGES/gorraBlanca.png" alt="">MeshCap</a>
@@ -48,12 +73,10 @@
     </div>
   </div>
 </nav>
-
-
-    <div class="container-fluid row" $id="container-total">
-      <form action="../CONTROLADOR/saveCruds.php" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
+<div class="container-fluid row" $id="container-total">
+      <form action="editPlataformas.php?id_plataforma=<?php echo $id?>" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
         <div class="mb-3">
-          <h3 class ="text-light text-center">Registro de Plataformas</h3>
+          <h3 class ="text-light text-center">Editar de Plataformas</h3>
 
             <label for="exampleInputEmail1" class="form-label mb-3">Departamento:</label>
               <select class="form-select mb-3" aria-label="Default select example" name="departamento">
@@ -93,41 +116,10 @@
                   <input type="text" class="form-control" id="exampleInputPassword1" name="numero">
             </div>
 
-              <button type="submit" class="btn btn-secondary " name="guardar_plataforma">Guardar</button>
+              <button type="submit" class="btn btn-secondary " name="editado">Guardar</button>
       </form>
         </div>
-
-        <div class="col-8 p-5 text-center">
-          <div style="max-height: 600px; overflow-y: auto;">
-              <table class="table col-8">
-              <thead class="table-dark fs-4">
-                  <tr class="align-middle">
-                    <th scope="col">N° Plataforma</th>
-                    <th scope="col">Departamento</th>
-                    <th scope="col">ubicacion</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-              </thead>
-              <tbody>
-                    <?php
-                    $query = "SELECT * FROM plataforma";
-                    $plataforma = mysqli_query($conn,$query);
-
-                    while($fila = mysqli_fetch_array($plataforma)){ ?>
-                            <tr class="align-middle">
-                                <td><?php echo $fila['id_plataforma']?></td>
-                                <td><?php echo $fila['nombre']?></td>
-                                <td><?php echo $fila['ubicacion']?></td>
-                                 <td class="align-middle"> 
-                                 <a href="../CONTROLADOR/editPlataformas.php?id_plataforma=<?php echo $fila['id_plataforma']; ?>" class="btn btn-small btn-warning"><i class="fas fa-pen-nib"></i></a>
-                                 <a href="../CONTROLADOR/deleteCruds.php?id_plataforma=<?php echo $fila['id_plataforma']; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>    
-                                </td>
-                            </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-          </div>
-    </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script></body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+</body>
 </html>

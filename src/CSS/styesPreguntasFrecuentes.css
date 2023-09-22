@@ -1,0 +1,25 @@
+.fondo {
+    background-image: url('../IMAGES/fondoIndex.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contenido {
+    padding: 20px;
+    max-width: 700px;
+    text-align: center;
+  }
+
+  #logo{
+    height: 60px;
+  }
+
+  .navbar-nav {
+    margin-left: auto;
+  }

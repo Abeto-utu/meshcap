@@ -1,16 +1,36 @@
-<?php require('../MODELO/db.php'); ?>
+<?php
+    require('../MODELO/db.php');
+
+        if(isset($_GET['id_lote'])){
+            $id = $_GET['id_lote'];
+            $query = "SELECT * FROM lote WHERE id_lote = $id";
+            $resultado = mysqli_query($conn,$query);
+                if(mysqli_num_rows($resultado) == 1){
+                    $fila = mysqli_fetch_array($resultado);
+                    $estado = $fila['estado'];
+                }   
+        }
+        if(isset($_POST['editado'])){
+            $id = $_GET['id_lote'];
+            $estado = $_POST['estado_lote'];
+
+            $query = "UPDATE lote SET estado = '$estado' WHERE id_lote = $id";
+            mysqli_query($conn,$query);
+            header("Location: ../VISTA/crudLotes.php");
+        }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Lotes</title>
-    <link rel="stylesheet" href ="../CSS/stylesCrudPaquetes.css">
+    <link rel="stylesheet" href ="../CSS/stylesCrudEdit.css">
+    <title>Editar Lote</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark p-4 ">
     <div class="container-fluid">
       <a class="navbar-brand" href="../VISTA/index.html" id="logo"><img src="../IMAGES/gorraBlanca.png" alt="">MeshCap</a>
@@ -49,10 +69,11 @@
   </div>
 </nav>
 
-<div class="container-fluid row" $id="container-total">
-      <form action="../CONTROLADOR/saveCruds.php" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
+
+    <div class="container-fluid row" $id="container-total">
+      <form action="editLotes.php?id_lote=<?php echo $id?>" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
         <div class="mb-3">
-          <h3 class ="text-light text-center">Registro Lotes</h3>
+          <h3 class ="text-light text-center">Editar Lotes</h3>
             <label for="exampleInputEmail1" class="form-label">Estado del lote</label>
               <select class="form-select mb-3" aria-label="Default select example" name="estado_lote">
                 <option value="De Camino al Almacen">De camino al almacen</option>
@@ -61,47 +82,10 @@
                 <option value="Entregado">Entregado</option>   
               </select>
 
-              <button type="submit" class="btn btn-secondary " name="guardar_lote">Guardar</button>
+              <button type="submit" class="btn btn-secondary " name="editado">Guardar</button>
       </form>
 </div>
-      <div class="col-8 p-5 text-center">
-          <div style="max-height: 600px; overflow-y: auto;">
-              <table class="table col-8">
-              <thead class="table-dark fs-4">
-                  <tr class="align-middle">
-                    <th scope="col">N° Lote</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Fecha de Apertura</th>
-                    <th scope="col">Fecha de Cierre</th>
-                    <th scope="col">Fecha de Entrega</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-              </thead>
-              <tbody>
-              <tbody>
-                    <?php
-                    $query = "SELECT * FROM lote";
-                    $lote = mysqli_query($conn,$query);
-
-                    while($fila = mysqli_fetch_array($lote)){ ?>
-                            <tr class="align-middle">
-                                <td><?php echo $fila['id_lote']?></td>
-                                <td><?php echo $fila['estado']?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                  <a href="../CONTROLADOR/editLotes.php?id_lote=<?php echo $fila['id_lote']; ?>" class="btn btn-small btn-warning"><i class="fas fa-pen-nib"></i></a>
-                                  <a href="../CONTROLADOR/deleteCruds.php?id_lote=<?php echo $fila['id_lote']; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-          </div>
-    </div>
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-      <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
 </body>
 </html>

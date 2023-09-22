@@ -5,7 +5,7 @@ if (isset($_GET['data'])) {
     $objetoDecodificado = json_decode($json);
 
     if ($objetoDecodificado) {
-        $puesto = $objetoDecodificado->tipo_usuario;
+        $puesto = $objetoDecodificado->cargo;
     } else {
         $_SESSION['error'] = 'Error al iniciar sesion, usuario o contraseña incorrectos...';
             header("Location: ../VISTA/inicioSesion.php");
