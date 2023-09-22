@@ -16,4 +16,4 @@ Para crear y usar la base de datos correras las lineas: CREATE DATABASE IF NOT E
 Luego, en la seccion de phpmyadmin importar el archivo sql /MeshCap/mysql/initdb/meshcap.sql
 
 ## 4) Iniciar la aplicacion
-En una terminal en la carpeta /src/VISTA correr el comando: "php -S localhost:8080". Luego, en un navegador ingresar a localhost:8080
+Mover la carpeta "src/" hacia "C:\xampp\htdocs". Luego, en un navegador ingresar a localhost/src/VISTA
