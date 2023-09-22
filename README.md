@@ -11,7 +11,7 @@ git clone https://github.com/Abeto-utu/MeshCap.git
 Empezar los servicios de Apache y MySQL
 
 ## 3) Iniciar la base de datos
-Para crear y usar la base de datos correras las lineas: CREATE DATABASE IF NOT EXISTS meshcap; USE meshcap;
+Para crear y usar la base de datos correr las lineas: CREATE DATABASE IF NOT EXISTS meshcap; USE meshcap;
 
 Luego, en la seccion de phpmyadmin importar el archivo sql /MeshCap/mysql/initdb/meshcap.sql
 
