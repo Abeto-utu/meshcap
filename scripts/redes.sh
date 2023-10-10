@@ -12,6 +12,7 @@ while true; do
     case $opcion in
         1)
             echo "Información de red:"
+            # El comando 'ip addr' muestra información detallada de la red y las interfaces
             ip addr
             read -p "Presione Enter para continuar..."
             ;;
@@ -23,6 +24,8 @@ while true; do
 
             # Configurar la interfaz de red
             echo "Configurando la interfaz de red $interfaz..."
+            # Se crea un archivo de configuración en /etc/sysconfig/network-scripts/
+            # con los parámetros ingresados por el usuario
             cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-$interfaz
 TYPE=Ethernet
 BOOTPROTO=static
@@ -33,7 +36,7 @@ NETMASK=$netmask
 GATEWAY=$gateway
 EOF
 
-            # Reiniciar la interfaz de red
+            # Reiniciar la interfaz de red para aplicar la configuración
             systemctl restart network
 
             echo "La interfaz de red $interfaz ha sido configurada correctamente."

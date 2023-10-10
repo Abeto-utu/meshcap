@@ -15,6 +15,7 @@ while true; do
         1)
             read -p "Ingrese el nombre del servicio que desea iniciar: " servicio
             systemctl start $servicio
+            #$? devuelve 0 si no hubo ningun error en la ejecucion del ultimo comando
             if [ $? -eq 0 ]; then
                 echo "El servicio $servicio se ha iniciado correctamente."
             else
@@ -25,6 +26,7 @@ while true; do
         2)
             read -p "Ingrese el nombre del servicio que desea detener: " servicio
             systemctl stop $servicio
+            #$? devuelve 0 si no hubo ningun error en la ejecucion del ultimo comando
             if [ $? -eq 0 ]; then
                 echo "El servicio $servicio se ha detenido correctamente."
             else

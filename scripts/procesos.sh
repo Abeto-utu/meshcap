@@ -12,12 +12,18 @@ while true; do
     case $opcion in
         1)
             echo "Listando procesos:"
+            
+            # El comando 'ps aux' muestra información sobre los procesos en ejecución
             ps aux
             read -p "Presione Enter para continuar..."
             ;;
         2)
             read -p "Ingrese el ID del proceso que desea matar: " pid
+
+             # El comando 'kill' se utiliza para terminar un proceso por su ID
             kill $pid
+
+            #$? devuelve 0 si no hubo ningun error en la ejecucion del ultimo comando
             if [ $? -eq 0 ]; then
                 echo "El proceso con ID $pid ha sido terminado correctamente."
             else
@@ -28,6 +34,8 @@ while true; do
         3)
             read -p "Ingrese el nombre del proceso que desea buscar: " proceso
             echo "Buscando procesos con el nombre \"$proceso\":"
+
+            # El comando 'pgrep' busca procesos por nombre y muestra sus IDs
             pgrep -l $proceso
             read -p "Presione Enter para continuar..."
             ;;
