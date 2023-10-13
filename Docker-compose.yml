@@ -33,6 +33,6 @@ services:
     volumes:
       - ./mysql/initdb:/docker-entrypoint-initdb.d
     # Mapea el directorio local "./mysql/initdb" al directorio "/docker-entrypoint-initdb.d" dentro del contenedor. 
-    # Esto se utiliza para proporcionar scripts de inicialización de la base de datos al contenedor MySQL.
+    # Esto se utiliza para  proporcionar scripts de inicialización de la base de datos al contenedor MySQL.
     restart: always
     # Configura el reinicio automático del contenedor
