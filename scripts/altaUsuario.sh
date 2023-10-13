@@ -7,27 +7,19 @@ read -p "Grupo (default, administradores, gestion): " grupo
 # Definir el directorio de inicio predeterminado
 dir_home="/home/$usuario"
 
-# Definir grupos predeterminados
+# Definir grupo predeterminado
 grupo_primario="group0"
-otros_grupos=""
 
-# Asignar grupos adicionales según la elección del grupo
+# Crear usuario segun su grupo
 if [[ "$grupo" == "default" ]]; then
-    :
+    useradd -m -d "$dir_home" -g "$grupo_primario" -s /bin/bash "$usuario"
 elif [[ "$grupo" == "administradores" ]]; then
-    otros_grupos="group1"
+    useradd -m -d "$dir_home" -g "$grupo_primario" -G "$grupo_primario,group1" -s /bin/bash "$usuario"
 elif [[ "$grupo" == "gestion" ]]; then
-    otros_grupos="group2"
+    useradd -m -d "$dir_home" -g "$grupo_primario" -G "$grupo_primario,group2" -s /bin/bash "$usuario"
 else
-    echo "Grupo no válido, se asignará el grupo predeterminado."
+    useradd -m -d "$dir_home" -g "$grupo_primario" -s /bin/bash "$usuario"
 fi
-
-# Crear el usuario
-useradd -m -d "$dir_home" -g "$grupo_primario" -G "$grupo_primario,$otros_grupos" -s /bin/bash "$usuario"
-
-# Establecer la contraseña del usuario
-passwd "$usuario"
 
 # Mostrar información del usuario creado
 echo "Usuario $usuario creado con directorio de inicio $dir_home y perteneciendo a los grupos: $grupo_primario $otros_grupos"
-read -p "Presione Enter para continuar..."
