@@ -3,9 +3,9 @@ services:
   web-app:
     container_name: aplicacion    
     build:
-      context: ./php
+      context: ./src
       dockerfile: Dockerfile
-    # Indica que se debe construir una imagen de Docker para este servicio utilizando el archivo Dockerfile en el directorio "./php".
+    # Indica que se debe construir una imagen de Docker para este servicio utilizando el archivo Dockerfile en el directorio "./src".
     links:
       - database
     # Establece una conexión de red entre este contenedor y el contenedor llamado "database". 
