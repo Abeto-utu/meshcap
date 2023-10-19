@@ -8,13 +8,10 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgb(29, 65, 127), rgb(2, 22, 56))
     }
-
+    
 .navbar-nav {
     margin-left: auto;
   }
-
-
-
 
 #logo{
     height: 60px;
