@@ -37,14 +37,15 @@ if (isset($_GET['data'])) {
                 $clave = $row2['contrasenha'];
 
                 if ($idUsuarioQuery1 == $idUsuarioQuery2) {
-                    if (isset($objetoDecodificado->numeroFuncionario) && $objetoDecodificado->numeroFuncionario == $idUsuarioQuery1 && $objetoDecodificado->clave == $clave){
+                    if (isset($objetoDecodificado->numeroFuncionario) && $objetoDecodificado->numeroFuncionario == $idUsuarioQuery1 && $objetoDecodificado->clave == $clave) {
+                        $_SESSION['username'] = $idUsuarioQuery1;
                         $puesto = $row1['cargo'];
                         switch ($puesto) {
                             case 'funcionario':
                                 header('Location: ../../ALMACENERO/VISTA/almacenero.html');
                                 exit();
                             case 'camionero':
-                                header('Location: ../../CAMIONERO/VISTA/camionero.html');
+                                header('Location: ../../CAMIONERO/VISTA/camionero.php');
                                 exit();
                             case 'administrador':
                                 header('Location: ../../BACKOFFICE/VISTA/backoffice.html');
@@ -56,7 +57,7 @@ if (isset($_GET['data'])) {
                         }
                     } else {
                         $_SESSION['error'] = 'Error al iniciar sesión, usuario o contraseña incorrectos...';
-                                header("Location: ../VISTA/inicioSesion.php");
+                        header("Location: ../VISTA/inicioSesion.php");
                     }
 
                     $encontrado = true;
@@ -81,4 +82,3 @@ if (isset($_GET['data'])) {
     echo "Falta el parámetro 'data' en la URL";
 }
 ?>
-
