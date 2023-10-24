@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     $id_usuario = $_SESSION['username'];
 } else {
-    header("Location: ../VISTA/inicioSesion.php");
+    header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 
@@ -41,7 +41,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4 ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../VISTA/camionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
+            <a class="navbar-brand" href="../VISTA/rutasCamionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
                     height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -58,7 +58,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/camionero.php">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/rutasCamionero.php">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php">Perfil</a>
@@ -68,6 +68,9 @@ while ($fila = mysqli_fetch_array($camionero)) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html">Log out</a>
+                        </li>
+                        <li>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
                         </li>
                     </ul>
                 </div>
@@ -86,7 +89,24 @@ while ($fila = mysqli_fetch_array($camionero)) {
                         <label for="exampleInputPassword1" class="form-label">Identificador:</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="lote">
                     </div>
-                    <div class="container mt-3"><button type="submit" class="btn btn-primary">Subir</button></a></div>
+                    <?php
+                    if (isset($_GET['error'])) {
+                        $error = $_GET['error'];
+                        if ($error == 'lne') {
+                            echo '<p>Ese lote ya esta subido</p>';
+                        }
+                        elseif ($error == 'lec') {
+                            echo '<p>Ese lote ya esta en un camion</p>';
+                        }
+                        elseif ($error == 'le') {
+                            echo '<p>Ese lote ya esta entregado</p>';
+                        }
+                        elseif ($error == 'la') {
+                            echo '<p>Ese lote aun esta abierto. </p>';
+                        }
+                    }
+                    ?>
+                    <div class="container mt-3"><button type="submit" class="btn btn-secondary">Subir</button></a></div>
                 </form>
 
                 <div class="mb-5"></div>

@@ -56,6 +56,15 @@ if ($accion == 'entregar') {
         die("Error en la consulta 2");
     }
 
+    $query = "UPDATE lote
+    SET estado = 'entregado'
+    WHERE id_lote = $lote;
+    ";
+    $resultado = mysqli_query($conn, $query);
+
+    if (!$resultado) {
+        die("Error en la consulta 3");
+    }
 
 
 

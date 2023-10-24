@@ -28,33 +28,5 @@ while ($fila = mysqli_fetch_array($camionero)) {
     $matricula = $fila['matricula'];
 }
 
-
-// Entregar paquete
-
-if ($accion == 'entregar') {
-    $paquete = $_POST['paquete'];
-
-    $query = "UPDATE paquete
-    SET estado = 'entregado'
-    WHERE id_paquete = $paquete;
-    ";
-    $resultado = mysqli_query($conn, $query);
-
-    if (!$resultado) {
-        die("Error en la consulta 1");
-    }
-
-    $query = "UPDATE paquete
-    SET fecha_entrega = CURRENT_TIMESTAMP
-    WHERE id_paquete = $paquete;
-    ";
-    $resultado = mysqli_query($conn, $query);
-
-    if (!$resultado) {
-        die("Error en la consulta 1");
-    }
-
-    header("Location: ../VISTA/entrega.php");
-}
-
-?>
+session_destroy();
+header("Location: ../../HOMEPAGE/VISTA/index.php");

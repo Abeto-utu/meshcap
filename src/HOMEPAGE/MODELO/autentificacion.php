@@ -45,7 +45,7 @@ if (isset($_GET['data'])) {
                                 header('Location: ../../ALMACENERO/VISTA/almacenero.html');
                                 exit();
                             case 'camionero':
-                                header('Location: ../../CAMIONERO/VISTA/camionero.php');
+                                header('Location: ../../CAMIONERO/VISTA/rutasCamionero.php');
                                 exit();
                             case 'administrador':
                                 header('Location: ../../BACKOFFICE/VISTA/backoffice.html');

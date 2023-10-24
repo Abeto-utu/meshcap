@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     $id_usuario = $_SESSION['username'];
 } else {
-    header("Location: ../VISTA/inicioSesion.php");
+    header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 
@@ -32,7 +32,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi perfil</title>
+    <title data-i18n="pageTitle">Mi perfil</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -42,7 +42,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4 ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../../VISTA/index.html" id="logo"><img src="../../IMAGES/gorraBlanca.png"
+            <a class="navbar-brand" href="rutasCamionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
                     height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -52,24 +52,27 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel">Menu del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del Backoffice</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/camionero.php">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                                href="../VISTA/perfilCamionero.php">Perfil</a>
+                                href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/rutasCamionero.php">Rutas</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html">Log out</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Log out</a>
+                        </li>
+                        <li>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
                         </li>
                     </ul>
                 </div>
@@ -77,26 +80,26 @@ while ($fila = mysqli_fetch_array($camionero)) {
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <h1 class="mb-4">Informacion</h1>
-                <div class="wrapper container">
-                    <div class="row ">
-                        <div class="col-md-6">
-                            <p><strong>ID de Usuario:</strong>
+    <div class="container mt-5" data-i18n="container">
+        <div class="row" data-i18n="row">
+            <div class="col-md-6 offset-md-3 mt-5" data-i18n="column">
+                <h1 class="mb-4" data-i18n="information">Informacion</h1>
+                <div class="wrapper container" data-i18n="wrapper">
+                    <div class="row " data-i18n="innerRow">
+                        <div class="col-md-6" data-i18n="innerColumn">
+                            <p><strong data-i18n="userId">ID de Usuario:</strong>
                                 <?php echo $id_usuario; ?>
                             </p>
-                            <p><strong>Nombre:</strong>
+                            <p><strong data-i18n="name">Nombre:</strong>
                                 <?php echo $nombre; ?>
                             </p>
-                            <p><strong>Cargo:</strong>
+                            <p><strong data-i18n="position">Cargo:</strong>
                                 <?php echo $cargo; ?>
                             </p>
-                            <p><strong>Estado:</strong>
+                            <p><strong data-i18n="status">Estado:</strong>
                                 <?php echo $estado; ?>
                             </p>
-                            <p><strong>Matrícula:</strong>
+                            <p><strong data-i18n="registration">Matrícula:</strong>
                                 <?php echo $matricula; ?>
                             </p>
                         </div>
@@ -112,6 +115,67 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
         crossorigin="anonymous"></script>
+    <script>
+        var textStrings = {
+            es: {
+                pageTitle: "Mi perfil",
+                menuTitle: "Menu del Backoffice",
+                home: "Inicio",
+                profile: "Perfil",
+                routes: "Rutas",
+                logout: "Cerrar sesión",
+                changeLanguage: "Cambiar idioma",
+                information: "Información",
+                userId: "ID de Usuario:",
+                name: "Nombre:",
+                position: "Cargo:",
+                status: "Estado:",
+                registration: "Matrícula:"
+            },
+            en: {
+                pageTitle: "My profile",
+                menuTitle: "Backoffice Menu",
+                home: "Home",
+                profile: "Profile",
+                routes: "Routes",
+                logout: "Log out",
+                changeLanguage: "Change language",
+                information: "Information",
+                userId: "User ID:",
+                name: "Name:",
+                position: "Position:",
+                status: "Status:",
+                registration: "Registration:"
+            }
+        };
+
+        function changeLanguage() {
+            var htmlTag = document.querySelector('html');
+            var language = htmlTag.getAttribute('lang');
+            if (language === 'en') {
+                htmlTag.setAttribute('lang', 'es');
+                updateText('es');
+            } else {
+                htmlTag.setAttribute('lang', 'en');
+                updateText('en');
+            }
+        }
+
+        function updateText(language) {
+            var elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(function (element) {
+                var key = element.getAttribute('data-i18n');
+                if (textStrings[language][key]) {
+                    element.innerText = textStrings[language][key];
+                }
+            });
+        }
+
+        // Initialize the text with the default language
+        document.addEventListener('DOMContentLoaded', function () {
+            updateText('en'); // Change to 'es' if the default language is Spanish
+        });
+    </script>
 </body>
 
 </html>

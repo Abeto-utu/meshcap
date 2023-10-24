@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     $id_usuario = $_SESSION['username'];
 } else {
-    header("Location: ../VISTA/inicioSesion.php");
+    header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 
@@ -32,7 +32,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rutas</title>
+    <title data-i18n="pageTitle">Rutas</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -42,7 +42,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4 ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../VISTA/camionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
+            <a class="navbar-brand" href="rutasCamionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
                     height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -52,23 +52,26 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel">Menu del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del Backoffice</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/camionero.php">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php">Rutas</a>
+                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html">Log out</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Log out</a>
+                        </li>
+                        <li>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
                         </li>
                     </ul>
                 </div>
@@ -79,12 +82,12 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4">Recorrido </h1>
+                <h1 class="mb-4" data-i18n="routeHeading">Recorrido </h1>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Plataformas</th>
-                            <th scope="col">Lote/s</th>
+                            <th scope="col" data-i18n="platforms">Plataformas</th>
+                            <th scope="col" data-i18n="lots">Lote/s</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,35 +143,35 @@ while ($fila = mysqli_fetch_array($camionero)) {
                 if ($estado == 'trabajando') {
                     if (mysqli_num_rows($paquetes) == 0) {
                         ?>
-                        <a href="../MODELO/entregarLote.php"><button type="button" class="btn btn-secondary">Entregar
+                        <a href="../MODELO/entregarLote.php"><button type="button" class="btn btn-secondary" data-i18n="deliverLot">Entregar
                                 lote</button></a>
                         <a href="../CONTROLADOR/finalizarTroncal.php?a=finalizar"><button type="button"
-                                class="btn btn-primary">Finalizar recorrido</button></a>
+                                class="btn btn-primary" data-i18n="finishRoute">Finalizar recorrido</button></a>
                         <?php
                     } else {
                         ?>
-                        <a href="../MODELO/entregarLote.php"><button type="button" class="btn btn-secondary">Entregar
+                        <a href="../MODELO/entregarLote.php"><button type="button" class="btn btn-secondary" data-i18n="deliverLot">Entregar
                                 lote</button></a>
-                        <a href=""><button type="button" class="btn btn-primary" disabled>Finalizar recorrido</button></a>
+                        <a href=""><button type="button" class="btn btn-primary" disabled data-i18n="finishRoute">Finalizar recorrido</button></a>
                         <?php
                     }
                 } ?>
 
 
                 <?php
-                if ($estado == 'disponible') { ?>
-                    <a href="../MODELO/subirLote.php"><button type="button" class="btn btn-secondary">Subir
+                if ($estado == 'disponible') { ?>     
+                    <a href="../MODELO/subirLote.php"><button type="button" class="btn btn-secondary" data-i18n="uploadLot">Subir
                             lote</button></a>
 
                     <?php
                     if (mysqli_num_rows($paquetes) == 0) {
                         ?>
-                        <a href=""><button type="button" class="btn btn-primary" disabled>Marcar salida</button></a>
+                        <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="markDeparture">Marcar salida</button></a>
                         <?php
                     } else {
                         ?>
                         <a href="../CONTROLADOR/iniciarTroncal.php?a=<?php echo 'iniciar' ?>"><button type="button"
-                                class="btn btn-primary">Marcar salida</button></a>
+                                class="btn btn-secondary" data-i18n="markDeparture">Marcar salida</button></a>
                         <?php
                     }
                 }
@@ -185,6 +188,69 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
         crossorigin="anonymous"></script>
+    <script>
+        var textStrings = {
+            es: {
+                pageTitle: "Rutas",
+                menuTitle: "Menu del Backoffice",
+                home: "Inicio",
+                profile: "Perfil",
+                routes: "Rutas",
+                logout: "Cerrar sesión",
+                changeLanguage: "Cambiar idioma",
+                routeHeading: "Recorrido",
+                platforms: "Plataformas",
+                lots: "Lote/s",
+                deliverLot: "Entregar lote",
+                finishRoute: "Finalizar recorrido",
+                uploadLot: "Subir lote",
+                markDeparture: "Marcar salida"
+            },
+            en: {
+                pageTitle: "Routes",
+                menuTitle: "Backoffice Menu",
+                home: "Home",
+                profile: "Profile",
+                routes: "Routes",
+                logout: "Log out",
+                changeLanguage: "Change language",
+                routeHeading: "Route",
+                platforms: "Platforms",
+                lots: "Lots",
+                deliverLot: "Deliver lot",
+                finishRoute: "Finish route",
+                uploadLot: "Upload lot",
+                markDeparture: "Mark departure"
+            }
+        };
+
+        function changeLanguage() {
+            var htmlTag = document.querySelector('html');
+            var language = htmlTag.getAttribute('lang');
+            if (language === 'en') {
+                htmlTag.setAttribute('lang', 'es');
+                updateText('es');
+            } else {
+                htmlTag.setAttribute('lang', 'en');
+                updateText('en');
+            }
+        }
+
+        function updateText(language) {
+            var elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(function (element) {
+                var key = element.getAttribute('data-i18n');
+                if (textStrings[language][key]) {
+                    element.innerText = textStrings[language][key];
+                }
+            });
+        }
+
+        // Initialize the text with the default language
+        document.addEventListener('DOMContentLoaded', function () {
+            updateText('es'); // Change to 'en' if the default language is English
+        });
+    </script>
 </body>
 
 </html>

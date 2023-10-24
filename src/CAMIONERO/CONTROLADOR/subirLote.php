@@ -28,7 +28,6 @@ while ($fila = mysqli_fetch_array($camionero)) {
     $matricula = $fila['matricula'];
 }
 
-
 // Subir lote
 
 if ($accion == 'subir') {
@@ -36,13 +35,6 @@ if ($accion == 'subir') {
     echo $lote;
     echo $matricula;
 
-    $query = "INSERT INTO vehiculo_plataforma_lote (id_lote, id_plataforma, matricula) 
-    VALUES ($lote, (SELECT id_plataforma FROM plataforma_lote WHERE id_lote = $lote), '$matricula');";
-    $resultado = mysqli_query($conn, $query);
-
-    if (!$resultado) {
-        die("Error en la consulta");
-    }
 
     $query = "SELECT *
     FROM lote
@@ -52,6 +44,29 @@ if ($accion == 'subir') {
 
     $fila = $fila = mysqli_fetch_array($resultado);
 
+    if ($fila['estado'] == 'en camion') {
+        header("Location: ../MODELO/subirLote.php?error=lec"); // Lote En Camion
+        die("Error en la consulta 1");
+    }
+
+    if ($fila['estado'] == 'entregado') {
+        header("Location: ../MODELO/subirLote.php?error=le"); // Lote Entregado
+        die("Error en la consulta 1");
+    }
+    if ($fila['estado'] == 'abierto') {
+        header("Location: ../MODELO/subirLote.php?error=la"); // Lote Abierto
+        die("Error en la consulta 1");
+    }
+
+    $query = "INSERT INTO vehiculo_plataforma_lote (id_lote, id_plataforma, matricula) 
+    VALUES ($lote, (SELECT id_plataforma FROM plataforma_lote WHERE id_lote = $lote), '$matricula');";
+    $resultado = mysqli_query($conn, $query);
+
+    if (!$resultado) {
+        header("Location: ../MODELO/subirLote.php?error=lne");  // Lote Ya subido
+        die("Error en la consulta 1");
+    }
+
     if (empty($fila['fecha_cierre'])) {
         $query = "UPDATE lote
         SET fecha_cierre = CURRENT_TIMESTAMP
@@ -60,7 +75,7 @@ if ($accion == 'subir') {
         $resultado = mysqli_query($conn, $query);
 
         if (!$resultado) {
-            die("Error en la consulta");
+            die("Error en la consulta 2");
         }
     }
 
@@ -72,7 +87,9 @@ if ($accion == 'subir') {
 
 
     if (!$resultado) {
-        die("Error en la consulta");
+        die("Error en la consulta 3
+        
+        ");
     }
     header("Location: ../MODELO/subirLote.php");
 }

@@ -55,7 +55,7 @@ if (!$resultado) {
     die("Error en la consulta 3");
 }
 
-header("Location: ../VISTA/verRecoleccion.php?id_recoleccion=$id_recoleccion");
+header("Location: ../VISTA/entrega.php");
 
 
 ?>

@@ -5,37 +5,15 @@ session_start();
 if (isset($_SESSION['username'])) {
     $id_usuario = $_SESSION['username'];
 } else {
-    header("Location: ../VISTA/inicioSesion.php");
+    header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 
-if (isset($_GET['id_recoleccion'])) {
-    $id = $_GET['id_recoleccion'];
-    $query = "SELECT r.id_recoleccion, r.fecha_llegada, r.fecha_ida, cr.id_cliente, cli.nombre as nombre_cliente, rv.matricula
-    FROM recoleccion r
-    JOIN cliente_recoleccion cr ON r.id_recoleccion = cr.id_recoleccion
-    JOIN cliente cli ON cr.id_cliente = cli.id_cliente
-    JOIN recoleccion_vehiculo rv ON r.id_recoleccion = rv.id_recoleccion
-    WHERE r.id_recoleccion = $id;
-    
-    ";
-    $resultado = mysqli_query($conn, $query);
-    if (mysqli_num_rows($resultado) == 1) {
-        $fila = mysqli_fetch_array($resultado);
-        $id_recoleccion = $fila['id_recoleccion'];
-        $fecha_llegada = $fila['fecha_llegada'];
-        $fecha_ida = $fila['fecha_ida'];
-        $matricula = $fila['matricula'];
-        $nombre_cliente = $fila['nombre_cliente'];
-        $id_cliente = $fila['id_cliente'];
-        if (empty($fila['fecha_ida'])) {
-            $estado = "sin empezar";
-        } elseif (empty($fila['fecha_llegada'])) {
-            $estado = "en proceso";
-        } else {
-            $estado = "finalizado";
-        }
-    }
+if (isset($_GET["id_recoleccion"])) {
+    $id_recoleccion = $_GET["id_recoleccion"];
+} else {
+    header("Location: rutasCamionero.php");
+    exit();
 }
 
 $nombre = "";
@@ -50,13 +28,13 @@ while ($fila = mysqli_fetch_array($camionero)) {
     $id_usuario = $fila['id_usuario'];
     $nombre = $fila['nombre'];
     $cargo = $fila['cargo'];
-    $estado_camionero = $fila['estado'];
+    $estado = $fila['estado'];
     $matricula = $fila['matricula'];
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" id="htmlTag">
 
 <head>
     <meta charset="UTF-8">
@@ -69,9 +47,9 @@ while ($fila = mysqli_fetch_array($camionero)) {
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark p-4 ">
+    <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../VISTA/camionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
+            <a class="navbar-brand" href="rutasCamionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
                     height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -81,23 +59,26 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel">Menu del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menú del Backoffice</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/camionero.php">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php">Rutas</a>
+                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html">Log out</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Cerrar sesión</a>
+                        </li>
+                        <li>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
                         </li>
                     </ul>
                 </div>
@@ -108,36 +89,32 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h1 class="mb-3">Agregar paquete</h1>
+                <h1 class="mb-3" data-i18n="addPackage">Agregar paquete</h1>
                 <form
                     action="../CONTROLADOR/agregarPaquete.php?id_recoleccion=<?php echo $id_recoleccion ?>&a=<?php echo 'agregar' ?>"
                     method="POST">
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Departamento:</label>
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="department">Departamento:</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="departamento">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Localidad:</label>
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="location">Localidad:</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="localidad">
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Calle:</label>
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="street">Calle:</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="calle">
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Numero:</label>
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="number">Numero:</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="numero">
                     </div>
-                    <div class="container mt-3"><button type="submit" class="btn btn-primary">Submit</button></div>
+                    <div class="container mt-3"><button type="submit" class="btn btn-secondary" data-i18n="submit">Submit</button></div>
 
                 </form>
             </div>
-
-
-
-
         </div>
     </div>
 
@@ -147,6 +124,65 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
         crossorigin="anonymous"></script>
+    <script>
+        var textStrings = {
+            es: {
+                menuTitle: "Menú del Backoffice",
+                home: "Inicio",
+                profile: "Perfil",
+                routes: "Rutas",
+                logout: "Cerrar sesión",
+                changeLanguage: "Change language",
+                addPackage: "Agregar paquete",
+                department: "Departamento:",
+                location: "Localidad:",
+                street: "Calle:",
+                number: "Numero:",
+                submit: "Enviar"
+            },
+            en: {
+                menuTitle: "Backoffice Menu",
+                home: "Home",
+                profile: "Profile",
+                routes: "Routes",
+                logout: "Log out",
+                changeLanguage: "Cambiar idioma",
+                addPackage: "Add Package",
+                department: "Department:",
+                location: "Location:",
+                street: "Street:",
+                number: "Number:",
+                submit: "Submit"
+            }
+        };
+
+        function changeLanguage() {
+            var htmlTag = document.getElementById('htmlTag');
+            var language = htmlTag.getAttribute('lang');
+            if (language === 'en') {
+                htmlTag.setAttribute('lang', 'es');
+                updateText('es');
+            } else {
+                htmlTag.setAttribute('lang', 'en');
+                updateText('en');
+            }
+        }
+
+        function updateText(language) {
+            var elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(function (element) {
+                var key = element.getAttribute('data-i18n');
+                if (textStrings[language][key]) {
+                    element.innerText = textStrings[language][key];
+                }
+            });
+        }
+
+        // Initialize the text with the default language
+        document.addEventListener('DOMContentLoaded', function () {
+            updateText('es'); // Change to 'en' if the default language is English
+        });
+    </script>
 </body>
 
 </html>

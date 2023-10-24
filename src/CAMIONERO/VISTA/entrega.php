@@ -6,7 +6,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     $id_usuario = $_SESSION['username'];
 } else {
-    header("Location: ../VISTA/inicioSesion.php");
+    header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 
@@ -27,7 +27,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" id="htmlTag">
 
 <head>
     <meta charset="UTF-8">
@@ -40,9 +40,9 @@ while ($fila = mysqli_fetch_array($camionero)) {
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark p-4 ">
+    <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../VISTA/camionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
+            <a class="navbar-brand" href="rutasCamionero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png"
                     height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -52,23 +52,26 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel">Menu del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del Backoffice</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/camionero.php">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php">Rutas</a>
+                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html">Log out</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Cerrar sesión</a>
+                        </li>
+                        <li>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                     </ul>
                 </div>
@@ -79,7 +82,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4">Paquetes a entregar</h1>
+                <h1 class="mb-4" data-i18n="packagesToDeliver">Paquetes a entregar</h1>
                 <?php
                 $query = "SELECT r.id_recorrido, r.estado, r.fecha_inicio, rv.matricula, cv.id_usuario
                         FROM recorrido r
@@ -94,8 +97,8 @@ while ($fila = mysqli_fetch_array($camionero)) {
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Domicilio</th>
-                                <th scope="col">Paquete/s</th>
+                                <th scope="col" data-i18n="address">Domicilio</th>
+                                <th scope="col" data-i18n="packages">Paquete/s</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,24 +141,24 @@ while ($fila = mysqli_fetch_array($camionero)) {
                             <?php
                             if (empty($fecha_inicio)) {
                                 ?>
-                                <a href=""><button type="button" class="btn btn-secondary" disabled>Entregar
+                                <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="deliverPackage">Entregar
                                         paquete</button></a>
                                 <a href="../CONTROLADOR/iniciarEntrega.php?id_entrega=<?php echo $id_recorrido ?>"><button
-                                        type="button" class="btn btn-secondary">Comenzar entregas</button></a>
+                                        type="button" class="btn btn-secondary" data-i18n="startDeliveries">Comenzar entregas</button></a>
                                 <?php
                             } else {
                                 if (mysqli_num_rows($paqueteRecorrido) == 0) {
                                     ?>
-                                    <a href=""><button type="button" class="btn btn-secondary" disabled>Entregar
+                                    <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="deliverPackage">Entregar
                                             paquete</button></a>
                                     <a href="../CONTROLADOR/finalizarEntrega.php?id_entrega=<?php echo $id_recorrido ?>"><button
-                                            type="button" class="btn btn-secondary">Finalizar entrega</button></a>
+                                            type="button" class="btn btn-secondary" data-i18n="finishDelivery">Finalizar entrega</button></a>
                                     <?php
                                 } else {
                                     ?>
-                                    <a href="../MODELO/entregarPaquete.php"><button type="button" class="btn btn-secondary">Entregar
+                                    <a href="../MODELO/entregarPaquete.php"><button type="button" class="btn btn-secondary" data-i18n="deliverPackage">Entregar
                                             paquete</button></a>
-                                    <a href=""><button type="button" class="btn btn-secondary" disabled>Finalizar
+                                    <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="finishDelivery">Finalizar
                                             entrega</button></a>
                                     <?php
                                 }
@@ -171,11 +174,11 @@ while ($fila = mysqli_fetch_array($camionero)) {
                     <?php
                 } elseif (mysqli_num_rows($recorridosActivos) == 0) {
                     ?>
-                    <p>No hay entregas asignadas</p>
+                    <p data-i18n="noAssignDeliveries">No hay entregas asignadas</p>
                     <?php
                 } else {
                     ?>
-                    <p>error, demasiadas entregas asignadas</p>
+                    <p data-i18n="errorTooManyDeliveries">error, demasiadas entregas asignadas</p>
                     <?php
                 }
                 ?>
@@ -190,6 +193,69 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
         crossorigin="anonymous"></script>
+    <script>
+        var textStrings = {
+            es: {
+                menuTitle: "Menu del Backoffice",
+                home: "Inicio",
+                profile: "Perfil",
+                routes: "Rutas",
+                logout: "Cerrar sesión",
+                changeLanguage: "Cambiar idioma",
+                packagesToDeliver: "Paquetes a entregar",
+                address: "Domicilio",
+                packages: "Paquete/s",
+                deliverPackage: "Entregar paquete",
+                startDeliveries: "Comenzar entregas",
+                finishDelivery: "Finalizar entrega",
+                noAssignDeliveries: "No hay entregas asignadas",
+                errorTooManyDeliveries: "Error, demasiadas entregas asignadas"
+            },
+            en: {
+                menuTitle: "Backoffice Menu",
+                home: "Home",
+                profile: "Profile",
+                routes: "Routes",
+                logout: "Log out",
+                changeLanguage: "Change language",
+                packagesToDeliver: "Packages to deliver",
+                address: "Address",
+                packages: "Package/s",
+                deliverPackage: "Deliver package",
+                startDeliveries: "Start deliveries",
+                finishDelivery: "Finish delivery",
+                noAssignDeliveries: "No deliveries assigned",
+                errorTooManyDeliveries: "Error, too many deliveries assigned"
+            }
+        };
+
+        function changeLanguage() {
+            var htmlTag = document.getElementById('htmlTag');
+            var language = htmlTag.getAttribute('lang');
+            if (language === 'en') {
+                htmlTag.setAttribute('lang', 'es');
+                updateText('es');
+            } else {
+                htmlTag.setAttribute('lang', 'en');
+                updateText('en');
+            }
+        }
+
+        function updateText(language) {
+            var elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(function (element) {
+                var key = element.getAttribute('data-i18n');
+                if (textStrings[language][key]) {
+                    element.innerText = textStrings[language][key];
+                }
+            });
+        }
+
+        // Initialize the text with the default language
+        document.addEventListener('DOMContentLoaded', function () {
+            updateText('es'); // Change to 'es' if the default language is Spanish
+        });
+    </script>
 </body>
 
 </html>
