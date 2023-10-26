@@ -1,31 +1,15 @@
 <?php
 require('../../db.php');
+require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
-    $id_usuario = $_SESSION['username'];
+    ($camionero = $camioneroModel->infoCamionero($_SESSION['username']));
 } else {
     header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
-
-$nombre = "";
-$query = "SELECT c.id_usuario, u.nombre, u.cargo, c.estado, cv.matricula
-        FROM camionero c
-        JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
-        JOIN usuario u ON c.id_usuario = u.id_usuario
-        WHERE c.id_usuario = $id_usuario";
-$camionero = mysqli_query($conn, $query);
-
-while ($fila = mysqli_fetch_array($camionero)) {
-    $id_usuario = $fila['id_usuario'];
-    $nombre = $fila['nombre'];
-    $cargo = $fila['cargo'];
-    $estado = $fila['estado'];
-    $matricula = $fila['matricula'];
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,27 +36,32 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">
+                        Camionero</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php"
+                                data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"
-                                href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
+                            <a class="nav-link active" aria-current="page" href="../VISTA/perfilCamionero.php"
+                                data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/rutasCamionero.php"
+                                data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Log out</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html"
+                                data-i18n="logout">Log out</a>
                         </li>
                         <li>
-                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()"
+                                data-i18n="changeLanguage">Change language</p>
                         </li>
                     </ul>
                 </div>
@@ -88,19 +77,19 @@ while ($fila = mysqli_fetch_array($camionero)) {
                     <div class="row " data-i18n="innerRow">
                         <div class="col-md-6" data-i18n="innerColumn">
                             <p><strong data-i18n="userId">ID de Usuario:</strong>
-                                <?php echo $id_usuario; ?>
+                                <?php echo $camionero['id_usuario']; ?>
                             </p>
                             <p><strong data-i18n="name">Nombre:</strong>
-                                <?php echo $nombre; ?>
+                                <?php echo $camionero['nombre']; ?>
                             </p>
                             <p><strong data-i18n="position">Cargo:</strong>
-                                <?php echo $cargo; ?>
+                                <?php echo $camionero['cargo']; ?>
                             </p>
                             <p><strong data-i18n="status">Estado:</strong>
-                                <?php echo $estado; ?>
+                                <?php echo $camionero['estado']; ?>
                             </p>
                             <p><strong data-i18n="registration">Matrícula:</strong>
-                                <?php echo $matricula; ?>
+                                <?php echo $camionero['matricula']; ?>
                             </p>
                         </div>
                     </div>
@@ -119,12 +108,12 @@ while ($fila = mysqli_fetch_array($camionero)) {
         var textStrings = {
             es: {
                 pageTitle: "Mi perfil",
-                menuTitle: "Menu del Backoffice",
+                menuTitle: "Camionero",
                 home: "Inicio",
                 profile: "Perfil",
                 routes: "Rutas",
                 logout: "Cerrar sesión",
-                changeLanguage: "Cambiar idioma",
+                changeLanguage: "Change language",
                 information: "Información",
                 userId: "ID de Usuario:",
                 name: "Nombre:",
@@ -134,12 +123,12 @@ while ($fila = mysqli_fetch_array($camionero)) {
             },
             en: {
                 pageTitle: "My profile",
-                menuTitle: "Backoffice Menu",
+                menuTitle: "Driver",
                 home: "Home",
                 profile: "Profile",
                 routes: "Routes",
                 logout: "Log out",
-                changeLanguage: "Change language",
+                changeLanguage: "Cambiar idioma",
                 information: "Information",
                 userId: "User ID:",
                 name: "Name:",
@@ -171,9 +160,8 @@ while ($fila = mysqli_fetch_array($camionero)) {
             });
         }
 
-        // Initialize the text with the default language
         document.addEventListener('DOMContentLoaded', function () {
-            updateText('en'); // Change to 'es' if the default language is Spanish
+            updateText('es');
         });
     </script>
 </body>

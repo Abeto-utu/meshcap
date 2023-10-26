@@ -1,9 +1,10 @@
 <?php
 require('../../db.php');
+require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
-    $id_usuario = $_SESSION['username'];
+    ($camionero = $camioneroModel->infoCamionero($_SESSION['username']));
 } else {
     header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
@@ -14,22 +15,6 @@ if (isset($_GET["id_recoleccion"])) {
 } else {
     header("Location: rutasCamionero.php");
     exit();
-}
-
-$nombre = "";
-$query = "SELECT c.id_usuario, u.nombre, u.cargo, c.estado, cv.matricula
-        FROM camionero c
-        JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
-        JOIN usuario u ON c.id_usuario = u.id_usuario
-        WHERE c.id_usuario = $id_usuario";
-$camionero = mysqli_query($conn, $query);
-
-while ($fila = mysqli_fetch_array($camionero)) {
-    $id_usuario = $fila['id_usuario'];
-    $nombre = $fila['nombre'];
-    $cargo = $fila['cargo'];
-    $estado = $fila['estado'];
-    $matricula = $fila['matricula'];
 }
 ?>
 
@@ -91,7 +76,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="col-md-6">
                 <h1 class="mb-3" data-i18n="addPackage">Agregar paquete</h1>
                 <form
-                    action="../CONTROLADOR/agregarPaquete.php?id_recoleccion=<?php echo $id_recoleccion ?>&a=<?php echo 'agregar' ?>"
+                    action="../CONTROLADOR/controladorCamionero.php?agregarPaquete=agregarPaquete&id_recoleccion=<?php echo $id_recoleccion ?>"
                     method="POST">
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label" data-i18n="department">Departamento:</label>
@@ -127,7 +112,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script>
         var textStrings = {
             es: {
-                menuTitle: "Menú del Backoffice",
+                menuTitle: "Camionero",
                 home: "Inicio",
                 profile: "Perfil",
                 routes: "Rutas",
@@ -141,7 +126,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
                 submit: "Enviar"
             },
             en: {
-                menuTitle: "Backoffice Menu",
+                menuTitle: "Driver",
                 home: "Home",
                 profile: "Profile",
                 routes: "Routes",
@@ -178,9 +163,8 @@ while ($fila = mysqli_fetch_array($camionero)) {
             });
         }
 
-        // Initialize the text with the default language
         document.addEventListener('DOMContentLoaded', function () {
-            updateText('es'); // Change to 'en' if the default language is English
+            updateText('es');
         });
     </script>
 </body>

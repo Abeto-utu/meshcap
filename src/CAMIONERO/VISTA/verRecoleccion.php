@@ -1,55 +1,33 @@
 <?php
 require('../../db.php');
+require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
-    $id_usuario = $_SESSION['username'];
+    ($camionero = $camioneroModel->infoCamionero($_SESSION['username']));
 } else {
     header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 
 if (isset($_GET['id_recoleccion'])) {
-    $id = $_GET['id_recoleccion'];
-    $query = "SELECT r.id_recoleccion, r.fecha_llegada, r.fecha_ida, cr.id_cliente, cli.nombre as nombre_cliente, rv.matricula
-    FROM recoleccion r
-    JOIN cliente_recoleccion cr ON r.id_recoleccion = cr.id_recoleccion
-    JOIN cliente cli ON cr.id_cliente = cli.id_cliente
-    JOIN recoleccion_vehiculo rv ON r.id_recoleccion = rv.id_recoleccion
-    WHERE r.id_recoleccion = $id";
-    $resultado = mysqli_query($conn, $query);
-    if (mysqli_num_rows($resultado) == 1) {
-        $fila = mysqli_fetch_array($resultado);
-        $id_recoleccion = $fila['id_recoleccion'];
-        $fecha_llegada = $fila['fecha_llegada'];
-        $fecha_ida = $fila['fecha_ida'];
-        $matricula = $fila['matricula'];
-        $nombre_cliente = $fila['nombre_cliente'];
-        $id_cliente = $fila['id_cliente'];
-        if (empty($fila['fecha_ida'])) {
+    ($recolecciones = $camioneroModel->infoRecoleccion($_GET['id_recoleccion']));
+
+    foreach ($recolecciones as $recoleccion) {
+        $id_recoleccion = $recoleccion['id_recoleccion'];
+        $fecha_llegada = $recoleccion['fecha_llegada'];
+        $fecha_ida = $recoleccion['fecha_ida'];
+        $matricula = $recoleccion['matricula'];
+        $nombre_cliente = $recoleccion['nombre_cliente'];
+        $id_cliente = $recoleccion['id_cliente'];
+        if (empty($recoleccion['fecha_ida'])) {
             $estado = "sin empezar";
-        } elseif (empty($fila['fecha_llegada'])) {
+        } elseif (empty($recoleccion['fecha_llegada'])) {
             $estado = "en proceso";
         } else {
             $estado = "finalizado";
         }
     }
-}
-
-$nombre = "";
-$query = "SELECT c.id_usuario, u.nombre, u.cargo, c.estado, cv.matricula
-        FROM camionero c
-        JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
-        JOIN usuario u ON c.id_usuario = u.id_usuario
-        WHERE c.id_usuario = $id_usuario";
-$camionero = mysqli_query($conn, $query);
-
-while ($fila = mysqli_fetch_array($camionero)) {
-    $id_usuario = $fila['id_usuario'];
-    $nombre = $fila['nombre'];
-    $cargo = $fila['cargo'];
-    $estado_camionero = $fila['estado'];
-    $matricula = $fila['matricula'];
 }
 ?>
 
@@ -164,7 +142,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
 
             <?php if ($estado == 'sin empezar') { ?>
                 <div class="text-center mt-3">
-                    <a href="../CONTROLADOR/iniciarRecoleccion.php?id_recoleccion=<?php echo $id_recoleccion ?>&a=<?php echo 'iniciar' ?>"
+                    <a href="../CONTROLADOR/controladorCamionero.php?id_usuario=<?php echo $camionero['id_usuario'] ?>&matricula=<?php echo $camionero['matricula'] ?>&id_recoleccion=<?php echo $id_recoleccion ?>&iniciarRecoleccion=iniciarRecoleccion"
                         class="btn btn-primary" data-i18n="startCollection">Iniciar recolección</a>
                 </div>
             <?php } ?>
@@ -175,7 +153,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
                         class="btn btn-primary" data-i18n="addPackage">Agregar paquete</a>
                 </div>
                 <div class="text-center mt-3">
-                    <a href="../CONTROLADOR/finalizarRecoleccion.php?id_recoleccion=<?php echo $id_recoleccion ?>&a=<?php echo 'finalizar' ?>"
+                    <a href="../CONTROLADOR/controladorCamionero.php?id_usuario=<?php echo $camionero['id_usuario'] ?>&matricula=<?php echo $camionero['matricula'] ?>&id_recoleccion=<?php echo $id_recoleccion ?>&finalizarRecoleccion=finalizarRecoleccion"
                         class="btn btn-primary" data-i18n="finishCollection">Finalizar recolección</a>
                 </div>
             <?php } ?>

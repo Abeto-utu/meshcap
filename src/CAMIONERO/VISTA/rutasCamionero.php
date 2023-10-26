@@ -1,28 +1,13 @@
 <?php
 require('../../db.php');
+require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
-    $id_usuario = $_SESSION['username'];
+    ($camionero = $camioneroModel->infoCamionero($_SESSION['username']));
 } else {
     header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
-}
-
-$nombre = "";
-$query = "SELECT c.id_usuario, u.nombre, u.cargo, c.estado, cv.matricula
-        FROM camionero c
-        JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
-        JOIN usuario u ON c.id_usuario = u.id_usuario
-        WHERE c.id_usuario = $id_usuario";
-$camionero = mysqli_query($conn, $query);
-
-while ($fila = mysqli_fetch_array($camionero)) {
-    $id_usuario = $fila['id_usuario'];
-    $nombre = $fila['nombre'];
-    $cargo = $fila['cargo'];
-    $estado = $fila['estado'];
-    $matricula = $fila['matricula'];
 }
 ?>
 
@@ -52,26 +37,32 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menú del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menú del
+                        Backoffice</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php"
+                                data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php"
+                                data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
+                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php"
+                                data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Cerrar sesión</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html"
+                                data-i18n="logout">Cerrar sesión</a>
                         </li>
                         <li>
-                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()"
+                                data-i18n="changeLanguage">Change language</p>
                         </li>
                     </ul>
                 </div>
@@ -86,7 +77,8 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="col-md-4">
                 <h1 class="mb-4" data-i18n="trunkRoutes">Troncales</h1>
                 <div class="container mt-5">
-                    <a class="btn btn-secondary" href="troncales.php" role="button" data-i18n="trunkRoutes">Rutas troncales</a>
+                    <a class="btn btn-secondary" href="troncales.php" role="button" data-i18n="trunkRoutes">Rutas
+                        troncales</a>
                 </div>
                 <div class="container mt-5">
                 </div>
@@ -111,26 +103,20 @@ while ($fila = mysqli_fetch_array($camionero)) {
                     </thead>
                     <tbody>
                         <?php
-                        $query = "SELECT r.id_recoleccion, r.fecha_llegada, r.fecha_ida, cr.id_cliente, c.nombre, rv.matricula
-                        FROM recoleccion r
-                        JOIN cliente_recoleccion cr ON r.id_recoleccion = cr.id_recoleccion
-                        JOIN cliente c ON cr.id_cliente = c.id_cliente
-                        JOIN recoleccion_vehiculo rv ON r.id_recoleccion = rv.id_recoleccion
-                        WHERE rv.matricula = '$matricula'";
-                        $recolecciones = mysqli_query($conn, $query);
-
-                        while ($fila = mysqli_fetch_array($recolecciones)) { ?>
+                        ($recolecciones = $camioneroModel->infoRecolecciones($camionero["matricula"]));
+                        foreach ($recolecciones as $recoleccion) { ?>
                             <tr class="align-middle">
                                 <td>
-                                    <a href="../VISTA/verRecoleccion.php?id_recoleccion=<?php echo $fila['id_recoleccion']; ?>">
-                                        <?php echo $fila['nombre']; ?>
+                                    <a
+                                        href="../VISTA/verRecoleccion.php?id_recoleccion=<?php echo $recoleccion['id_recoleccion']; ?>">
+                                        <?php echo $recoleccion['nombre']; ?>
                                     </a>
                                 </td>
                                 <td>
                                     <?php
-                                    if (empty($fila['fecha_ida'])) {
+                                    if (empty($recoleccion['fecha_ida'])) {
                                         echo "sin empezar";
-                                    } elseif (empty($fila['fecha_llegada'])) {
+                                    } elseif (empty($recoleccion['fecha_llegada'])) {
                                         echo "en proceso";
                                     } else {
                                         echo "finalizado";
@@ -139,13 +125,13 @@ while ($fila = mysqli_fetch_array($camionero)) {
                                 </td>
                                 <td>
                                     <?php
-                                    if (empty($fila['fecha_ida'])) {
+                                    if (empty($recoleccion['fecha_ida'])) {
                                         echo "-";
                                     } else {
-                                        $day = date('d', strtotime($fila['fecha_ida'])); // Day
-                                        $month = date('m', strtotime($fila['fecha_ida'])); // Month
-                                        $year = date('Y', strtotime($fila['fecha_ida'])); // Year
-
+                                        $day = date('d', strtotime($recoleccion['fecha_ida'])); // Day
+                                        $month = date('m', strtotime($recoleccion['fecha_ida'])); // Month
+                                        $year = date('Y', strtotime($recoleccion['fecha_ida'])); // Year
+                                
                                         echo "$day/$month/$year";
                                     }
                                     ?>
@@ -167,7 +153,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script>
         var textStrings = {
             es: {
-                menuTitle: "Menú del Backoffice",
+                menuTitle: "Rutas",
                 home: "Inicio",
                 profile: "Perfil",
                 routes: "Rutas",
@@ -184,7 +170,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
                 finished: "finalizado"
             },
             en: {
-                menuTitle: "Backoffice Menu",
+                menuTitle: "Routes",
                 home: "Home",
                 profile: "Profile",
                 routes: "Routes",

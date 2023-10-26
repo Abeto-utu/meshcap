@@ -1,28 +1,14 @@
 <?php
-/* error_reporting(E_ALL ^ E_WARNING);  */
+//LINEA 79 103 SE USA SQL          CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 require('../../db.php');
+require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
-    $id_usuario = $_SESSION['username'];
+    ($camionero = $camioneroModel->infoCamionero($_SESSION['username']));
 } else {
     header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
-}
-
-$query = "SELECT c.id_usuario, u.nombre, u.cargo, c.estado, cv.matricula
-        FROM camionero c
-        JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
-        JOIN usuario u ON c.id_usuario = u.id_usuario
-        WHERE c.id_usuario = $id_usuario";
-$camionero = mysqli_query($conn, $query);
-
-while ($fila = mysqli_fetch_array($camionero)) {
-    $id_usuario = $fila['id_usuario'];
-    $nombre = $fila['nombre'];
-    $cargo = $fila['cargo'];
-    $estado_camionero = $fila['estado'];
-    $matricula = $fila['matricula'];
 }
 ?>
 
@@ -52,26 +38,32 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del
+                        Backoffice</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="rutasCamionero.php" data-i18n="home">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="rutasCamionero.php"
+                                data-i18n="home">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php" data-i18n="profile">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="../VISTA/perfilCamionero.php"
+                                data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="routes">Rutas</a>
+                            <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php"
+                                data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="logout">Cerrar sesión</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html"
+                                data-i18n="logout">Cerrar sesión</a>
                         </li>
                         <li>
-                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Cambiar idioma</p>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()"
+                                data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                     </ul>
                 </div>
@@ -84,6 +76,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
             <div class="col-md-12">
                 <h1 class="mb-4" data-i18n="packagesToDeliver">Paquetes a entregar</h1>
                 <?php
+                $id_usuario = $camionero["id_usuario"];
                 $query = "SELECT r.id_recorrido, r.estado, r.fecha_inicio, rv.matricula, cv.id_usuario
                         FROM recorrido r
                         JOIN recorrido_vehiculo rv ON r.id_recorrido = rv.id_recorrido
@@ -141,24 +134,32 @@ while ($fila = mysqli_fetch_array($camionero)) {
                             <?php
                             if (empty($fecha_inicio)) {
                                 ?>
-                                <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="deliverPackage">Entregar
+                                <a href=""><button type="button" class="btn btn-secondary" disabled
+                                        data-i18n="deliverPackage">Entregar
                                         paquete</button></a>
-                                <a href="../CONTROLADOR/iniciarEntrega.php?id_entrega=<?php echo $id_recorrido ?>"><button
-                                        type="button" class="btn btn-secondary" data-i18n="startDeliveries">Comenzar entregas</button></a>
+                                <a
+                                    href="../CONTROLADOR/controladorCamionero.php?iniciarEntrega=iniciarEntrega&id_recorrido=<?php echo $id_recorrido ?>&matricula=<?php echo $camionero['matricula'] ?>&id_usuario=<?php echo $camionero['id_usuario'] ?>"><button
+                                        type="button" class="btn btn-secondary" data-i18n="startDeliveries">Comenzar
+                                        entregas</button></a>
                                 <?php
                             } else {
                                 if (mysqli_num_rows($paqueteRecorrido) == 0) {
                                     ?>
-                                    <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="deliverPackage">Entregar
+                                    <a href=""><button type="button" class="btn btn-secondary" disabled
+                                            data-i18n="deliverPackage">Entregar
                                             paquete</button></a>
-                                    <a href="../CONTROLADOR/finalizarEntrega.php?id_entrega=<?php echo $id_recorrido ?>"><button
-                                            type="button" class="btn btn-secondary" data-i18n="finishDelivery">Finalizar entrega</button></a>
+                                    <a
+                                        href="../CONTROLADOR/controladorCamionero.php?finalizarEntrega=finalizarEntrega&id_recorrido=<?php echo $id_recorrido ?>&matricula=<?php echo $camionero['matricula'] ?>&id_usuario=<?php echo $camionero['id_usuario'] ?>"><button
+                                            type="button" class="btn btn-secondary" data-i18n="finishDelivery">Finalizar
+                                            entrega</button></a>
                                     <?php
                                 } else {
                                     ?>
-                                    <a href="../MODELO/entregarPaquete.php"><button type="button" class="btn btn-secondary" data-i18n="deliverPackage">Entregar
+                                    <a href="../VISTA/entregarPaquete.php"><button type="button" class="btn btn-secondary"
+                                            data-i18n="deliverPackage">Entregar
                                             paquete</button></a>
-                                    <a href=""><button type="button" class="btn btn-secondary" disabled data-i18n="finishDelivery">Finalizar
+                                    <a href=""><button type="button" class="btn btn-secondary" disabled
+                                            data-i18n="finishDelivery">Finalizar
                                             entrega</button></a>
                                     <?php
                                 }
@@ -178,7 +179,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
                     <?php
                 } else {
                     ?>
-                    <p data-i18n="errorTooManyDeliveries">error, demasiadas entregas asignadas</p>
+                    <p data-i18n="errorTooManyDeliveries">Error, demasiadas entregas asignadas</p>
                     <?php
                 }
                 ?>
@@ -196,7 +197,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
     <script>
         var textStrings = {
             es: {
-                menuTitle: "Menu del Backoffice",
+                menuTitle: "Entregas",
                 home: "Inicio",
                 profile: "Perfil",
                 routes: "Rutas",
@@ -212,7 +213,7 @@ while ($fila = mysqli_fetch_array($camionero)) {
                 errorTooManyDeliveries: "Error, demasiadas entregas asignadas"
             },
             en: {
-                menuTitle: "Backoffice Menu",
+                menuTitle: "Deliveries",
                 home: "Home",
                 profile: "Profile",
                 routes: "Routes",
@@ -250,10 +251,8 @@ while ($fila = mysqli_fetch_array($camionero)) {
                 }
             });
         }
-
-        // Initialize the text with the default language
         document.addEventListener('DOMContentLoaded', function () {
-            updateText('es'); // Change to 'es' if the default language is Spanish
+            updateText('es');
         });
     </script>
 </body>
