@@ -1,5 +1,4 @@
 <?php
-//LINEA 79 103 SE USA SQL          CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 require('../../db.php');
 require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
@@ -76,16 +75,8 @@ if (isset($_SESSION['username'])) {
             <div class="col-md-12">
                 <h1 class="mb-4" data-i18n="packagesToDeliver">Paquetes a entregar</h1>
                 <?php
-                $id_usuario = $camionero["id_usuario"];
-                $query = "SELECT r.id_recorrido, r.estado, r.fecha_inicio, rv.matricula, cv.id_usuario
-                        FROM recorrido r
-                        JOIN recorrido_vehiculo rv ON r.id_recorrido = rv.id_recorrido
-                        JOIN camionero_vehiculo cv ON rv.matricula = cv.matricula
-                        WHERE cv.id_usuario = $id_usuario
-                        AND r.estado IN ('no comenzado', 'en proceso');
-                        ";
-                $recorridosActivos = mysqli_query($conn, $query);
-                if (mysqli_num_rows($recorridosActivos) == 1) {
+                ($recorridosActivos = $camioneroModel->recorridosActivos($camionero["id_usuario"]));
+                if (count($recorridosActivos) == 1) {
                     ?>
                     <table class="table">
                         <thead>
@@ -96,17 +87,10 @@ if (isset($_SESSION['username'])) {
                         </thead>
                         <tbody>
                             <?php
-                            $resultArray = mysqli_fetch_array($recorridosActivos);
-                            $id_recorrido = $resultArray['id_recorrido'];
-                            $fecha_inicio = $resultArray['fecha_inicio'];
+                            $id_recorrido = $recorridosActivos[0]['id_recorrido'];
+                            $fecha_inicio = $recorridosActivos[0]['fecha_inicio'];
 
-                            $query = "SELECT p.id_paquete, p.destino, p.estado, p.fecha_recibo, p.fecha_entrega
-                            FROM paquete p
-                            JOIN paquete_recorrido pr ON p.id_paquete = pr.id_paquete
-                            WHERE pr.id_recorrido = $id_recorrido AND p.estado <> 'entregado';;
-                            ";
-                            $paqueteRecorrido = mysqli_query($conn, $query);
-
+                            ($paqueteRecorrido = $camioneroModel->paquetesEnRecorrido($id_recorrido));
                             $newArray = [];
                             foreach ($paqueteRecorrido as $item) {
                                 $destino = $item['destino'];
@@ -143,7 +127,7 @@ if (isset($_SESSION['username'])) {
                                         entregas</button></a>
                                 <?php
                             } else {
-                                if (mysqli_num_rows($paqueteRecorrido) == 0) {
+                                if (count($paqueteRecorrido) == 0) {
                                     ?>
                                     <a href=""><button type="button" class="btn btn-secondary" disabled
                                             data-i18n="deliverPackage">Entregar
@@ -173,7 +157,7 @@ if (isset($_SESSION['username'])) {
 
 
                     <?php
-                } elseif (mysqli_num_rows($recorridosActivos) == 0) {
+                } elseif (count($recorridosActivos) == 0) {
                     ?>
                     <p data-i18n="noAssignDeliveries">No hay entregas asignadas</p>
                     <?php

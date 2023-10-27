@@ -1,5 +1,4 @@
 <?php
-// api ready
 require('../../db.php');
 require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();

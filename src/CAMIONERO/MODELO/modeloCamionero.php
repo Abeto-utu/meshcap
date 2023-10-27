@@ -37,11 +37,15 @@ class CamioneroModel
     public function infoRecolecciones($matricula)
     {
         $query = "SELECT r.id_recoleccion, r.fecha_llegada, r.fecha_ida, c.nombre
-            FROM recoleccion r
-            JOIN cliente_recoleccion cr ON r.id_recoleccion = cr.id_recoleccion
-            JOIN cliente c ON cr.id_cliente = c.id_cliente
-            JOIN recoleccion_vehiculo rv ON r.id_recoleccion = rv.id_recoleccion
-            WHERE rv.matricula = '$matricula'";
+        FROM recoleccion r
+        JOIN cliente_recoleccion cr ON r.id_recoleccion = cr.id_recoleccion
+        JOIN cliente c ON cr.id_cliente = c.id_cliente
+        JOIN recoleccion_vehiculo rv ON r.id_recoleccion = rv.id_recoleccion
+        WHERE rv.matricula = '$matricula'
+        ORDER BY 
+          CASE WHEN r.fecha_llegada IS NULL THEN 0 ELSE 1 END,
+          r.fecha_llegada;
+        ";
         $recolecciones = mysqli_query($this->conn, $query);
 
         if (!$recolecciones) {
@@ -180,6 +184,52 @@ class CamioneroModel
         $resultado = [];
 
         while ($fila = mysqli_fetch_array($lotes)) {
+            $resultado[] = $fila;
+        }
+
+        return $resultado;
+    }
+
+    public function paquetesEnRecorrido($id_recorrido)
+    {
+        $query = "SELECT p.id_paquete, p.destino, p.estado, p.fecha_recibo, p.fecha_entrega
+                            FROM paquete p
+                            JOIN paquete_recorrido pr ON p.id_paquete = pr.id_paquete
+                            WHERE pr.id_recorrido = $id_recorrido AND p.estado <> 'entregado';;
+                            ";
+        $paqueteRecorrido = mysqli_query($this->conn, $query);
+
+        if (!$paqueteRecorrido) {
+            die("Error: " . mysqli_error($this->conn));
+        }
+
+        $resultado = [];
+
+        while ($fila = mysqli_fetch_array($paqueteRecorrido)) {
+            $resultado[] = $fila;
+        }
+
+        return $resultado;
+    }
+
+    public function recorridosActivos($id_usuario)
+    {
+        $query = "SELECT r.id_recorrido, r.estado, r.fecha_inicio, rv.matricula, cv.id_usuario
+                        FROM recorrido r
+                        JOIN recorrido_vehiculo rv ON r.id_recorrido = rv.id_recorrido
+                        JOIN camionero_vehiculo cv ON rv.matricula = cv.matricula
+                        WHERE cv.id_usuario = $id_usuario
+                        AND r.estado IN ('no comenzado', 'en proceso');
+                        ";
+        $recorridosActivos = mysqli_query($this->conn, $query);
+
+        if (!$recorridosActivos) {
+            die($id_usuario . " gdfgError: " . mysqli_error($this->conn));
+        }
+
+        $resultado = [];
+
+        while ($fila = mysqli_fetch_array($recorridosActivos)) {
             $resultado[] = $fila;
         }
 
