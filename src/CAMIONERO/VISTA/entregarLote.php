@@ -144,13 +144,11 @@ if (isset($_SESSION['username'])) {
         crossorigin="anonymous"></script>
     <script>
         function changeLanguage() {
-            // Code to change language
             const htmlTag = document.querySelector('html');
             const currentLang = htmlTag.getAttribute('lang');
-            const newLang = currentLang === 'en' ? 'es' : 'en'; // Toggle between English and Spanish
+            const newLang = currentLang === 'en' ? 'es' : 'en';
             htmlTag.setAttribute('lang', newLang);
 
-            // Translate the text
             const elementsToTranslate = document.querySelectorAll('[data-i18n]');
             elementsToTranslate.forEach(element => {
                 const key = element.getAttribute('data-i18n');
