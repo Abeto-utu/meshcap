@@ -57,7 +57,7 @@ if (isset($_SESSION['username'])) {
                                 data-i18n="routes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html"
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
                                 data-i18n="logout">Cerrar sesión</a>
                         </li>
                         <li>

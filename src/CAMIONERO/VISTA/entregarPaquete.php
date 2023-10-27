@@ -53,7 +53,7 @@ if (isset($_SESSION['username'])) {
                             <a class="nav-link active" aria-current="page" href="../VISTA/rutasCamionero.php" data-i18n="navRoutes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html" data-i18n="navLogout">Log out</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="navLogout">Log out</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>

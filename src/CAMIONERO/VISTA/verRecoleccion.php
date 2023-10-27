@@ -65,11 +65,11 @@ if (isset($_GET['id_recoleccion'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../VISTA/camionero.php"
+                            <a class="nav-link" aria-current="page" href="../VISTA/rutasCamionero.php"
                                 data-i18n="navHome">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="rutasCamionero.php"
+                            <a class="nav-link" aria-current="page" href="perfilCamionero.php"
                                 data-i18n="navProfile">Perfil</a>
                         </li>
                         <li class="nav-item">
@@ -77,7 +77,7 @@ if (isset($_GET['id_recoleccion'])) {
                                 data-i18n="navRoutes">Rutas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.html"
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
                                 data-i18n="navLogout">Cerrar sesión</a>
                         </li>
                         <li>
