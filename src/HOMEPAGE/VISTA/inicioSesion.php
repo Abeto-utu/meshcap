@@ -111,7 +111,7 @@
         </div>
     </section>
 
-    <footer id="contacto" class="text-white text-center text-lg-start bg-dark">
+    <footer id="contacto" class="text-white text-center text-lg-start" style="background-color: rgba(0, 0, 0, 0.2);">
         <div class="container p-4">
             <div class="row mt-4">
                 <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
@@ -123,9 +123,10 @@
                     <div class="mt-4">
                         <a type="button" class="btn btn-floating btn-warning btn-lg" href="https://facebook.com"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a type="button" class="btn btn-floating btn-warning btn-lg" href="https://twitter.com"><i class="fab fa-twitter"></i></a>
-                        <a type="button" class="btn btn-floating btn-warning btn-lg" href="https://www.google.com/intl/es/gmail/about"><i
-                                class="fab fa-google-plus-g"></i></a>
+                        <a type="button" class="btn btn-floating btn-warning btn-lg" href="https://twitter.com"><i
+                                class="fab fa-twitter"></i></a>
+                        <a type="button" class="btn btn-floating btn-warning btn-lg"
+                            href="https://www.google.com/intl/es/gmail/about"><i class="fab fa-google-plus-g"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
@@ -144,8 +145,8 @@
                                 data-i18n="homeAddress">Montevideo, Av.Gral Rivera, 11600, UY</span>
                         </li>
                         <li class="mb-3">
-                            <span class="fa-li"><i class="fas fa-envelope"></i></span><span
-                                class="ms-2" data-i18n="emailAddress">Abeto@gmail.com</span>
+                            <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2"
+                                data-i18n="emailAddress">Abeto@gmail.com</span>
                         </li>
                         <li class="mb-3">
                             <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2"
@@ -176,7 +177,7 @@
             </div>
         </div>
 
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);" data-i18n="rightsReserved">© 2023
+        <div class="text-center p-3 bg-dark" data-i18n="rightsReserved">© 2023
             Derechos de autor
         </div>
     </footer>

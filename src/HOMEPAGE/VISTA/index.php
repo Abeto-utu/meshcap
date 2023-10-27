@@ -73,8 +73,8 @@
         </nav>
     </header>
 
-    <section id="inicio">
-        <div class="container bg-dark text-white text-center py-5">
+    <section id="inicio" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="container text-white text-center py-5" >
             <h1 class="display-4" data-i18n="quickCarry">Quick Carry</h1>
             <h2 data-i18n="reliableLogistics">La empresa de logística más confiable del Uruguay</h2>
             <div class="mt-4">
@@ -131,7 +131,7 @@
         </div>
     </section>
 
-    <footer id="contacto" class="text-white text-center text-lg-start bg-dark">
+    <footer id="contacto" class="text-white text-center text-lg-start" style="background-color: rgba(0, 0, 0, 0.2);">
         <div class="container p-4">
             <div class="row mt-4">
                 <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
@@ -196,7 +196,7 @@
             </div>
         </div>
 
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);" data-i18n="copyright">© 2023 Derechos
+        <div class="text-center p-3 bg-dark" data-i18n="copyright">© 2023 Derechos
             de autor
         </div>
     </footer>
