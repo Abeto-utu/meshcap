@@ -74,7 +74,7 @@
     </header>
 
     <section id="inicio" style="background-color: rgba(0, 0, 0, 0.2);">
-        <div class="container text-white text-center py-5" >
+        <div class="container text-white text-center py-5">
             <h1 class="display-4" data-i18n="quickCarry">Quick Carry</h1>
             <h2 data-i18n="reliableLogistics">La empresa de logística más confiable del Uruguay</h2>
             <div class="mt-4">
@@ -176,7 +176,7 @@
 
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                     <h5 data-i18n="contactUs">CONTACTANOS</h5>
-                    <form action="send_email.php" method="post">
+                    <form action="../CONTROLADOR/send_email.php" method="post">
                         <div class="form-group">
                             <label for="name" data-i18n="name">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -289,6 +289,20 @@
                 navbarMenu.classList.toggle("show");
             });
         });
+    </script>
+    <script>
+        <?php
+        if (isset($_GET['status'])) {
+            $status = $_GET['status'];
+            echo "var status = '" . $status . "';";
+        } else {
+            echo "var status = '';";
+        }
+        ?>
+
+        if (status !== '') {
+            alert(status);
+        }
     </script>
 </body>
 
