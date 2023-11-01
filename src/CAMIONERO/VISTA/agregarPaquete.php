@@ -44,7 +44,7 @@ if (isset($_GET["id_recoleccion"])) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menú del Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menú</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -96,8 +96,12 @@ if (isset($_GET["id_recoleccion"])) {
                         <label for="exampleInputPassword1" class="form-label" data-i18n="number">Numero:</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="numero">
                     </div>
-                    <div class="container mt-3"><button type="submit" class="btn btn-secondary" data-i18n="submit">Submit</button></div>
-
+                    <div class="container mt-3"><button type="submit" class="btn btn-secondary" data-i18n="submit">Agregar</button></div>
+                    <?php 
+                        ($id_paquete = $camioneroModel->ultimoPaquete());
+                    ?>
+                    <br>
+                    <p data-i18n="registrara"></p>
                 </form>
             </div>
         </div>
@@ -123,7 +127,8 @@ if (isset($_GET["id_recoleccion"])) {
                 location: "Localidad:",
                 street: "Calle:",
                 number: "Numero:",
-                submit: "Enviar"
+                submit: "Agregar",
+                registrara: "Se registrara con el identificador: <?php echo $id_paquete ?>"
             },
             en: {
                 menuTitle: "Driver",
@@ -137,7 +142,8 @@ if (isset($_GET["id_recoleccion"])) {
                 location: "Location:",
                 street: "Street:",
                 number: "Number:",
-                submit: "Submit"
+                submit: "Add",
+                registrara: "It'll have the identifier: <?php echo $id_paquete ?>"
             }
         };
 

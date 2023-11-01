@@ -210,9 +210,8 @@ if (isset($_SESSION['username'])) {
             });
         }
 
-        // Initialize the text with the default language
         document.addEventListener('DOMContentLoaded', function () {
-            updateText('es'); // Change to 'en' if the default language is English
+            updateText('es');
         });
     </script>
 </body>

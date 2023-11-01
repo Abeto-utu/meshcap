@@ -42,7 +42,7 @@ if (isset($_GET['data'])) {
                         $puesto = $row1['cargo'];
                         switch ($puesto) {
                             case 'funcionario':
-                                header('Location: ../../ALMACENERO/VISTA/almacenero.html');
+                                header('Location: ../../ALMACENERO/VISTA/almacenero.php');
                                 exit();
                             case 'camionero':
                                 header('Location: ../../CAMIONERO/VISTA/rutasCamionero.php');

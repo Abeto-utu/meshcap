@@ -496,6 +496,19 @@ class CamioneroModel
         return true;
     }
 
+    public function ultimoPaquete()
+    {
+        $query = "SELECT MAX(id_paquete) AS highest_id_paquete FROM paquete;";
+        $resultado = mysqli_query($this->conn, $query);
+
+        if ($row = mysqli_fetch_assoc($resultado)) {
+            $id_paquete = $row['highest_id_paquete'];
+        } else {
+            die('error 1 en consultar ultimo paquete' . mysqli_error($this->conn));
+        }
+
+        return $id_paquete;
+    }
 
 }
 ?>
