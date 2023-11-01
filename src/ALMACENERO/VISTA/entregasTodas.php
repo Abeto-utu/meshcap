@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recolecciones</title>
+    <title>Entregas</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -54,14 +54,14 @@ if (isset($_SESSION['username'])) {
                             <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="recolecciones.php"
+                            <a class="nav-link" aria-current="page" href="recolecciones.php"
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -78,71 +78,60 @@ if (isset($_SESSION['username'])) {
     </nav>
 
     <div class="container mt-5">
-        <br>
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <a href="../VISTA/recoleccionesCrear.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="createRecolection">Crear recoleccion</button></a>
-            </div>
-        </div>
+
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="currentRecolections">Recolecciones en curso</h1>
+                <h1 class="mb-4" data-i18n="">Entregas</h1>
                 <?php
                 if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p>Error al crear la recoleccion</p>';
+                    if ($_GET["error"] == "subirLote") {
+                        echo '<p>Error al subir el lote</p>';
                     }
                 } ?>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Cliente</th>
-                            <th scope="col" data-i18n="">Estado</th>
+                            <th scope="col" data-i18n="">Paquetes</th>
                             <th scope="col" data-i18n="">Vehiculo</th>
-                            <th scope="col" data-i18n="">Llegada</th>
-                            <th scope="col" data-i18n="">Ida</th>
+                            <th scope="col" data-i18n="">Estado</th>
+                            <th scope="col" data-i18n="">Inicio</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        ($recolecciones = $almaceneroModel->recoleccionesActivas());
+                        ($entregas = $almaceneroModel->mostrarEntregas());
                         $resultArray = [];
-                        foreach ($recolecciones as $fila) {
-                            $id_recoleccion = $fila['id_recoleccion'];
-                            $nombre = $fila['nombre'];
+                        foreach ($entregas as $fila) {
+                            $id_recorrido = $fila['id_recorrido'];
+                            $estado = $fila['estado'];
+                            $fecha_inicio = $fila['fecha_inicio'];
                             $matricula = $fila['matricula'];
-                            $fecha_llegada = $fila['fecha_llegada'];
-                            $fecha_ida = $fila['fecha_ida'];
-                            if (empty($fecha_ida)) {
-                                $estado = 'sin comenzar';
-                            } elseif (empty($fecha_llegada)) {
-                                $estado = 'en proceso';
-                            } else {
-                                $estado = 'finalizado';
+                            ($paquetes = $almaceneroModel->paquetesDeUnRecorrido($id_recorrido));
+                            if (empty($recibo)) {
+                                $recibo = '-';
+                            }
+                            if (empty($entrega)) {
+                                $entrega = '-';
                             }
 
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $id_recoleccion ?>
+                                    <?php echo $id_recorrido ?>
                                 </td>
                                 <td>
-                                    <?php echo $nombre; ?>
-                                </td>
-                                <td>
-                                    <?php echo $estado; ?>
+                                    <?php echo implode(', ', $paquetes) ?>
                                 </td>
                                 <td>
                                     <?php echo $matricula; ?>
                                 </td>
                                 <td>
-                                    <?php echo $fecha_llegada; ?>
+                                    <?php echo $estado ?>
                                 </td>
                                 <td>
-                                    <?php echo $fecha_ida; ?>
+                                    <?php echo $fecha_inicio; ?>
                                 </td>
                             </tr>
                             <?php
@@ -151,8 +140,6 @@ if (isset($_SESSION['username'])) {
                         ?>
                     </tbody>
                 </table>
-                <a href="../VISTA/recoleccionesTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
             </div>
         </div>
 

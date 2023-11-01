@@ -47,8 +47,7 @@ if (isset($_SESSION['username'])) {
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php"
-                                data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
@@ -59,19 +58,18 @@ if (isset($_SESSION['username'])) {
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="entregas.php"
-                                data-i18n="">Entregas</a>
+                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
+                                data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -93,7 +91,49 @@ if (isset($_SESSION['username'])) {
                     <button type="submit" class="btn btn-secondary">Crear</button>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="mb-4" data-i18n="">Vehiculos</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="">Matricula</th>
+                            <th scope="col" data-i18n="">Estado</th>
+                            <th scope="col" data-i18n="">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        ($vehiculos = $almaceneroModel->mostrarVehiculo());
+                        $resultArray = [];
+                        foreach ($vehiculos as $fila) {
+                            $matricula = $fila['matricula'];
+                            $estado = $fila['estado'];
+                            $tipo = $fila['tipo'];
+
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $matricula ?>
+                                </td>
+                                <td>
+                                    <?php echo $estado; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tipo; ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

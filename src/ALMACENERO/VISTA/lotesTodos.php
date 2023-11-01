@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recolecciones</title>
+    <title>Lotes</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -47,18 +47,20 @@ if (isset($_SESSION['username'])) {
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php"
+                                data-i18n="">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="recolecciones.php"
+                            <a class="nav-link" aria-current="page" href="recolecciones.php"
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php"
+                                data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
@@ -68,8 +70,7 @@ if (isset($_SESSION['username'])) {
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
-                                data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -79,70 +80,67 @@ if (isset($_SESSION['username'])) {
 
     <div class="container mt-5">
         <br>
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <a href="../VISTA/recoleccionesCrear.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="createRecolection">Crear recoleccion</button></a>
-            </div>
-        </div>
-        <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="currentRecolections">Recolecciones en curso</h1>
+                <h1 class="mb-4" data-i18n="notDeliveredLots">Lotes</h1>
                 <?php
                 if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p>Error al crear la recoleccion</p>';
+                    if ($_GET["error"] == "subirLote") {
+                        echo '<p>Error al subir el lote</p>';
                     }
                 } ?>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Cliente</th>
+                            <th scope="col" data-i18n="">Destino</th>
                             <th scope="col" data-i18n="">Estado</th>
+                            <th scope="col" data-i18n="">Fecha Abierto</th>
+                            <th scope="col" data-i18n="">Cierre</th>
+                            <th scope="col" data-i18n="">Paquetes</th>
                             <th scope="col" data-i18n="">Vehiculo</th>
-                            <th scope="col" data-i18n="">Llegada</th>
-                            <th scope="col" data-i18n="">Ida</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        ($recolecciones = $almaceneroModel->recoleccionesActivas());
+
+                        ($lotes = $almaceneroModel->mostrarLotes());
                         $resultArray = [];
-                        foreach ($recolecciones as $fila) {
-                            $id_recoleccion = $fila['id_recoleccion'];
-                            $nombre = $fila['nombre'];
-                            $matricula = $fila['matricula'];
-                            $fecha_llegada = $fila['fecha_llegada'];
-                            $fecha_ida = $fila['fecha_ida'];
-                            if (empty($fecha_ida)) {
-                                $estado = 'sin comenzar';
-                            } elseif (empty($fecha_llegada)) {
-                                $estado = 'en proceso';
-                            } else {
-                                $estado = 'finalizado';
-                            }
+                        foreach ($lotes as $fila) {
+                            $id_lote = $fila['id_lote'];
+                            $destino = $fila['nombre'];
+                            $estado = $fila['estado'];
+                            $fecha_cierre = $fila['fecha_cierre'];
+                            $fecha_abierto = $fila['fecha_abierto'];
+                            ($paquetes = $almaceneroModel->paquetesDeUnLote($id_lote));
+                            ($vehiculo = $almaceneroModel->vehiculoDeUnLote($id_lote));
+
 
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $id_recoleccion ?>
+                                    <?php echo $id_lote ?>
                                 </td>
                                 <td>
-                                    <?php echo $nombre; ?>
+                                    <?php echo $destino ?>
                                 </td>
                                 <td>
-                                    <?php echo $estado; ?>
+                                    <?php echo $estado ?>
                                 </td>
                                 <td>
-                                    <?php echo $matricula; ?>
+                                    <?php echo $fecha_abierto ?>
                                 </td>
                                 <td>
-                                    <?php echo $fecha_llegada; ?>
+                                    <?php echo $fecha_cierre ?>
                                 </td>
                                 <td>
-                                    <?php echo $fecha_ida; ?>
+                                    <?php echo implode(', ', $paquetes) ?>
+                                </td>
+                                <td>
+                                    <?php if (isset($vehiculo[0])) {
+                                        echo $vehiculo[0];
+                                    } ?>
                                 </td>
                             </tr>
                             <?php
@@ -151,8 +149,6 @@ if (isset($_SESSION['username'])) {
                         ?>
                     </tbody>
                 </table>
-                <a href="../VISTA/recoleccionesTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
             </div>
         </div>
 

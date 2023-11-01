@@ -51,8 +51,7 @@ if (isset($_GET["id_lote"])) {
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php"
-                                data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
@@ -63,8 +62,7 @@ if (isset($_GET["id_lote"])) {
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
@@ -74,7 +72,8 @@ if (isset($_GET["id_lote"])) {
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
+                                data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -96,6 +95,62 @@ if (isset($_GET["id_lote"])) {
                     <br>
                     <button type="submit" class="btn btn-secondary">Asignar</button>
                 </form>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="mb-4" data-i18n="">Paquetes disponibles</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="">Identificador</th>
+                            <th scope="col" data-i18n="">Destino</th>
+                            <th scope="col" data-i18n="">Estado</th>
+                            <th scope="col" data-i18n="">Recibo</th>
+                            <th scope="col" data-i18n="">Entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        ($paquetes = $almaceneroModel->paquetesPlatafoma($almacenero['id_plataforma']));
+                        $resultArray = [];
+                        foreach ($paquetes as $fila) {
+                            $paquete = $fila['id_paquete'];
+                            $destino = $fila['destino'];
+                            $estado = $fila['estado'];
+                            $recibo = $fila['fecha_recibo'];
+                            $entrega = $fila['fecha_entrega'];
+                            if (empty($recibo)) {
+                                $recibo = '-';
+                            }
+                            if (empty($entrega)) {
+                                $entrega = '-';
+                            }
+
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $paquete ?>
+                                </td>
+                                <td>
+                                    <?php echo $destino; ?>
+                                </td>
+                                <td>
+                                    <?php echo $estado; ?>
+                                </td>
+                                <td>
+                                    <?php echo $recibo; ?>
+                                </td>
+                                <td>
+                                    <?php echo $entrega; ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
 

@@ -78,24 +78,10 @@ if (isset($_SESSION['username'])) {
     </nav>
 
     <div class="container mt-5">
-        <br>
-        <div class="row mt-4">
+        <div class="row justify-content-center">
             <div class="col-md-6">
-                <a href="../VISTA/recoleccionesCrear.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="createRecolection">Crear recoleccion</button></a>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="currentRecolections">Recolecciones en curso</h1>
-                <?php
-                if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p>Error al crear la recoleccion</p>';
-                    }
-                } ?>
-                <table class="table">
+                <h1 class="mb-3" data-i18n="">Recolecciones</h1>
+                <table class="table centered-table">
                     <thead>
                         <tr>
                             <th scope="col" data-i18n="">Identificador</th>
@@ -108,7 +94,7 @@ if (isset($_SESSION['username'])) {
                     </thead>
                     <tbody>
                         <?php
-                        ($recolecciones = $almaceneroModel->recoleccionesActivas());
+                        ($recolecciones = $almaceneroModel->mostrarRecolecciones());
                         $resultArray = [];
                         foreach ($recolecciones as $fila) {
                             $id_recoleccion = $fila['id_recoleccion'];
@@ -151,11 +137,8 @@ if (isset($_SESSION['username'])) {
                         ?>
                     </tbody>
                 </table>
-                <a href="../VISTA/recoleccionesTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

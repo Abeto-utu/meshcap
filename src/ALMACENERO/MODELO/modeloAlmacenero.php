@@ -98,7 +98,7 @@ class almaceneroModel
         $query = "INSERT INTO recoleccion (id_recoleccion, fecha_llegada, fecha_ida) VALUES (NULL, NULL, NULL);";
         $resultado = mysqli_query($this->conn, $query);
         if (!$resultado) {
-            die("error 1 en crear recoleccion" . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "SELECT MAX(id_recoleccion) AS highest_id_recoleccion FROM recoleccion;";
@@ -107,14 +107,14 @@ class almaceneroModel
         if ($row = mysqli_fetch_assoc($resultado)) {
             $id_recoleccion = $row['highest_id_recoleccion'];
         } else {
-            die('error 2 en crear recoleccion' . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "INSERT INTO `recoleccion_vehiculo`(`id_recoleccion`, `matricula`) VALUES ('$id_recoleccion','$matricula')";
         $resultado = mysqli_query($this->conn, $query);
 
         if (!$resultado) {
-            die("error 3 en crear recoleccion" . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "INSERT INTO `cliente_recoleccion`(`id_recoleccion`, `id_cliente`) VALUES ('$id_recoleccion','$id_cliente')";
@@ -141,6 +141,30 @@ class almaceneroModel
 
         if (!$result) {
             die("Error al obtener informacion de los lotes sin entregar: " . mysqli_error($this->conn));
+        }
+
+        $lotes = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $lotes[] = $fila;
+        }
+
+        return $lotes;
+    }
+
+    public function mostrarLotes()
+    {
+
+        $query = "SELECT l.*, pl.fecha_llegada, p.nombre
+        FROM lote l
+        JOIN plataforma_lote pl ON l.id_lote = pl.id_lote
+        JOIN plataforma p ON pl.id_plataforma = p.id_plataforma;
+        ";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de los lotes: " . mysqli_error($this->conn));
         }
 
         $lotes = [];
@@ -199,7 +223,7 @@ class almaceneroModel
         } else {
             return "";
         }
-        
+
     }
 
     public function crearLote($id_plataforma)
@@ -247,7 +271,8 @@ class almaceneroModel
         }
     }
 
-    public function asignarPaqueteALote($id_lote, $id_paquete) {
+    public function asignarPaqueteALote($id_lote, $id_paquete)
+    {
         $query = "INSERT INTO `paquete_lote`(`id_paquete`, `id_lote`) VALUES ($id_paquete,$id_lote)";
         $resultado = mysqli_query($this->conn, $query);
 
@@ -258,7 +283,8 @@ class almaceneroModel
         }
     }
 
-    public function cerrarLote($id_lote) {
+    public function cerrarLote($id_lote)
+    {
         $query = "UPDATE `lote` SET `estado`='cerrado',`fecha_cierre`=CURRENT_TIMESTAMP WHERE id_lote = $id_lote";
         $resultado = mysqli_query($this->conn, $query);
 
@@ -282,6 +308,30 @@ class almaceneroModel
 
         if (!$result) {
             die("Error al obtener informacion de las entregas activas: " . mysqli_error($this->conn));
+        }
+
+        $entregas = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $entregas[] = $fila;
+        }
+
+        return $entregas;
+    }
+
+    public function mostrarEntregas()
+    {
+
+        $query = "SELECT r.*, rv.*
+        FROM recorrido r
+        JOIN recorrido_vehiculo rv ON r.id_recorrido = rv.id_recorrido
+        ORDER BY r.id_recorrido DESC;
+        ";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de las entregas: " . mysqli_error($this->conn));
         }
 
         $entregas = [];
@@ -347,7 +397,8 @@ class almaceneroModel
         }
     }
 
-    public function asignarPaqueteAEntrega($id_paquete, $id_recorrido) {
+    public function asignarPaqueteAEntrega($id_paquete, $id_recorrido)
+    {
         $query = "INSERT INTO `paquete_recorrido`(`id_paquete`, `id_recorrido`) VALUES ($id_paquete,$id_recorrido)";
         $resultado = mysqli_query($this->conn, $query);
 
@@ -356,6 +407,207 @@ class almaceneroModel
         } else {
             return false; // Error en la inserción
         }
+    }
+
+    public function agregarPaquete()
+    {
+        $departamento = $_POST['departamento'];
+        $estado = 'en plataforma'; // DEFAULT PORQUE SON PAQUETES QUE REOCOGE EL CAMIONERO
+        $localidad = $_POST['localidad'];
+        $calle = $_POST['calle'];
+        $numero = $_POST['numero'];
+        $destino = "$numero $calle, $localidad, $departamento";
+        $query = "INSERT INTO paquete (destino, estado, fecha_recibo, fecha_entrega) 
+        VALUES ('$destino', '$estado', CURRENT_TIMESTAMP, NULL);
+        ";
+        $resultado = mysqli_query($this->conn, $query);
+
+        if (!$resultado) {
+            return false;
+        }
+        return true;
+    }
+
+    public function ultimoPaquete()
+    {
+        $query = "SELECT MAX(id_paquete) AS highest_id_paquete FROM paquete;";
+        $resultado = mysqli_query($this->conn, $query);
+
+        if ($row = mysqli_fetch_assoc($resultado)) {
+            $id_paquete = $row['highest_id_paquete'];
+        } else {
+            die('error 1 en consultar ultimo paquete' . mysqli_error($this->conn));
+        }
+
+        return $id_paquete;
+    }
+
+    public function entregarPaquete()
+    {
+        $paquete = $_POST['paquete'];
+
+        $query = "UPDATE paquete
+        SET estado = 'entregado'
+        WHERE id_paquete = $paquete;
+        ";
+        $resultado = mysqli_query($this->conn, $query);
+
+        if (!$resultado) {
+            return false;
+        }
+
+        $query = "UPDATE paquete
+        SET fecha_entrega = CURRENT_TIMESTAMP
+        WHERE id_paquete = $paquete;
+        ";
+        $resultado = mysqli_query($this->conn, $query);
+
+        if (!$resultado) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function mostrarPaquetes()
+    {
+
+
+        $query = "SELECT * FROM paquete ORDER BY id_paquete DESC;";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de los paquetes: " . mysqli_error($this->conn));
+        }
+
+        $paquetes = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $paquetes[] = $fila;
+        }
+
+        return $paquetes;
+    }
+
+    public function mostrarRecolecciones()
+    {
+        $query = "SELECT r.id_recoleccion, cl.nombre, rv.matricula, r.fecha_llegada, r.fecha_ida
+        FROM recoleccion r
+        JOIN cliente_recoleccion cr ON r.id_recoleccion = cr.id_recoleccion
+        JOIN cliente cl ON cr.id_cliente = cl.id_cliente
+        JOIN recoleccion_vehiculo rv ON r.id_recoleccion = rv.id_recoleccion
+        ORDER BY id_recoleccion DESC;
+        ";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de las recolecciones: " . mysqli_error($this->conn));
+        }
+
+        $recolecciones = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $recolecciones[] = $fila;
+        }
+
+        return $recolecciones;
+    }
+
+    public function mostrarClientes()
+    {
+
+
+        $query = "SELECT * FROM cliente";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de los clientes: " . mysqli_error($this->conn));
+        }
+
+        $clientes = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $clientes[] = $fila;
+        }
+
+        return $clientes;
+    }
+
+    public function mostrarVehiculo()
+    {
+
+
+        $query = "SELECT * FROM vehiculo";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de los vehiculos: " . mysqli_error($this->conn));
+        }
+
+        $vehiculos = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $vehiculos[] = $fila;
+        }
+
+        return $vehiculos;
+    }
+
+    public function mostrarPlataforma()
+    {
+
+
+        $query = "SELECT *
+        FROM plataforma
+        JOIN plataforma_linea ON plataforma.id_plataforma = plataforma_linea.id_plataforma;";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            die("Error al obtener informacion de los plataformas: " . mysqli_error($this->conn));
+        }
+
+        $plataformas = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $plataformas[] = $fila;
+        }
+
+        return $plataformas;
+    }
+
+    public function paquetesEntregas($id_plataforma)
+    {
+
+        if ($id_plataforma == '1') { // Si la plataforma es montevideo se comporta diferente
+            $query = "SELECT * FROM paquete WHERE estado = 'en plataforma destino';
+            ";
+            $result = mysqli_query($this->conn, $query);
+        } else {
+            $query = "SELECT p.*
+            FROM paquete p
+            JOIN paquete_lote pl ON p.id_paquete = pl.id_paquete
+            JOIN plataforma_lote plote ON pl.id_lote = plote.id_lote
+            WHERE plote.id_plataforma = 8 AND p.estado <> 'entregado';
+            ";
+            $result = mysqli_query($this->conn, $query);
+        }
+
+        if (!$result) {
+            die("Error al obtener informacion de los paquetes en plataforma: " . mysqli_error($this->conn));
+        }
+
+        $paquetes = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $paquetes[] = $fila;
+        }
+
+        return $paquetes;
     }
 }
 ?>

@@ -47,8 +47,7 @@ if (isset($_SESSION['username'])) {
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php"
-                                data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
@@ -59,19 +58,18 @@ if (isset($_SESSION['username'])) {
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="entregas.php"
-                                data-i18n="">Entregas</a>
+                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
+                                data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -134,10 +132,16 @@ if (isset($_SESSION['username'])) {
                                 <td>
                                     <?php echo implode(', ', $paquetes) ?>
                                 </td>
-                                <td>
-                                    <a href="entregasPaquetes.php?id_recorrido=<?php echo $id_recorrido ?>"><button
-                                            type="button" class="btn btn-secondary" data-i18n="">+</button></a>
-                                </td>
+                                <?php
+                                if ($estado == 'no comenzado') {
+                                    ?>
+                                    <td>
+                                        <a href="entregasPaquetes.php?id_recorrido=<?php echo $id_recorrido ?>"><button
+                                                type="button" class="btn btn-secondary" data-i18n="">+</button></a>
+                                    </td>
+                                    <?php
+                                }
+                                ?>
                                 <td>
                                     <?php echo $matricula; ?>
                                 </td>

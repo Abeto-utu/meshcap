@@ -65,6 +65,26 @@ if (isset($_GET['apae'])) {
     } else {
         header("Location: ../VISTA/entregas.php?error=asignarPaqueteAEntrega");
     }
-} 
+}
+
+if (isset($_GET["agregarPaquete"])) {
+    if ($almaceneroModel->agregarPaquete()) {
+        header("Location: ../VISTA/paquetes.php");
+        exit();
+    } else {
+        header("Location: ../VISTA/paquetes.php?error=agregarPaquete");
+        exit();
+    }
+}
+
+if (isset($_GET["entregarPaquete"])) {
+    if ($almaceneroModel->entregarPaquete()) {
+        header("Location: ../VISTA/paquetes.php");
+        exit();
+    } else {
+        header("Location: .../VISTA/paquetes.php&error=entregarPaquete");
+        exit();
+    }
+}
 
 ?>

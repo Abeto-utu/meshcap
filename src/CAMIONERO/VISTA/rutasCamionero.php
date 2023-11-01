@@ -93,53 +93,30 @@ if (isset($_SESSION['username'])) {
             </div>
             <div class="col-md-4">
                 <h1 class="mb-4" data-i18n="collection">Recolección</h1>
-                <table class="table centered-table">
-                    <thead>
-                        <tr>
-                            <th scope="col" data-i18n="client">Cliente</th>
-                            <th scope="col" data-i18n="status">Estado</th>
-                            <th scope="col" data-i18n="date">Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="container mt-5">
+                    <?php
+                    ($recolecciones = $camioneroModel->infoRecolecciones($camionero["matricula"]));
+                    $mostrarDeshabilitado = true;
+                    foreach ($recolecciones as $recoleccion) {
+                        if (empty($recoleccion['fecha_llegada'])) {
+                            ?>
+                            <a class="btn btn-secondary"
+                                href="../VISTA/verRecoleccion.php?id_recoleccion=<?php echo $recoleccion['id_recoleccion']; ?>"
+                                role="button" data-i18n="collection"></a>
+                            <?php
+                            $mostrarDeshabilitado = false;
+                        }
+                    }
+                    if ($mostrarDeshabilitado) {
+                        ?>
+                        <a class="btn btn-secondary disabled" href="" role="button" data-i18n="collection"></a>
                         <?php
-                        ($recolecciones = $camioneroModel->infoRecolecciones($camionero["matricula"]));
-                        foreach ($recolecciones as $recoleccion) { ?>
-                            <tr class="align-middle">
-                                <td>
-                                    <a
-                                        href="../VISTA/verRecoleccion.php?id_recoleccion=<?php echo $recoleccion['id_recoleccion']; ?>">
-                                        <?php echo $recoleccion['nombre']; ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php
-                                    if (empty($recoleccion['fecha_ida'])) {
-                                        echo "sin empezar";
-                                    } elseif (empty($recoleccion['fecha_llegada'])) {
-                                        echo "en proceso";
-                                    } else {
-                                        echo "finalizado";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    if (empty($recoleccion['fecha_ida'])) {
-                                        echo "-";
-                                    } else {
-                                        $day = date('d', strtotime($recoleccion['fecha_ida'])); // Day
-                                        $month = date('m', strtotime($recoleccion['fecha_ida'])); // Month
-                                        $year = date('Y', strtotime($recoleccion['fecha_ida'])); // Year
-                                
-                                        echo "$day/$month/$year";
-                                    }
-                                    ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                    }
+                    ?>
+                    <div class="container mt-5">
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

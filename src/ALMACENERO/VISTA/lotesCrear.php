@@ -92,6 +92,52 @@ if (isset($_SESSION['username'])) {
                     <button type="submit" class="btn btn-secondary">Crear</button>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="mb-4" data-i18n="">Plataformas</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="">Identificador</th>
+                            <th scope="col" data-i18n="">Nombre</th>
+                            <th scope="col" data-i18n="">Ubicacion</th>
+                            <th scope="col" data-i18n="">Linea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        ($plataformas = $almaceneroModel->mostrarPlataforma());
+                        $resultArray = [];
+                        foreach ($plataformas as $fila) {
+                            $matricula = $fila['id_plataforma'];
+                            $estado = $fila['nombre'];
+                            $tipo = $fila['ubicacion'];
+                            $id_linea = $fila['id_linea'];
+
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $matricula ?>
+                                </td>
+                                <td>
+                                    <?php echo $estado; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tipo; ?>
+                                </td>
+                                <td>
+                                    <?php echo $id_linea; ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

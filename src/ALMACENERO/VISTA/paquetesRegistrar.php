@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recolecciones</title>
+    <title>Paquetes</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -46,15 +46,15 @@ if (isset($_SESSION['username'])) {
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                        <li class="nav-item active">
+                            <a class="nav-link active" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="recolecciones.php"
+                            <a class="nav-link" aria-current="page" href="recolecciones.php"
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
@@ -78,84 +78,41 @@ if (isset($_SESSION['username'])) {
     </nav>
 
     <div class="container mt-5">
-        <br>
-        <div class="row mt-4">
+        <div class="row justify-content-center">
             <div class="col-md-6">
-                <a href="../VISTA/recoleccionesCrear.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="createRecolection">Crear recoleccion</button></a>
+                <h1 class="mb-3" data-i18n="addPackage">Agregar paquete</h1>
+                <form
+                    action="../CONTROLADOR/controladorAlmacenero.php?agregarPaquete=agregarPaquete"
+                    method="POST">
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label"
+                            data-i18n="department">Departamento:</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="departamento">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="location">Localidad:</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="localidad">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="street">Calle:</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="calle">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label" data-i18n="number">Numero:</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="numero">
+                    </div>
+                    <div class="container mt-3"><button type="submit" class="btn btn-secondary"
+                            data-i18n="submit">Agregar</button></div>
+                    <?php
+                    ($id_paquete = $almaceneroModel->ultimoPaquete());
+                    ?>
+                    <br>
+                    <p data-i18n="registrara"></p>
+                </form>
             </div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="currentRecolections">Recolecciones en curso</h1>
-                <?php
-                if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p>Error al crear la recoleccion</p>';
-                    }
-                } ?>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Cliente</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Vehiculo</th>
-                            <th scope="col" data-i18n="">Llegada</th>
-                            <th scope="col" data-i18n="">Ida</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        ($recolecciones = $almaceneroModel->recoleccionesActivas());
-                        $resultArray = [];
-                        foreach ($recolecciones as $fila) {
-                            $id_recoleccion = $fila['id_recoleccion'];
-                            $nombre = $fila['nombre'];
-                            $matricula = $fila['matricula'];
-                            $fecha_llegada = $fila['fecha_llegada'];
-                            $fecha_ida = $fila['fecha_ida'];
-                            if (empty($fecha_ida)) {
-                                $estado = 'sin comenzar';
-                            } elseif (empty($fecha_llegada)) {
-                                $estado = 'en proceso';
-                            } else {
-                                $estado = 'finalizado';
-                            }
-
-                            ?>
-                            <tr>
-                                <td>
-                                    <?php echo $id_recoleccion ?>
-                                </td>
-                                <td>
-                                    <?php echo $nombre; ?>
-                                </td>
-                                <td>
-                                    <?php echo $estado; ?>
-                                </td>
-                                <td>
-                                    <?php echo $matricula; ?>
-                                </td>
-                                <td>
-                                    <?php echo $fecha_llegada; ?>
-                                </td>
-                                <td>
-                                    <?php echo $fecha_ida; ?>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-
-                        ?>
-                    </tbody>
-                </table>
-                <a href="../VISTA/recoleccionesTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
-            </div>
-        </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -167,10 +124,10 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                registrara: "Se registrara con el identificador: <?php echo $id_paquete ?>"
             },
             en: {
-
+                registrara: "It'll have the identifier: <?php echo $id_paquete ?>"
             }
         };
 
