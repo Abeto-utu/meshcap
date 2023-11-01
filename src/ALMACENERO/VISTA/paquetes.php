@@ -45,29 +45,32 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="routes">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         <li class="nav-item active">
                             <a class="nav-link active" aria-current="page" href="paquetes.php"
-                                data-i18n="profile">Paquetes</a>
+                                data-i18n="">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="logout">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="logout">Recolecciones</a>
+                                data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="logout">Troncales</a>
+                                data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="logout">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
                                 data-i18n="changeLanguage">Change language</p>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
