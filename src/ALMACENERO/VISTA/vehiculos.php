@@ -45,8 +45,7 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="almacenero.php"
-                                data-i18n="">Perfil</a>
+                            <a class="nav-link active" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         <li class="nav-item active">
                             <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
@@ -59,8 +58,7 @@ if (isset($_SESSION['username'])) {
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
@@ -73,7 +71,8 @@ if (isset($_SESSION['username'])) {
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
+                                data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -81,31 +80,7 @@ if (isset($_SESSION['username'])) {
         </div>
     </nav>
 
-    <div class="container mt-5" data-i18n="container">
-        <div class="row" data-i18n="row">
-            <div class="col-md-6 offset-md-3 mt-5" data-i18n="column">
-                <h1 class="mb-4" data-i18n="information">Mi perfil</h1>
-                <div class="wrapper container" data-i18n="wrapper">
-                    <div class="row " data-i18n="innerRow">
-                        <div class="col-md-6" data-i18n="innerColumn">
-                            <p><strong data-i18n="userId">ID de Usuario:</strong>
-                                <?php echo $almacenero['id_usuario']; ?>
-                            </p>
-                            <p><strong data-i18n="name">Nombre:</strong>
-                                <?php echo $almacenero['nombre']; ?>
-                            </p>
-                            <p><strong data-i18n="position">Cargo:</strong>
-                                <?php echo $almacenero['cargo']; ?>
-                            </p>
-                            <p><strong data-i18n="registration">Plataforma:</strong>
-                                <?php echo $almacenero['nombre_plataforma'] . " (" . $almacenero['id_plataforma'] . ")"; ?>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

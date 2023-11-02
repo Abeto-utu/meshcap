@@ -158,7 +158,6 @@ if (isset($_SESSION['username'])) {
             });
         }
 
-        // Translation dictionary
         const translations = {
             'en': {
                 'lang': 'es',

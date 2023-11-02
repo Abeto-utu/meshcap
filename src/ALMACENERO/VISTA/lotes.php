@@ -144,16 +144,16 @@ if (isset($_SESSION['username'])) {
                                 <td>
                                     <?php echo implode(', ', $paquetes) ?>
                                 </td>
-                                <?php
-                                if ($estado == 'abierto') {
-                                    ?>
-                                    <td>
+                                <td>
+                                    <?php
+                                    if ($estado == 'abierto') {
+                                        ?>
                                         <a href="lotesPaquetes.php?id_lote=<?php echo $id_lote ?>"><button type="button"
                                                 class="btn btn-secondary" data-i18n="">+</button></a>
-                                    </td>
-                                    <?php
-                                }
-                                ?>
+                                        <?php
+                                    }
+                                    ?>
+                                </td>
                                 <td>
                                     <?php if (isset($vehiculo[0])) {
                                         echo $vehiculo[0];
