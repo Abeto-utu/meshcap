@@ -67,6 +67,28 @@ class almaceneroModel
         return $paquetes;
     }
 
+    public function informacionVehiculo()
+    {
+        $query = "SELECT v.matricula, v.estado, v.tipo, cv.id_usuario, u.nombre
+        FROM vehiculo v
+        LEFT JOIN camionero_vehiculo cv ON v.matricula = cv.matricula
+        LEFT JOIN usuario u ON cv.id_usuario = u.id_usuario;
+        ";
+        $result = mysqli_query($this->conn, $query);
+
+        if (!$result) {
+            return false;
+        }
+
+        $vehiculos = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $vehiculos[] = $fila;
+        }
+
+        return $vehiculos;
+    }
+
     public function recoleccionesActivas()
     {
 
@@ -538,8 +560,6 @@ class almaceneroModel
 
     public function mostrarVehiculo()
     {
-
-
         $query = "SELECT * FROM vehiculo";
         $result = mysqli_query($this->conn, $query);
 
@@ -608,6 +628,101 @@ class almaceneroModel
         }
 
         return $paquetes;
+    }
+
+    public function desasignarCamionero($id_usuario, $matricula)
+    {
+        $query = "SELECT estado
+        FROM vehiculo
+        WHERE matricula = '$matricula';";
+        $resultado = mysqli_query($this->conn, $query);
+
+        $fila = mysqli_fetch_assoc($resultado);
+        if ($fila['estado'] === 'con conductor') {
+            $query = "UPDATE vehiculo
+            SET estado = 'sin conductor'
+            WHERE matricula = '$matricula';";
+            $resultado = mysqli_query($this->conn, $query);
+
+            $query = "UPDATE camionero
+            SET estado = 'disponible'
+            WHERE id_usuario = $id_usuario;";
+            $resultado = mysqli_query($this->conn, $query);
+
+            $query = "DELETE FROM camionero_vehiculo
+            WHERE id_usuario = $id_usuario AND matricula = '$matricula';
+            ";
+            $resultado = mysqli_query($this->conn, $query);
+        } else {
+            return false;
+        }
+
+
+
+
+        if ($resultado) {
+            return true; // Inserción exitosa
+        } else {
+            return false; // Error en la inserción
+        }
+    }
+
+    public function informacionCamioneroSinCamion()
+    {
+        $query = "SELECT u.id_usuario, u.nombre, u.cargo, c.estado
+        FROM usuario u
+        LEFT JOIN camionero c ON u.id_usuario = c.id_usuario
+        LEFT JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
+        WHERE cv.id_usuario IS NULL AND u.cargo = 'camionero';
+        ";
+        $result = mysqli_query($this->conn, $query);
+
+        if (!$result) {
+            return false;
+        }
+
+        $usuarios = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $usuarios[] = $fila;
+        }
+
+        return $usuarios;
+    }
+
+    public function asignarCamionero($id_usuario, $matricula)
+    {
+
+        $query = "UPDATE vehiculo
+            SET estado = 'con conductor'
+            WHERE matricula = '$matricula';";
+        $resultado = mysqli_query($this->conn, $query);
+
+        $query = "UPDATE camionero
+            SET estado = 'disponible'
+            WHERE id_usuario = $id_usuario;";
+        $resultado = mysqli_query($this->conn, $query);
+
+        $query = "INSERT INTO `camionero_vehiculo`(`id_usuario`, `matricula`) VALUES ($id_usuario,'$matricula')";
+        $resultado = mysqli_query($this->conn, $query);
+
+        if ($resultado) {
+            return true; // Inserción exitosa
+        } else {
+            return false; // Error en la inserción
+        }
+    }
+
+    public function registrarCamion($matricula, $tipo)
+    {
+        $query = "INSERT INTO `vehiculo`(`matricula`, `estado`, `tipo`) VALUES ('$matricula','sin conductor','$tipo')";
+        $resultado = mysqli_query($this->conn, $query);
+        
+        if ($resultado) {
+            return true; // Inserción exitosa
+        } else {
+            return false; // Error en la inserción
+        }
     }
 }
 ?>

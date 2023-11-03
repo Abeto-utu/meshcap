@@ -124,10 +124,10 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-                registrara: "Se registrara con el identificador: <?php echo $id_paquete ?>"
+                registrara: "Se registrara con el identificador: <?php echo $id_paquete + 1 ?>"
             },
             en: {
-                registrara: "It'll have the identifier: <?php echo $id_paquete ?>"
+                registrara: "It'll have the identifier: <?php echo $id_paquete + 1 ?>"
             }
         };
 

@@ -45,10 +45,10 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
@@ -64,7 +64,8 @@ if (isset($_SESSION['username'])) {
                             <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="vehiculos.php" data-i18n="">Vehiculos</a>
+                            <a class="nav-link active" aria-current="page" href="vehiculos.php"
+                                data-i18n="">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -79,6 +80,88 @@ if (isset($_SESSION['username'])) {
             </div>
         </div>
     </nav>
+
+    <div class="container mt-5">
+        <br>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <a href="../VISTA/vehiculosRegistrar.php"><button type="button" class="btn btn-secondary"
+                        data-i18n="registerVehicule">Registrar vehiculo</button></a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-4" data-i18n="vehiclesHeading">Vehiculos</h1>
+                <?php
+                if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "subirLote") {
+                        echo '<p>Error al subir el lote</p>';
+                    }
+                } ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="">Matricula</th>
+                            <th scope="col" data-i18n="">Estado</th>
+                            <th scope="col" data-i18n="">Tipo</th>
+                            <th scope="col" data-i18n="">Identificador Usuario</th>
+                            <th scope="col" data-i18n="">Nombre</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        ($vehiculosConCamionero = $almaceneroModel->informacionVehiculo());
+
+                        foreach ($vehiculosConCamionero as $fila) {
+                            $matricula = $fila['matricula'];
+                            $estado = $fila['estado'];
+                            $tipo = $fila['tipo'];
+                            $id_usuario = $fila['id_usuario'];
+                            $nombre = $fila['nombre'];
+
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $matricula ?>
+                                </td>
+                                <td>
+                                    <?php echo $estado; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tipo; ?>
+                                </td>
+                                <td>
+                                    <?php echo $id_usuario; ?>
+                                </td>
+                                <td>
+                                    <?php echo $nombre; ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if (isset($id_usuario)) { ?>
+                                        <a
+                                            href="../CONTROLADOR/controladorAlmacenero.php?desasignarCamionero=desasignarCamionero&id_usuario=<?php echo $id_usuario ?>&matricula=<?php echo $matricula ?>"><button
+                                                type="button" class="btn btn-secondary" data-i18n="">Desasignar
+                                                camionero</button></a>
+                                    <?php } else { ?>
+                                        <a
+                                            href="asignarCamionero.php?matricula=<?php echo $matricula ?>"><button
+                                                type="button" class="btn btn-secondary" data-i18n="">Asignar
+                                                camionero</button></a>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 
 
 

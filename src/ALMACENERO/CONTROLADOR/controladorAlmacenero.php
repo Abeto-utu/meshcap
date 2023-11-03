@@ -87,4 +87,42 @@ if (isset($_GET["entregarPaquete"])) {
     }
 }
 
+if (isset($_GET['desasignarCamionero'])) {
+    $id_usuario = $_GET['id_usuario'];
+    $matricula = $_GET['matricula'];
+    if ($almaceneroModel->desasignarCamionero($id_usuario, $matricula)) {
+        header("Location: ../VISTA/vehiculos.php");
+        exit();
+    } else {
+        header("Location: ../VISTA/vehiculos.php?error=desasignarCamionero");
+    }
+}
+
+if (isset($_GET['asignarCamionero'])) {
+    $id_usuario = $_POST['usuario'];
+    $matricula = $_GET['matricula'];
+    if ($almaceneroModel->asignarCamionero($id_usuario, $matricula)) {
+        header("Location: ../VISTA/vehiculos.php");
+        exit();
+    } else {
+        header("Location: ../VISTA/vehiculos.php?error=desasignarCamionero");
+    }
+}
+
+if (isset($_GET['registrarCamion'])) {
+    $matricula = $_POST['plataforma'];
+    $tipo = $_POST['tipo'];
+
+    if ($tipo == 'camioneta' || $tipo == 'camion') {
+        if ($almaceneroModel->registrarCamion($matricula, $tipo)) {
+            header("Location: ../VISTA/vehiculos.php");
+            exit();
+        } else {
+            header("Location: ../VISTA/vehiculos.php?error=registrarCamion");
+        }
+    }else {
+        header("Location: ../VISTA/vehiculos.php?error=tipoInvalido");
+    }
+}
+
 ?>

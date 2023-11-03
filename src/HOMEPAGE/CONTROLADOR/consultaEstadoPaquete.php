@@ -13,7 +13,11 @@ if(isset($_POST['numero_paquete']) && isset($_POST['rastreo'])) {
     JOIN vehiculo v ON vp.matricula = v.matricula
     JOIN camionero_vehiculo cv ON v.matricula = cv.matricula
     JOIN usuario u ON cv.id_usuario = u.id_usuario
-    WHERE p.id_paquete = $numero;
+    WHERE p.id_paquete = $numero
+    UNION
+    SELECT *
+    FROM paquete
+    WHERE id_paquete = $numero;
     ";
     $paqueteSeleccionado = mysqli_query($conn, $query);
 

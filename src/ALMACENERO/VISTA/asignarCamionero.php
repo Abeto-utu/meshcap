@@ -6,7 +6,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     ($almacenero = $almaceneroModel->infoAlmacenero($_SESSION['username']));
 } else {
-    header("Location: ../../HOMEPAGE/VISTA/index.php");
+    header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
 }
 ?>
@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recolecciones</title>
+    <title>Almacen</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -46,15 +46,15 @@ if (isset($_SESSION['username'])) {
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="recolecciones.php"
+                            <a class="nav-link" aria-current="page" href="recolecciones.php"
                                 data-i18n="">Recolecciones</a>
                         </li>
                         <li class="nav-item">
@@ -62,6 +62,10 @@ if (isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="vehiculos.php"
+                                data-i18n="">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -79,70 +83,49 @@ if (isset($_SESSION['username'])) {
 
     <div class="container mt-5">
         <br>
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <a href="../VISTA/recoleccionesCrear.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="createRecolection">Crear recoleccion</button></a>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-4" data-i18n="">Asignar camionero</h1>
+                <p>Matricula: <?php echo $_GET['matricula'] ?></p>
+                <form action="../CONTROLADOR/controladorAlmacenero.php?asignarCamionero=asignarCamionero&matricula=<?php echo $_GET['matricula'] ?>" method="post">
+                    <div class="form-group">
+                        <label for="usuario">Usuario (identificador):</label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-secondary">Asignar</button>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="currentRecolections">Recolecciones en curso</h1>
-                <?php
-                if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p>Error al crear la recoleccion</p>';
-                    }
-                } ?>
+            <div class="col-md-6">
+                <h2 class="mb-4" data-i18n="">Camioneros disponibles</h2>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Cliente</th>
+                            <th scope="col" data-i18n="">Nombre</th>
                             <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Vehiculo</th>
-                            <th scope="col" data-i18n="">Llegada</th>
-                            <th scope="col" data-i18n="">Ida</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        ($recolecciones = $almaceneroModel->recoleccionesActivas());
+                        ($camioneros = $almaceneroModel->informacionCamioneroSinCamion());
                         $resultArray = [];
-                        foreach ($recolecciones as $fila) {
-                            $id_recoleccion = $fila['id_recoleccion'];
+                        foreach ($camioneros as $fila) {
+                            $id_usuario = $fila['id_usuario'];
                             $nombre = $fila['nombre'];
-                            $matricula = $fila['matricula'];
-                            $fecha_llegada = $fila['fecha_llegada'];
-                            $fecha_ida = $fila['fecha_ida'];
-                            if (empty($fecha_ida)) {
-                                $estado = 'sin comenzar';
-                            } elseif (empty($fecha_llegada)) {
-                                $estado = 'en proceso';
-                            } else {
-                                $estado = 'finalizado';
-                            }
-
+                            $estado = $fila['estado'];
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $id_recoleccion ?>
+                                    <?php echo $id_usuario ?>
                                 </td>
                                 <td>
                                     <?php echo $nombre; ?>
                                 </td>
                                 <td>
                                     <?php echo $estado; ?>
-                                </td>
-                                <td>
-                                    <?php echo $matricula; ?>
-                                </td>
-                                <td>
-                                    <?php echo $fecha_llegada; ?>
-                                </td>
-                                <td>
-                                    <?php echo $fecha_ida; ?>
                                 </td>
                             </tr>
                             <?php
@@ -151,11 +134,8 @@ if (isset($_SESSION['username'])) {
                         ?>
                     </tbody>
                 </table>
-                <a href="../VISTA/recoleccionesTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

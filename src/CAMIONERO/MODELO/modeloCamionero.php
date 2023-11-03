@@ -14,8 +14,13 @@ class CamioneroModel
         FROM camionero c
         JOIN camionero_vehiculo cv ON c.id_usuario = cv.id_usuario
         JOIN usuario u ON c.id_usuario = u.id_usuario
-        WHERE c.id_usuario = $id_usuario";
+        WHERE c.id_usuario = $id_usuario
+      	UNION
+		SELECT id_usuario, estado, estado AS estado2, estado AS estado3, estado AS estado4
+        FROM camionero 
+        WHERE id_usuario = $id_usuario";
         $result = mysqli_query($this->conn, $query);
+        // Lo de los muchos estados es para que no haya error cuando inicia sesion un camionero sin vehiculo. Cuando entra a la pagina no le deja hacer nada basicamente
 
         if (!$result) {
             die("Error al obtener informacion de camionero: " . mysqli_error($this->conn));
@@ -29,8 +34,18 @@ class CamioneroModel
                 'estado' => $fila['estado'],
                 'matricula' => $fila['matricula']
             );
+            break;
         }
-
+        if ($camionero['cargo'] == $camionero['estado']) {
+            $camioneroInvalido = array(
+                'id_usuario' => $camionero['id_usuario'],
+                'nombre' => '-',
+                'cargo' => '-',
+                'estado' => '-',
+                'matricula' => '-'
+            );
+            return $camioneroInvalido;
+        }
         return $camionero;
     }
 

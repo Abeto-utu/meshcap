@@ -84,14 +84,14 @@
                 <div class="form-row align-items-center">
                     <div class="col-auto" style="display: flex;align-items: center; justify-content: center;">
                         <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typeEmailX" data-i18n="name">N° Funcionario</label>
+                            <label class="form-label" for="typeEmailX" data-i18n="ide">N° Funcionario</label>
                             <input type="number" id="typeEmailX" class="form-control form-control-lg"
                                 name="numero_funcionario" />
                         </div>
                     </div>
                     <div class="col-auto" style="display: flex;align-items: center; justify-content: center;">
                         <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typePasswordX" data-i18n="email">Contraseña</label>
+                            <label class="form-label" for="typePasswordX" data-i18n="pass">Contraseña</label>
                             <input type="password" id="typePasswordX" class="form-control form-control-lg" name="clave"
                                 maxlength="16" minlength="6" />
                         </div>
@@ -201,7 +201,7 @@
                 logisticsFocus: "Somos una empresa enfocada en el ámbito de la logística y nos comprometemos a brindar el mejor servicio posible.",
                 customerSatisfaction: "La conformidad de nuestros clientes a la hora de finalizar un recorrido es lo que nos caracteriza.",
                 contact: "Contacto",
-                name: "Nombre",
+                ide: "Identificador",
                 email: "Correo",
                 message: "Mensaje",
                 send: "Enviar",
@@ -215,7 +215,8 @@
                 homeAddress: "Montevideo, Av.Gral Rivera, 11600, UY",
                 emailAddress: "Abeto@gmail.com",
                 phoneNumber: "+594 092 951 240",
-                rightsReserved: "© 2023 Derechos de autor"
+                rightsReserved: "© 2023 Derechos de autor",
+                pass: "Contraseña"
             },
             en: {
                 loginTitle: "Login",
@@ -224,7 +225,7 @@
                 logisticsFocus: "We are a company focused on the field of logistics and committed to providing the best possible service.",
                 customerSatisfaction: "Customer satisfaction at the end of a journey is what characterizes us.",
                 contact: "Contact",
-                name: "Name",
+                ide: "Identifier",
                 email: "Email",
                 message: "Message",
                 send: "Send",
@@ -238,7 +239,8 @@
                 homeAddress: "Montevideo, Av.Gral Rivera, 11600, UY",
                 emailAddress: "Abeto@gmail.com",
                 phoneNumber: "+594 092 951 240",
-                rightsReserved: "© 2023 All rights reserved"
+                rightsReserved: "© 2023 All rights reserved",
+                pass: "Password"
             }
         };
 

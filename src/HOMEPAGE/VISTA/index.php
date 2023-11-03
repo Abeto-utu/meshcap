@@ -104,8 +104,9 @@
             if (isset($_SESSION['resultado_paquete'])) {
                 $resultado_paquete = $_SESSION['resultado_paquete'];
 
-                ?>
-                <p class="p-2">
+                if (isset($resultado_paquete['nombre'])) {
+                    ?> 
+                    <p class="p-2">
                     <?php echo "Identificador: " . $resultado_paquete['id_paquete'] ?>
                 </p>
                 <p class="p-2">
@@ -120,6 +121,25 @@
                 <p class="p-2">
                     <?php echo "Camionero: " . $resultado_paquete['nombre'] ?>
                 </p>
+                    <?php
+                } else {
+                    ?> 
+                    <p class="p-2">
+                    <?php echo "Identificador: " . $resultado_paquete['id_paquete'] ?>
+                </p>
+                <p class="p-2">
+                    <?php echo "Destino: " . $resultado_paquete['estado'] ?>
+                </p>
+                <p class="p-2">
+                    <?php echo "Estado: " . $resultado_paquete['id_lote'] ?>
+                </p>
+                <p class="p-2">
+                    <?php echo "Recibo: " . $resultado_paquete['matricula'] ?>
+                </p>
+                    <?php
+                }
+                ?>
+                
 
                 <?php unset($_SESSION['resultado_paquete']);
 
