@@ -45,25 +45,29 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="paquetes.php"
-                                data-i18n="">Paquetes</a>
+                                data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                                data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -92,13 +96,13 @@ if (isset($_SESSION['username'])) {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Destino</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Fecha Abierto</th>
-                            <th scope="col" data-i18n="">Cierre</th>
-                            <th scope="col" data-i18n="">Paquetes</th>
-                            <th scope="col" data-i18n="">Vehiculo</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="destination">Destino</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="openDate">Fecha Abierto</th>
+                            <th scope="col" data-i18n="closure">Cierre</th>
+                            <th scope="col" data-i18n="packages">Paquetes</th>
+                            <th scope="col" data-i18n="vehicle">Vehiculo</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -143,15 +147,13 @@ if (isset($_SESSION['username'])) {
                                     } ?>
                                 </td>
                             </tr>
-                            <?php
+                        <?php
                         }
-
                         ?>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -163,10 +165,38 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                notDeliveredLots: "Lotes no entregados",
+                identifier: "Identificador",
+                destination: "Destino",
+                status: "Estado",
+                openDate: "Fecha Abierto",
+                closure: "Cierre",
+                vehicle: "Vehiculo"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                notDeliveredLots: "Not Delivered Lots",
+                identifier: "Identifier",
+                destination: "Destination",
+                status: "Status",
+                openDate: "Open Date",
+                closure: "Closure",
+                vehicle: "Vehicle"
             }
         };
 

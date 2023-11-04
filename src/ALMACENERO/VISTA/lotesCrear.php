@@ -45,25 +45,27 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php"
-                                data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -82,27 +84,28 @@ if (isset($_SESSION['username'])) {
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="">Crear Lote</h1>
+                <h1 class="mb-4" data-i18n="createLot">Crear Lote</h1>
                 <form action="../CONTROLADOR/controladorAlmacenero.php?crearLote=crearLote" method="post">
                     <div class="form-group">
-                        <label for="plataforma">Destino (identificador de plataforma):</label>
+                        <label for="plataforma" data-i18n="destination">Destino (identificador de plataforma):</label>
                         <input type="text" class="form-control" id="plataforma" name="plataforma" required>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-secondary">Crear</button>
+                    <button type="submit" class="btn btn-secondary" data-i18n="create">Crear</button>
+                </form>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-6">
-                <h2 class="mb-4" data-i18n="">Plataformas</h2>
+                <h2 class="mb-4" data-i18n="platforms">Plataformas</h2>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Nombre</th>
-                            <th scope="col" data-i18n="">Ubicacion</th>
-                            <th scope="col" data-i18n="">Linea</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="name">Nombre</th>
+                            <th scope="col" data-i18n="location">Ubicacion</th>
+                            <th scope="col" data-i18n="line">Linea</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,10 +152,40 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                createLot: "Crear Lote",
+                destination: "Destino (identificador de plataforma):",
+                create: "Crear",
+                platforms: "Plataformas",
+                identifier: "Identificador",
+                name: "Nombre",
+                location: "Ubicacion",
+                line: "Linea"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                createLot: "Create Lot",
+                destination: "Destination (platform identifier):",
+                create: "Create",
+                platforms: "Platforms",
+                identifier: "Identifier",
+                name: "Name",
+                location: "Location",
+                line: "Line"
             }
         };
 

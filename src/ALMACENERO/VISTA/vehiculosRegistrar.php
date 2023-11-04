@@ -27,8 +27,8 @@ if (isset($_SESSION['username'])) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="almacenero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
-                    alt="">MeshCap</a>
+            <a class="navbar-brand" href="almacenero.php" id="logo" data-i18n="meshCap"><img
+                    src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -45,31 +45,29 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                            <a class="nav-link" aria-current="page" href="recolecciones.php" data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="vehiculos.php"
-                                data-i18n="">Vehiculos</a>
+                            <a class="nav-link active" aria-current="page" href="vehiculos.php" data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
-                                data-i18n="changeLanguage">Change language</p>
+                                data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
@@ -85,21 +83,19 @@ if (isset($_SESSION['username'])) {
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="">Registrar camion</h1>
+                <h1 class="mb-4" data-i18n="registerTruck">Registrar camión</h1>
                 <form action="../CONTROLADOR/controladorAlmacenero.php?registrarCamion=registrarCamion" method="post">
                     <div class="form-group">
-                        <label for="plataforma">Matricula: </label>
+                        <label for="plataforma" data-i18n="licensePlate">Matrícula: </label>
                         <input type="text" class="form-control" id="plataforma" name="plataforma" required>
-                        <label for="tipo">Tipo: </label>
+                        <label for="tipo" data-i18n="type">Tipo: </label>
                         <input type="text" class="form-control" id="tipo" name="tipo" required>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-secondary">Registrar</button>
+                    <button type="submit" class="btn btn-secondary" data-i18n="register">Registrar</button>
             </div>
         </div>
     </div>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -110,10 +106,38 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menú",
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                vehicles: "Vehículos",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                registerTruck: "Registrar camión",
+                licensePlate: "Matrícula:",
+                type: "Tipo:",
+                register: "Registrar"
             },
             en: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menu",
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                vehicles: "Vehicles",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                registerTruck: "Register Truck",
+                licensePlate: "License Plate:",
+                type: "Type:",
+                register: "Register"
             }
         };
 

@@ -45,23 +45,27 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
-                        </li>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -81,26 +85,27 @@ if (isset($_SESSION['username'])) {
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="">Crear entrega</h1>
+                <h1 class="mb-4" data-i18n="createDelivery">Crear entrega</h1>
                 <form action="../CONTROLADOR/controladorAlmacenero.php?crearEntrega=crearEntrega" method="post">
                     <div class="form-group">
-                        <label for="matricula">Vehiculo (matricula):</label>
+                        <label for="matricula" data-i18n="vehicle">Vehiculo (matricula):</label>
                         <input type="text" class="form-control" id="matricula" name="matricula" required>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-secondary">Crear</button>
+                    <button type="submit" class="btn btn-secondary" data-i18n="create">Crear</button>
+                </form>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-6">
-                <h2 class="mb-4" data-i18n="">Vehiculos</h2>
+                <h2 class="mb-4" data-i18n="vehicles">Vehiculos</h2>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Matricula</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Tipo</th>
+                            <th scope="col" data-i18n="plate">Matricula</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="type">Tipo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,7 +131,6 @@ if (isset($_SESSION['username'])) {
                             </tr>
                             <?php
                         }
-
                         ?>
                     </tbody>
                 </table>
@@ -144,10 +148,38 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                createDelivery: "Crear entrega",
+                vehicle: "Vehiculo (matricula):",
+                create: "Crear",
+                vehicles: "Vehiculos",
+                plate: "Matricula",
+                status: "Estado",
+                type: "Tipo"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                createDelivery: "Create delivery",
+                vehicle: "Vehicle (plate):",
+                create: "Create",
+                vehicles: "Vehicles",
+                plate: "Plate",
+                status: "Status",
+                type: "Type"
             }
         };
 

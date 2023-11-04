@@ -46,34 +46,38 @@ if (isset($_SESSION['username'])) {
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="almacenero.php"
-                                data-i18n="">Perfil</a>
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                                data-i18n="profile">Perfil</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="paquetes.php"
+                                data-i18n="packages">Paquetes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                                data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php"
+                                data-i18n="deliveries">Entregas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="vehiculos.php" data-i18n="">Vehiculos</a>
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
+                                data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -116,10 +120,34 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                information: "Información",
+                userId: "ID de Usuario:",
+                name: "Nombre:",
+                position: "Cargo:",
+                registration: "Plataforma:"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                information: "Information",
+                userId: "User ID:",
+                name: "Name:",
+                position: "Position:",
+                registration: "Registration:"
             }
         };
 

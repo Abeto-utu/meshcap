@@ -45,31 +45,34 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link active" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
                                 data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
-                                data-i18n="logout">Salir</a>
+                            <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -98,14 +101,14 @@ if (isset($_SESSION['username'])) {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Destino</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Fecha Abierto</th>
-                            <th scope="col" data-i18n="">Cierre</th>
-                            <th scope="col" data-i18n="">Paquetes</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="destination">Destino</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="openDate">Fecha Abierto</th>
+                            <th scope="col" data-i18n="close">Cierre</th>
+                            <th scope="col" data-i18n="packages">Paquetes</th>
                             <th></th>
-                            <th scope="col" data-i18n="">Vehiculo</th>
+                            <th scope="col" data-i18n="vehicle">Vehiculo</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -165,7 +168,7 @@ if (isset($_SESSION['username'])) {
                                     <td>
                                         <a
                                             href="../CONTROLADOR/controladorAlmacenero.php?cerrarLote=cerrarLote&id_lote=<?php echo $id_lote ?>"><button
-                                                type="button" class="btn btn-secondary" data-i18n="">Cerrar</button></a>
+                                                type="button" class="btn btn-secondary" data-i18n="close">Cerrar</button></a>
                                     </td>
                                     <?php
                                 }
@@ -178,7 +181,7 @@ if (isset($_SESSION['username'])) {
                     </tbody>
                 </table>
                 <a href="../VISTA/lotesTodos.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
+                        data-i18n="history">Historial</button></a>
             </div>
         </div>
 
@@ -193,10 +196,44 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                createLot: "Crear lote",
+                notDeliveredLots: "Lotes sin entregar",
+                identifier: "Identificador",
+                destination: "Destino",
+                status: "Estado",
+                openDate: "Fecha Abierto",
+                close: "Cierre",
+                packages: "Paquetes",
+                vehicle: "Vehiculo",
+                history: "Historial"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                createLot: "Create lot",
+                notDeliveredLots: "Not Delivered Lots",
+                identifier: "Identifier",
+                destination: "Destination",
+                status: "Status",
+                openDate: "Open Date",
+                close: "Close",
+                packages: "Packages",
+                vehicle: "Vehicle",
+                history: "History"
             }
         };
 

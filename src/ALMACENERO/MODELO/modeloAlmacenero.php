@@ -583,7 +583,8 @@ class almaceneroModel
 
         $query = "SELECT *
         FROM plataforma
-        JOIN plataforma_linea ON plataforma.id_plataforma = plataforma_linea.id_plataforma;";
+        JOIN plataforma_linea ON plataforma.id_plataforma = plataforma_linea.id_plataforma
+        ORDER BY plataforma_linea.id_linea;";
         $result = mysqli_query($this->conn, $query);
 
 
@@ -717,7 +718,7 @@ class almaceneroModel
     {
         $query = "INSERT INTO `vehiculo`(`matricula`, `estado`, `tipo`) VALUES ('$matricula','sin conductor','$tipo')";
         $resultado = mysqli_query($this->conn, $query);
-        
+
         if ($resultado) {
             return true; // Inserción exitosa
         } else {

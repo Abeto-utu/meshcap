@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almacen</title>
+    <title>Almacén</title>
     <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -27,8 +27,8 @@ if (isset($_SESSION['username'])) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="almacenero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
-                    alt="">MeshCap</a>
+            <a class="navbar-brand" href="almacenero.php" id="logo" data-i18n="meshCap"><img
+                    src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -45,31 +45,29 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                            <a class="nav-link" aria-current="page" href="recolecciones.php" data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="vehiculos.php"
-                                data-i18n="">Vehiculos</a>
+                            <a class="nav-link active" aria-current="page" href="vehiculos.php" data-i18n="vehicles">Vehículos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
-                                data-i18n="changeLanguage">Change language</p>
+                                data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
@@ -86,13 +84,13 @@ if (isset($_SESSION['username'])) {
         <div class="row mt-4">
             <div class="col-md-6">
                 <a href="../VISTA/vehiculosRegistrar.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="registerVehicule">Registrar vehiculo</button></a>
+                        data-i18n="registerVehicule">Registrar vehículo</button></a>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="vehiclesHeading">Vehiculos</h1>
+                <h1 class="mb-4" data-i18n="vehiclesHeading">Vehículos</h1>
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] == "subirLote") {
@@ -102,11 +100,11 @@ if (isset($_SESSION['username'])) {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Matricula</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Tipo</th>
-                            <th scope="col" data-i18n="">Identificador Usuario</th>
-                            <th scope="col" data-i18n="">Nombre</th>
+                            <th scope="col" data-i18n="licensePlate">Matrícula</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="type">Tipo</th>
+                            <th scope="col" data-i18n="userIdentifier">Identificador Usuario</th>
+                            <th scope="col" data-i18n="name">Nombre</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -143,12 +141,12 @@ if (isset($_SESSION['username'])) {
                                     if (isset($id_usuario)) { ?>
                                         <a
                                             href="../CONTROLADOR/controladorAlmacenero.php?desasignarCamionero=desasignarCamionero&id_usuario=<?php echo $id_usuario ?>&matricula=<?php echo $matricula ?>"><button
-                                                type="button" class="btn btn-secondary" data-i18n="">Desasignar
+                                                type="button" class="btn btn-secondary" data-i18n="unassignDriver">Desasignar
                                                 camionero</button></a>
                                     <?php } else { ?>
                                         <a
                                             href="asignarCamionero.php?matricula=<?php echo $matricula ?>"><button
-                                                type="button" class="btn btn-secondary" data-i18n="">Asignar
+                                                type="button" class="btn btn-secondary" data-i18n="assignDriver">Asignar
                                                 camionero</button></a>
                                     <?php } ?>
                                 </td>
@@ -163,8 +161,6 @@ if (isset($_SESSION['username'])) {
 
     </div>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
@@ -174,10 +170,48 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menú",
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                vehicles: "Vehículos",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                registerVehicule: "Registrar vehículo",
+                vehiclesHeading: "Vehículos",
+                licensePlate: "Matrícula",
+                status: "Estado",
+                type: "Tipo",
+                userIdentifier: "Identificador Usuario",
+                name: "Nombre",
+                unassignDriver: "Desasignar camionero",
+                assignDriver: "Asignar camionero"
             },
             en: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menu",
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                vehicles: "Vehicles",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                registerVehicule: "Register Vehicle",
+                vehiclesHeading: "Vehicles",
+                licensePlate: "License Plate",
+                status: "Status",
+                type: "Type",
+                userIdentifier: "User Identifier",
+                name: "Name",
+                unassignDriver: "Unassign Driver",
+                assignDriver: "Assign Driver"
             }
         };
 

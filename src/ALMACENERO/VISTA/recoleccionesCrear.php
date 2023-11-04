@@ -27,8 +27,8 @@ if (isset($_SESSION['username'])) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="almacenero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
-                    alt="">MeshCap</a>
+            <a class="navbar-brand" href="almacenero.php" id="logo" data-i18n="meshCap"><img
+                    src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -45,27 +45,31 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
-                        </li>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
-                                data-i18n="changeLanguage">Change language</p>
+                                data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
@@ -81,30 +85,31 @@ if (isset($_SESSION['username'])) {
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="">Crear Recoleccion</h1>
+                <h1 class="mb-4" data-i18n="createCollection">Crear Recoleccion</h1>
                 <form action="../CONTROLADOR/controladorAlmacenero.php?crearRecoleccion=crearRecoleccion" method="post">
                     <div class="form-group">
-                        <label for="matricula">Vehiculo (matricula):</label>
+                        <label for="matricula" data-i18n="vehicleLicense">Vehiculo (matricula):</label>
                         <input type="text" class="form-control" id="matricula" name="matricula" required>
                     </div>
                     <div class="form-group">
-                        <label for="cliente">Cliente (identificador):</label>
+                        <label for="cliente" data-i18n="clientIdentifier">Cliente (identificador):</label>
                         <input type="text" class="form-control" id="cliente" name="cliente" required>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-secondary">Crear</button>
+                    <button type="submit" class="btn btn-secondary" data-i18n="create">Crear</button>
+                </form>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-6">
-                <h2 class="mb-4" data-i18n="">Vehiculos</h2>
+                <h2 class="mb-4" data-i18n="vehicles">Vehiculos</h2>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Matricula</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Tipo</th>
+                            <th scope="col" data-i18n="licensePlate">Matricula</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="type">Tipo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,19 +135,18 @@ if (isset($_SESSION['username'])) {
                             </tr>
                             <?php
                         }
-
                         ?>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6">
-                <h2 class="mb-4" data-i18n="">Clientes</h2>
+                <h2 class="mb-4" data-i18n="clients">Clientes</h2>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Nombre</th>
-                            <th scope="col" data-i18n="">Ubicacion</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="name">Nombre</th>
+                            <th scope="col" data-i18n="location">Ubicacion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -184,10 +188,52 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menú",
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                createCollection: "Crear Recoleccion",
+                vehicleLicense: "Vehiculo (matricula):",
+                clientIdentifier: "Cliente (identificador):",
+                create: "Crear",
+                vehicles: "Vehiculos",
+                licensePlate: "Matricula",
+                status: "Estado",
+                type: "Tipo",
+                clients: "Clientes",
+                identifier: "Identificador",
+                name: "Nombre",
+                location: "Ubicacion"
             },
             en: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menu",
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                createCollection: "Create Collection",
+                vehicleLicense: "Vehicle (license plate):",
+                clientIdentifier: "Client (identifier):",
+                create: "Create",
+                vehicles: "Vehicles",
+                licensePlate: "License Plate",
+                status: "Status",
+                type: "Type",
+                clients: "Clients",
+                identifier: "Identifier",
+                name: "Name",
+                location: "Location"
             }
         };
 

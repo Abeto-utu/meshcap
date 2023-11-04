@@ -45,27 +45,31 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item active">
-                            <a class="nav-link active" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link active" aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
-                                data-i18n="changeLanguage">Change language</p>
+                                data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
@@ -109,7 +113,7 @@ if (isset($_SESSION['username'])) {
                     ($id_paquete = $almaceneroModel->ultimoPaquete());
                     ?>
                     <br>
-                    <p data-i18n="registrara"></p>
+                    <p data-i18n="register">Se registrará con el identificador: <?php echo $id_paquete + 1 ?></p>
                 </form>
             </div>
         </div>
@@ -124,10 +128,38 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-                registrara: "Se registrara con el identificador: <?php echo $id_paquete + 1 ?>"
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                addPackage: "Agregar paquete",
+                department: "Departamento",
+                location: "Localidad",
+                street: "Calle",
+                number: "Numero",
+                submit: "Agregar",
+                register: "Se registrará con el identificador: <?php echo $id_paquete + 1 ?>"
             },
             en: {
-                registrara: "It'll have the identifier: <?php echo $id_paquete + 1 ?>"
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                addPackage: "Add Package",
+                department: "Department",
+                location: "Location",
+                street: "Street",
+                number: "Number",
+                submit: "Submit",
+                register: "It'll have the identifier: <?php echo $id_paquete + 1 ?>"
             }
         };
 

@@ -45,23 +45,30 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
-                        </li>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php"
+                                data-i18n="packages">Paquetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php"
+                                data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link active" aria-current="page" href="entregas.php"
+                                data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -81,29 +88,29 @@ if (isset($_SESSION['username'])) {
         <br>
         <div class="row mt-4">
             <div class="col-md-6">
-                <a href="../VISTA/entregasCrear.php"><button type="button" class="btn btn-secondary" data-i18n="">Crear
-                        entrega</button></a>
+                <a href="../VISTA/entregasCrear.php"><button type="button" class="btn btn-secondary"
+                        data-i18n="createDelivery">Crear entrega</button></a>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="">Entregas activas</h1>
+                <h1 class="mb-4" data-i18n="activeDeliveries">Entregas activas</h1>
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] == "subirLote") {
-                        echo '<p>Error al subir el lote</p>';
+                        echo '<p data-i18n="uploadError">Error al subir el lote</p>';
                     }
                 } ?>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Paquetes</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="packages">Paquetes</th>
                             <th></th>
-                            <th scope="col" data-i18n="">Vehiculo</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Inicio</th>
+                            <th scope="col" data-i18n="vehicle">Vehiculo</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="start">Inicio</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -137,7 +144,7 @@ if (isset($_SESSION['username'])) {
                                     ?>
                                     <td>
                                         <a href="entregasPaquetes.php?id_recorrido=<?php echo $id_recorrido ?>"><button
-                                                type="button" class="btn btn-secondary" data-i18n="">+</button></a>
+                                                type="button" class="btn btn-secondary" data-i18n="add">+</button></a>
                                     </td>
                                     <?php
                                 }
@@ -159,7 +166,7 @@ if (isset($_SESSION['username'])) {
                     </tbody>
                 </table>
                 <a href="../VISTA/entregasTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
+                        data-i18n="history">Historial</button></a>
             </div>
         </div>
 
@@ -174,10 +181,50 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                createDelivery: "Crear entrega",
+                vehicle: "Vehiculo",
+                create: "Crear",
+                vehicles: "Vehiculos",
+                plate: "Matricula",
+                status: "Estado",
+                type: "Tipo",
+                activeDeliveries: "Entregas activas",
+                uploadError: "Error al subir el lote",
+                identifier: "Identificador",
+                start: "Inicio",
+                history: "Historial",
+                add: "+"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                createDelivery: "Create delivery",
+                vehicle: "Vehicle",
+                create: "Create",
+                vehicles: "Vehicles",
+                plate: "Plate",
+                status: "Status",
+                type: "Type",
+                activeDeliveries: "Active Deliveries",
+                uploadError: "Error uploading lot",
+                identifier: "Identifier",
+                start: "Start",
+                history: "History",
+                add: "+"
             }
         };
 

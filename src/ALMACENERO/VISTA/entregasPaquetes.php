@@ -49,23 +49,27 @@ if (isset($_GET["id_recorrido"])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link active" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -85,16 +89,16 @@ if (isset($_GET["id_recorrido"])) {
         <br>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4" data-i18n="">Asignar paquete</h1>
+                <h1 class="mb-4" data-i18n="assignPackage">Asignar paquete</h1>
                 <form
                     action="../CONTROLADOR/controladorAlmacenero.php?apae=PaqueteAEntrega&id_recorrido=<?php echo $id_recorrido ?>"
                     method="post">
                     <div class="form-group">
-                        <label for="paquete">Paquete (identificador):</label>
+                        <label for="paquete" data-i18n="packageIdentifier">Paquete (identificador):</label>
                         <input type="text" class="form-control" id="paquete" name="paquete" required>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-secondary">Asignar</button>
+                    <button type="submit" class="btn btn-secondary" data-i18n="assign">Asignar</button>
                 </form>
             </div>
         </div>
@@ -111,11 +115,11 @@ if (isset($_GET["id_recorrido"])) {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Destino</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Recibo</th>
-                            <th scope="col" data-i18n="">Entrega</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="destination">Destino</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="receipt">Recibo</th>
+                            <th scope="col" data-i18n="delivery">Entrega</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -172,10 +176,42 @@ if (isset($_GET["id_recorrido"])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                assignPackage: "Asignar paquete",
+                packageIdentifier: "Paquete (identificador):",
+                assign: "Asignar",
+                packagesHeading: "Paquetes sin entregar",
+                identifier: "Identificador",
+                destination: "Destino",
+                status: "Estado",
+                receipt: "Recibo",
+                delivery: "Entrega"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                assignPackage: "Assign Package",
+                packageIdentifier: "Package (identifier):",
+                assign: "Assign",
+                packagesHeading: "Undelivered Packages",
+                identifier: "Identifier",
+                destination: "Destination",
+                status: "Status",
+                receipt: "Receipt",
+                delivery: "Delivery"
             }
         };
 

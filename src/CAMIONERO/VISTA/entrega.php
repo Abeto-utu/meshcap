@@ -37,8 +37,7 @@ if (isset($_SESSION['username'])) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menu del
-                        Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="deliveries"></h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -178,67 +177,7 @@ if (isset($_SESSION['username'])) {
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
         crossorigin="anonymous"></script>
-    <script>
-        var textStrings = {
-            es: {
-                menuTitle: "Entregas",
-                home: "Inicio",
-                profile: "Perfil",
-                routes: "Rutas",
-                logout: "Cerrar sesión",
-                changeLanguage: "Change language",
-                packagesToDeliver: "Paquetes a entregar",
-                address: "Domicilio",
-                packages: "Paquete/s",
-                deliverPackage: "Entregar paquete",
-                startDeliveries: "Comenzar entregas",
-                finishDelivery: "Finalizar entrega",
-                noAssignDeliveries: "No hay entregas asignadas",
-                errorTooManyDeliveries: "Error, demasiadas entregas asignadas"
-            },
-            en: {
-                menuTitle: "Deliveries",
-                home: "Home",
-                profile: "Profile",
-                routes: "Routes",
-                logout: "Log out",
-                changeLanguage: "Cambiar idioma",
-                packagesToDeliver: "Packages to deliver",
-                address: "Address",
-                packages: "Package/s",
-                deliverPackage: "Deliver package",
-                startDeliveries: "Start deliveries",
-                finishDelivery: "Finish delivery",
-                noAssignDeliveries: "No deliveries assigned",
-                errorTooManyDeliveries: "Error, too many deliveries assigned"
-            }
-        };
-
-        function changeLanguage() {
-            var htmlTag = document.getElementById('htmlTag');
-            var language = htmlTag.getAttribute('lang');
-            if (language === 'en') {
-                htmlTag.setAttribute('lang', 'es');
-                updateText('es');
-            } else {
-                htmlTag.setAttribute('lang', 'en');
-                updateText('en');
-            }
-        }
-
-        function updateText(language) {
-            var elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(function (element) {
-                var key = element.getAttribute('data-i18n');
-                if (textStrings[language][key]) {
-                    element.innerText = textStrings[language][key];
-                }
-            });
-        }
-        document.addEventListener('DOMContentLoaded', function () {
-            updateText('es');
-        });
-    </script>
+    <script src="../../JS/languageScript.js"></script>
 </body>
 
 </html>

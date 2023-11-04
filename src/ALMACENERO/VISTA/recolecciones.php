@@ -27,7 +27,7 @@ if (isset($_SESSION['username'])) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="almacenero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
+        <a class="navbar-brand" href="almacenero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
                     alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
@@ -45,27 +45,34 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
-                        </li>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="paquetes.php"
+                                data-i18n="packages">Paquetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php"
+                                data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php"
+                                data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
-                                data-i18n="changeLanguage">Change language</p>
+                                data-i18n="changeLanguage">Cambiar idioma</p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php"
@@ -92,18 +99,18 @@ if (isset($_SESSION['username'])) {
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p>Error al crear la recoleccion</p>';
+                        echo '<p data-i18n="errorCreateCollection">Error al crear la recoleccion</p>';
                     }
                 } ?>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Cliente</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Vehiculo</th>
-                            <th scope="col" data-i18n="">Llegada</th>
-                            <th scope="col" data-i18n="">Ida</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="client">Cliente</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="vehicle">Vehiculo</th>
+                            <th scope="col" data-i18n="arrival">Llegada</th>
+                            <th scope="col" data-i18n="departure">Ida</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,10 +174,48 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menú",
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                createRecolection: "Crear recolección",
+                currentRecolections: "Recolecciones en curso",
+                errorCreateCollection: "Error al crear la recolección",
+                identifier: "Identificador",
+                client: "Cliente",
+                status: "Estado",
+                vehicle: "Vehículo",
+                arrival: "Llegada",
+                departure: "Ida",
+                historial: "Historial"
             },
             en: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menu",
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                createRecolection: "Create recolection",
+                currentRecolections: "Current recolections",
+                errorCreateCollection: "Error creating the collection",
+                identifier: "Identifier",
+                client: "Client",
+                status: "Status",
+                vehicle: "Vehicle",
+                arrival: "Arrival",
+                departure: "Departure",
+                historial: "History"
             }
         };
 

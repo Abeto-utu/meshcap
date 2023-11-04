@@ -4,7 +4,7 @@ require_once('../CONTROLADOR/controladorCamionero.php');
 session_start();
 
 if (isset($_SESSION['username'])) {
-    ($camionero = $camioneroModel->infoCamionero($_SESSION['username']));
+    $camionero = $camioneroModel->infoCamionero($_SESSION['username']);
 } else {
     header("Location: ../../HOMEPAGE/VISTA/index.html");
     exit();
@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="htmlTag">
 
 <head>
     <meta charset="UTF-8">
@@ -37,8 +37,7 @@ if (isset($_SESSION['username'])) {
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="menuTitle">Menú del
-                        Backoffice</h5>
+                    <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel" data-i18n="routes">Rutas</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -95,21 +94,21 @@ if (isset($_SESSION['username'])) {
                 <h1 class="mb-4" data-i18n="collection">Recolección</h1>
                 <div class="container mt-5">
                     <?php
-                    ($recolecciones = $camioneroModel->infoRecolecciones($camionero["matricula"]));
+                    $recolecciones = $camioneroModel->infoRecolecciones($camionero["matricula"]);
                     $mostrarDeshabilitado = true;
                     foreach ($recolecciones as $recoleccion) {
                         if (empty($recoleccion['fecha_llegada'])) {
                             ?>
                             <a class="btn btn-secondary"
                                 href="../VISTA/verRecoleccion.php?id_recoleccion=<?php echo $recoleccion['id_recoleccion']; ?>"
-                                role="button" data-i18n="collection"></a>
+                                role="button" data-i18n="collection">Recolección</a>
                             <?php
                             $mostrarDeshabilitado = false;
                         }
                     }
                     if ($mostrarDeshabilitado) {
                         ?>
-                        <a class="btn btn-secondary disabled" href="" role="button" data-i18n="collection"></a>
+                        <a class="btn btn-secondary disabled" href="" role="button" data-i18n="collection">Recolección</a>
                         <?php
                     }
                     ?>
@@ -127,70 +126,7 @@ if (isset($_SESSION['username'])) {
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
         crossorigin="anonymous"></script>
-    <script>
-        var textStrings = {
-            es: {
-                menuTitle: "Rutas",
-                home: "Inicio",
-                profile: "Perfil",
-                routes: "Rutas",
-                logout: "Cerrar sesión",
-                changeLanguage: "Change language",
-                trunkRoutes: "Rutas troncales",
-                deliveries: "Entregas",
-                collection: "Recolección",
-                client: "Cliente",
-                status: "Estado",
-                date: "Fecha",
-                notStarted: "sin empezar",
-                inProcess: "en proceso",
-                finished: "finalizado"
-            },
-            en: {
-                menuTitle: "Routes",
-                home: "Home",
-                profile: "Profile",
-                routes: "Routes",
-                logout: "Log out",
-                changeLanguage: "Cambiar idioma",
-                trunkRoutes: "Trunk Routes",
-                deliveries: "Deliveries",
-                collection: "Collection",
-                client: "Client",
-                status: "Status",
-                date: "Date",
-                notStarted: "not started",
-                inProcess: "in process",
-                finished: "finished"
-            }
-        };
-
-        function changeLanguage() {
-            var htmlTag = document.getElementsByTagName('html')[0];
-            var language = htmlTag.getAttribute('lang');
-            if (language === 'en') {
-                htmlTag.setAttribute('lang', 'es');
-                updateText('es');
-            } else {
-                htmlTag.setAttribute('lang', 'en');
-                updateText('en');
-            }
-        }
-
-        function updateText(language) {
-            var elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(function (element) {
-                var key = element.getAttribute('data-i18n');
-                if (textStrings[language][key]) {
-                    element.innerText = textStrings[language][key];
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            updateText('es');
-        });
-    </script>
+    <script src="../../JS/languageScript.js"></script>
 </body>
 
 </html>

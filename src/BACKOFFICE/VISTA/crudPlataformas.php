@@ -13,7 +13,7 @@
 
 <nav class="navbar navbar-dark bg-dark p-4 ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="../../VISTA/index.html" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
+      <a class="navbar-brand" href="backoffice.html" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

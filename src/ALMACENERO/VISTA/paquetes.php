@@ -45,29 +45,29 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item active">
-                            <a class="nav-link active" aria-current="page" href="paquetes.php"
-                                data-i18n="">Paquetes</a>
+                            <a class="nav-link active" aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                            <a class="nav-link" aria-current="page" href="recolecciones.php" data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php"
-                                data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
-                            <p class="nav-link" aria-current="page" onclick="changeLanguage()"
-                                data-i18n="changeLanguage">Change language</p>
+                            <p class="nav-link" aria-current="page" onclick="changeLanguage()" data-i18n="changeLanguage">Change language</p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="../../HOMEPAGE/VISTA/index.php" data-i18n="logout">Salir</a>
@@ -82,10 +82,8 @@ if (isset($_SESSION['username'])) {
         <br>
         <div class="row mt-4">
             <div class="col-md-6">
-                <a href="../VISTA/paquetesRegistrar.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="registerPackage">Registrar paquete</button></a>
-                <a href="../VISTA/paquetesEntregar.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="deliverPackage">Entregar paquete</button></a>
+                <a href="../VISTA/paquetesRegistrar.php"><button type="button" class="btn btn-secondary" data-i18n="registerPackage">Registrar paquete</button></a>
+                <a href="../VISTA/paquetesEntregar.php"><button type="button" class="btn btn-secondary" data-i18n="deliverPackage">Entregar paquete</button></a>
             </div>
         </div>
         <br>
@@ -97,15 +95,16 @@ if (isset($_SESSION['username'])) {
                     if ($_GET["error"] == "subirLote") {
                         echo '<p>Error al subir el lote</p>';
                     }
-                } ?>
+                }
+                ?>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" data-i18n="">Identificador</th>
-                            <th scope="col" data-i18n="">Destino</th>
-                            <th scope="col" data-i18n="">Estado</th>
-                            <th scope="col" data-i18n="">Recibo</th>
-                            <th scope="col" data-i18n="">Entrega</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="destination">Destino</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="receipt">Recibo</th>
+                            <th scope="col" data-i18n="delivery">Entrega</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,8 +123,7 @@ if (isset($_SESSION['username'])) {
                             if (empty($entrega)) {
                                 $entrega = '-';
                             }
-
-                            ?>
+                        ?>
                             <tr>
                                 <td>
                                     <?php echo $paquete ?>
@@ -143,17 +141,14 @@ if (isset($_SESSION['username'])) {
                                     <?php echo $entrega; ?>
                                 </td>
                             </tr>
-                            <?php
+                        <?php
                         }
-
                         ?>
                     </tbody>
                 </table>
-                <a href="../VISTA/paquetesTodas.php"><button type="button" class="btn btn-secondary"
-                        data-i18n="historial">Historial</button></a>
+                <a href="../VISTA/paquetesTodas.php"><button type="button" class="btn btn-secondary" data-i18n="history">Historial</button></a>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -165,10 +160,42 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                registerPackage: "Registrar paquete",
+                deliverPackage: "Entregar paquete",
+                packagesHeading: "Paquetes sin entregar",
+                identifier: "Identificador",
+                destination: "Destino",
+                status: "Estado",
+                receipt: "Recibo",
+                delivery: "Entrega",
+                history: "Historial"
             },
             en: {
-
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                registerPackage: "Register Package",
+                deliverPackage: "Deliver Package",
+                packagesHeading: "Undelivered Packages",
+                identifier: "Identifier",
+                destination: "Destination",
+                status: "Status",
+                receipt: "Receipt",
+                delivery: "Delivery",
+                history: "History"
             }
         };
 

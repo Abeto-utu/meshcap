@@ -27,8 +27,8 @@ if (isset($_SESSION['username'])) {
 <body>
     <nav class="navbar navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="almacenero.php" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
-                    alt="">MeshCap</a>
+            <a class="navbar-brand" href="almacenero.php" id="logo" data-i18n="meshCap"><img
+                    src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -45,23 +45,27 @@ if (isset($_SESSION['username'])) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="">Perfil</a>
-                        <li class="nav-item active">
-                            <a class="nav-link active" aria-current="page" href="paquetes.php" data-i18n="">Paquetes</a>
+                            <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link active" aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="">Lotes</a>
+                            <a class="nav-link" aria-current="page" href="lotes.php" data-i18n="lots">Lotes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="recolecciones.php"
-                                data-i18n="">Recolecciones</a>
+                                data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vehiculos.php"
+                                data-i18n="vehicles">Vehiculos</a>
                         </li>
                         <li>
                             <p class="nav-link" aria-current="page" onclick="changeLanguage()"
@@ -84,11 +88,11 @@ if (isset($_SESSION['username'])) {
                 <table class="table centered-table">
                     <thead>
                         <tr>
-                            <th scope="col">Identificador</th>
-                            <th scope="col">Destino</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Fecha_recibo</th>
-                            <th scope="col">Fecha_entrega</th>
+                            <th scope="col" data-i18n="identifier">Identificador</th>
+                            <th scope="col" data-i18n="destination">Destino</th>
+                            <th scope="col" data-i18n="status">Estado</th>
+                            <th scope="col" data-i18n="receiptDate">Fecha de recibo</th>
+                            <th scope="col" data-i18n="deliveryDate">Fecha de entrega</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,7 +103,8 @@ if (isset($_SESSION['username'])) {
                             <tr class="align-middle">
                                 <td>
                                     <?php echo $paquete['id_paquete'] ?>
-                                </td><td>
+                                </td>
+                                <td>
                                     <?php echo $paquete['destino'] ?>
                                 </td>
                                 <td>
@@ -128,10 +133,40 @@ if (isset($_SESSION['username'])) {
     <script>
         var textStrings = {
             es: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menú",
+                profile: "Perfil",
+                packages: "Paquetes",
+                lots: "Lotes",
+                collections: "Recolecciones",
+                trunks: "Troncales",
+                deliveries: "Entregas",
+                changeLanguage: "Cambiar idioma",
+                logout: "Salir",
+                deliverPackage: "Paquetes",
+                identifier: "Identificador",
+                destination: "Destino",
+                status: "Estado",
+                receiptDate: "Fecha de recibo",
+                deliveryDate: "Fecha de entrega"
             },
             en: {
-
+                meshCap: "MeshCap",
+                menuTitle: "Menu",
+                profile: "Profile",
+                packages: "Packages",
+                lots: "Lots",
+                collections: "Collections",
+                trunks: "Trunks",
+                deliveries: "Deliveries",
+                changeLanguage: "Change language",
+                logout: "Logout",
+                deliverPackage: "Packages",
+                identifier: "Identifier",
+                destination: "Destination",
+                status: "Status",
+                receiptDate: "Receipt date",
+                deliveryDate: "Delivery date"
             }
         };
 
