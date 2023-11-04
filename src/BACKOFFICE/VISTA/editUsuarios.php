@@ -15,16 +15,14 @@
             $fila = mysqli_fetch_array($resultado);
             $id_usuario = $fila['id_usuario'];
             $contrasenha = $fila['contrasenha'];
-            $cargo = $fila['cargo'];
         }   
     }
 
     if(isset($_POST['editado'])){
         $id_usuario = $_GET['id_usuario'];
         $contrasenha = $_POST['contrasenha'];
-        $cargo = $_POST['cargo'];
 
-        $query = "UPDATE login SET id_usuario = '$id_usuario', contrasenha = '$contrasenha', cargo = '$cargo' WHERE id_usuario = $id_usuario";
+        $query = "UPDATE login SET id_usuario = '$id_usuario', contrasenha = '$contrasenha', WHERE id_usuario = $id_usuario";
         $resultado = mysqli_query($conn, $query);
 
         if(!$resultado) {

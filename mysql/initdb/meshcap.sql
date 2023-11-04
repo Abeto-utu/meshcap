@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2023 at 06:30 PM
+-- Generation Time: Nov 04, 2023 at 09:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -38,7 +38,9 @@ CREATE TABLE `camionero` (
 
 INSERT INTO `camionero` (`id_usuario`, `estado`) VALUES
 (1, 'disponible'),
-(5, 'disponible');
+(5, 'trabajando'),
+(6, 'disponible'),
+(7, 'disponible');
 
 -- --------------------------------------------------------
 
@@ -57,7 +59,8 @@ CREATE TABLE `camionero_vehiculo` (
 
 INSERT INTO `camionero_vehiculo` (`id_usuario`, `matricula`) VALUES
 (1, 'ABC123'),
-(5, 'ABC456');
+(5, 'ABC456'),
+(6, 'ABC789');
 
 -- --------------------------------------------------------
 
@@ -99,7 +102,15 @@ INSERT INTO `cliente_recoleccion` (`id_recoleccion`, `id_cliente`) VALUES
 (3, 1),
 (4, 1),
 (5, 1),
-(6, 1);
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(19, 1),
+(20, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +128,9 @@ CREATE TABLE `linea` (
 
 INSERT INTO `linea` (`id_linea`) VALUES
 (1),
-(2);
+(2),
+(3),
+(4);
 
 -- --------------------------------------------------------
 
@@ -140,7 +153,9 @@ INSERT INTO `login` (`id_usuario`, `contrasenha`, `salt`) VALUES
 (2, '123456', NULL),
 (3, '123456', NULL),
 (4, '123456', NULL),
-(5, '123456', NULL);
+(5, '123456', NULL),
+(6, '123456', NULL),
+(7, '123456', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,7 +180,17 @@ INSERT INTO `lote` (`id_lote`, `estado`, `fecha_cierre`, `fecha_abierto`) VALUES
 (4, 'entregado', '2023-10-23 00:42:06', '2023-10-23 00:14:29'),
 (6, 'entregado', '2023-10-24 17:40:52', '2023-10-24 17:38:49'),
 (9, 'entregado', '2023-10-25 21:53:30', '2023-10-25 21:51:10'),
-(10, 'entregado', '2023-10-26 01:33:56', '2023-10-26 01:32:10');
+(10, 'entregado', '2023-10-26 01:33:56', '2023-10-26 01:32:10'),
+(11, 'entregado', '2023-10-27 00:13:01', '2023-10-27 00:08:23'),
+(12, 'entregado', '2023-10-27 00:12:57', '2023-10-27 00:08:47'),
+(13, 'entregado', '2023-10-27 01:08:42', '2023-10-27 01:07:25'),
+(14, 'entregado', '2023-10-27 01:22:26', '2023-10-27 01:21:15'),
+(15, 'entregado', '2023-10-31 22:39:07', '2023-10-31 21:58:42'),
+(16, 'entregado', '2023-10-31 23:43:10', '2023-10-31 23:39:57'),
+(17, 'entregado', '2023-11-01 22:34:09', '2023-11-01 22:30:49'),
+(18, 'entregado', '2023-11-02 17:48:27', '2023-11-02 17:47:46'),
+(19, 'entregado', '2023-11-02 18:01:29', '2023-11-02 18:00:07'),
+(21, 'entregado', '2023-11-02 18:06:58', '2023-11-02 18:06:28');
 
 -- --------------------------------------------------------
 
@@ -204,7 +229,28 @@ INSERT INTO `paquete` (`id_paquete`, `destino`, `estado`, `fecha_recibo`, `fecha
 (28, '4324 calle, localidad, Soriano', 'entregado', '2023-10-25 21:54:49', '2023-10-25 21:54:49'),
 (39, '1234 calle, Punta del este, Maldonado', 'entregado', '2023-10-26 01:41:47', '2023-10-26 01:41:47'),
 (40, '12343 callecita, Maldonado, Maldonado', 'entregado', '2023-10-26 01:41:44', '2023-10-26 01:41:44'),
-(41, '1234 calle, Maldonado, Maldonado', 'entregado', '2023-10-26 01:41:40', '2023-10-26 01:41:40');
+(41, '1234 calle, Maldonado, Maldonado', 'entregado', '2023-10-26 01:41:40', '2023-10-26 01:41:40'),
+(42, '1234 calle, Mercedes, Soriano', 'entregado', '2023-10-27 00:14:12', '2023-10-27 00:14:12'),
+(43, '1234 calle, Mercedes, Soriano', 'entregado', '2023-10-27 00:14:07', '2023-10-27 00:14:07'),
+(44, '1234 calle, Mercedes, Soriano', 'entregado', '2023-10-27 00:14:10', '2023-10-27 00:14:10'),
+(45, '3212 Peru, Maldonado, Maldonado', 'entregado', '2023-10-27 01:09:51', '2023-10-27 01:09:51'),
+(46, '4342 Salvador, Punta del este, Maldonado', 'entregado', '2023-10-27 01:09:54', '2023-10-27 01:09:54'),
+(47, '1234 calle, Mercedes, Soriano', 'entregado', '2023-10-27 01:40:01', '2023-10-27 01:40:01'),
+(48, '1234 calle, Mercedes, Soriano', 'entregado', '2023-10-27 01:40:06', '2023-10-27 01:40:06'),
+(49, '1232 18 de Julio, Palmitas, Soriano', 'entregado', '2023-10-31 23:35:47', '2023-10-31 23:35:47'),
+(50, '1232 18 de Julio, Palmitas, Soriano', 'entregado', '2023-10-31 23:35:51', '2023-10-31 23:35:51'),
+(51, '1234 18 de julio, Palmitas, Soriano', 'entregado', '2023-10-31 23:43:50', '2023-10-31 23:43:50'),
+(52, '1234 18 de julio, Palmitas, Soriano', 'entregado', '2023-10-31 23:43:52', '2023-10-31 23:43:52'),
+(53, '9983 Montevideo, Mercedes, Soriano', 'entregado', '2023-10-31 23:43:54', '2023-10-31 23:43:54'),
+(54, '1234 calle, Punta del este, Maldonado', 'en plataforma destino', '2023-11-01 22:34:09', NULL),
+(55, '3399 Salvador, Montevideo, Montevideo', 'entregado', '2023-11-01 18:44:59', '2023-11-01 18:44:59'),
+(56, '1234 calle, Mercedes, Soriano', 'entregado', '2023-11-02 17:48:59', '2023-11-02 17:48:59'),
+(57, '1234 calle, Palmitas, Soriano', 'entregado', '2023-11-02 17:49:02', '2023-11-02 17:49:02'),
+(58, '3399 Salvador, Montevideo, Montevideo', 'entregado', '2023-11-02 17:49:34', '2023-11-02 17:49:34'),
+(59, '1234 calle, Mercedes, Soriano', 'entregado', '2023-11-02 18:02:10', '2023-11-02 18:02:10'),
+(60, '1234 calle, Mercedes, Soriano', 'entregado', '2023-11-02 18:02:12', '2023-11-02 18:02:12'),
+(61, '4321 calle, Palmitas, Soriano', 'entregado', '2023-11-02 18:02:15', '2023-11-02 18:02:15'),
+(62, '4321 calle, Palmitas, Soriano', 'en plataforma', '2023-11-03 19:18:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -236,7 +282,26 @@ INSERT INTO `paquete_lote` (`id_paquete`, `id_lote`) VALUES
 (28, 9),
 (39, 10),
 (40, 10),
-(41, 10);
+(41, 10),
+(42, 12),
+(43, 12),
+(44, 11),
+(45, 13),
+(46, 13),
+(47, 14),
+(48, 14),
+(49, 15),
+(50, 15),
+(51, 16),
+(52, 16),
+(53, 16),
+(54, 17),
+(54, 21),
+(56, 18),
+(57, 18),
+(59, 19),
+(60, 19),
+(61, 19);
 
 -- --------------------------------------------------------
 
@@ -269,7 +334,24 @@ INSERT INTO `paquete_recorrido` (`id_paquete`, `id_recorrido`) VALUES
 (28, 4),
 (39, 5),
 (40, 5),
-(41, 5);
+(41, 5),
+(42, 6),
+(43, 6),
+(44, 6),
+(45, 7),
+(46, 7),
+(47, 8),
+(48, 8),
+(49, 10),
+(50, 10),
+(51, 11),
+(52, 11),
+(53, 11),
+(56, 14),
+(57, 14),
+(59, 15),
+(60, 15),
+(61, 15);
 
 -- --------------------------------------------------------
 
@@ -291,12 +373,21 @@ INSERT INTO `plataforma` (`id_plataforma`, `nombre`, `ubicacion`) VALUES
 (1, 'Montevideo', '2255 perez castellano, Montevideo'),
 (2, 'Artigas', '4232 paul, Artigas'),
 (3, 'Canelones', '1234 Nico, La Paz'),
-(4, 'Cerro Largo', '4324 Juana, Melo'),
+(4, 'Cerro Largo', '1234  calle,  Melo'),
 (5, 'Colonia', '4234 Plaza Colonia, Colonia del sacramento'),
 (6, 'Durazno', '8765 Melocoton, Sandia'),
-(7, 'Flores', '432 Arboles, Plantas'),
 (8, 'Soriano', '4324 18 de julio, Palmitas'),
-(9, 'Maldonado', '2223 Rivera, Punta del este, Maldonado');
+(9, 'Maldonado', '2223 Rivera, Punta del este, Maldonado'),
+(10, 'Rio negro', '4321 callecita, Fray Bentos'),
+(11, 'Rocha', '9999 lalala, Rocha'),
+(12, 'Treinta y Tres', '3333 33, Treinta y Tres'),
+(13, 'Lavalleja', '1010 Alfajores, Minas'),
+(14, 'Florida', '7676 miami, Florida'),
+(15, 'Tacuarembo', '9494 18 de julio, Tacuarembo'),
+(16, 'Rivera', '0000 rios, Rivera'),
+(17, 'San jose', '5435 solano, San jose'),
+(18, 'Paysandu', '4324 calle, Paysandu'),
+(19, 'Salto', '2234 calle, Salto');
 
 -- --------------------------------------------------------
 
@@ -316,8 +407,23 @@ CREATE TABLE `plataforma_linea` (
 
 INSERT INTO `plataforma_linea` (`id_plataforma`, `id_linea`, `posicion`) VALUES
 (1, 1, 1),
-(5, 1, 2),
-(8, 1, 3);
+(2, 1, 8),
+(3, 4, 1),
+(4, 3, 3),
+(5, 1, 3),
+(6, 4, 3),
+(8, 1, 4),
+(9, 2, 1),
+(10, 1, 5),
+(11, 2, 2),
+(12, 3, 2),
+(13, 3, 1),
+(14, 4, 2),
+(15, 4, 4),
+(16, 4, 5),
+(17, 1, 2),
+(18, 1, 6),
+(19, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -341,7 +447,17 @@ INSERT INTO `plataforma_lote` (`id_lote`, `id_plataforma`, `fecha_llegada`) VALU
 (4, 9, '2023-10-23 00:37:25'),
 (6, 2, '2023-10-24 17:40:52'),
 (9, 8, '2023-10-25 21:53:30'),
-(10, 9, '2023-10-26 01:33:56');
+(10, 9, '2023-10-26 01:33:56'),
+(11, 8, '2023-10-27 00:13:01'),
+(12, 8, '2023-10-27 00:12:57'),
+(13, 9, '2023-10-27 01:08:42'),
+(14, 8, '2023-10-27 01:22:26'),
+(15, 8, '2023-10-31 22:39:07'),
+(16, 8, '2023-10-31 23:43:10'),
+(17, 9, '2023-11-01 22:34:09'),
+(18, 8, '2023-11-02 17:48:27'),
+(19, 8, '2023-11-02 18:01:29'),
+(21, 9, '2023-11-02 18:06:58');
 
 -- --------------------------------------------------------
 
@@ -365,7 +481,15 @@ INSERT INTO `recoleccion` (`id_recoleccion`, `fecha_llegada`, `fecha_ida`) VALUE
 (3, '2023-10-23 00:12:33', '2023-10-23 00:11:44'),
 (4, '2023-10-24 17:36:22', '2023-10-24 17:24:10'),
 (5, '2023-10-25 21:50:49', '2023-10-25 21:50:14'),
-(6, '2023-10-25 23:45:07', '2023-10-25 23:29:57');
+(6, '2023-10-25 23:45:07', '2023-10-25 23:29:57'),
+(7, '2023-10-27 00:07:49', '2023-10-27 00:06:57'),
+(8, '2023-10-27 01:06:43', '2023-10-27 01:06:05'),
+(9, '2023-10-27 01:20:51', '2023-10-27 01:20:22'),
+(10, '2023-10-31 22:21:37', '2023-10-31 22:21:04'),
+(11, NULL, '2023-11-01 17:52:50'),
+(12, '2023-10-31 23:39:30', '2023-10-31 23:38:45'),
+(19, '2023-11-02 17:47:26', '2023-11-02 17:46:47'),
+(20, '2023-11-02 17:59:38', '2023-11-02 17:58:52');
 
 -- --------------------------------------------------------
 
@@ -388,7 +512,15 @@ INSERT INTO `recoleccion_vehiculo` (`id_recoleccion`, `matricula`) VALUES
 (3, 'ABC123'),
 (4, 'ABC456'),
 (5, 'ABC456'),
-(6, 'ABC456');
+(6, 'ABC456'),
+(7, 'ABC456'),
+(8, 'ABC456'),
+(9, 'ABC456'),
+(10, 'ABC123'),
+(11, 'ABC456'),
+(12, 'ABC123'),
+(19, 'ABC123'),
+(20, 'ABC123');
 
 -- --------------------------------------------------------
 
@@ -411,7 +543,17 @@ INSERT INTO `recorrido` (`id_recorrido`, `estado`, `fecha_inicio`) VALUES
 (2, 'finalizado', '2023-10-23 00:45:32'),
 (3, 'finalizado', '2023-10-24 17:42:59'),
 (4, 'finalizado', '2023-10-25 21:54:50'),
-(5, 'finalizado', '2023-10-26 01:43:47');
+(5, 'finalizado', '2023-10-26 01:43:47'),
+(6, 'finalizado', '2023-10-27 00:14:13'),
+(7, 'finalizado', '2023-10-27 01:09:56'),
+(8, 'finalizado', '2023-10-27 01:40:07'),
+(9, 'finalizado', '2023-10-31 23:25:37'),
+(10, 'finalizado', '2023-10-31 23:35:53'),
+(11, 'finalizado', '2023-10-31 23:43:55'),
+(12, 'finalizado', '2023-11-01 22:14:16'),
+(13, 'finalizado', '2023-11-01 22:16:42'),
+(14, 'finalizado', '2023-11-02 17:49:04'),
+(15, 'finalizado', '2023-11-02 18:02:17');
 
 -- --------------------------------------------------------
 
@@ -433,7 +575,17 @@ INSERT INTO `recorrido_vehiculo` (`id_recorrido`, `matricula`) VALUES
 (2, 'ABC123'),
 (3, 'ABC456'),
 (4, 'ABC456'),
-(5, 'ABC456');
+(5, 'ABC456'),
+(6, 'ABC456'),
+(7, 'ABC456'),
+(8, 'ABC456'),
+(9, 'ABC123'),
+(10, 'ABC123'),
+(11, 'ABC123'),
+(12, 'ABC123'),
+(13, 'ABC123'),
+(14, 'ABC123'),
+(15, 'ABC123');
 
 -- --------------------------------------------------------
 
@@ -456,7 +608,9 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `cargo`) VALUES
 (2, 'Genaro', 'funcionario'),
 (3, 'Agustin', 'administrador'),
 (4, 'Woody', 'sin cargo'),
-(5, 'Pedro Gonzales', 'camionero');
+(5, 'Pedro Gonzales', 'camionero'),
+(6, 'Jude Bellinghim', 'camionero'),
+(7, 'Tamandua', 'camionero');
 
 -- --------------------------------------------------------
 
@@ -468,6 +622,13 @@ CREATE TABLE `usuario_plataforma` (
   `id_usuario` int(11) NOT NULL,
   `id_plataforma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usuario_plataforma`
+--
+
+INSERT INTO `usuario_plataforma` (`id_usuario`, `id_plataforma`) VALUES
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -487,7 +648,9 @@ CREATE TABLE `vehiculo` (
 
 INSERT INTO `vehiculo` (`matricula`, `estado`, `tipo`) VALUES
 ('ABC123', 'con conductor', 'camioneta'),
-('ABC456', 'con conductor', 'camion');
+('ABC456', 'en recoleccion', 'camion'),
+('ABC789', 'con conductor', 'camioneta'),
+('YYY987', 'sin conductor', 'camion');
 
 -- --------------------------------------------------------
 
@@ -511,7 +674,17 @@ INSERT INTO `vehiculo_plataforma_lote` (`id_lote`, `id_plataforma`, `matricula`)
 (4, 9, 'ABC123'),
 (6, 2, 'ABC456'),
 (9, 8, 'ABC456'),
-(10, 9, 'ABC456');
+(10, 9, 'ABC456'),
+(11, 8, 'ABC456'),
+(12, 8, 'ABC456'),
+(13, 9, 'ABC456'),
+(14, 8, 'ABC456'),
+(15, 8, 'ABC123'),
+(16, 8, 'ABC123'),
+(17, 9, 'ABC123'),
+(18, 8, 'ABC123'),
+(19, 8, 'ABC123'),
+(21, 9, 'ABC123');
 
 -- --------------------------------------------------------
 
@@ -621,7 +794,7 @@ ALTER TABLE `plataforma`
 --
 ALTER TABLE `plataforma_linea`
   ADD PRIMARY KEY (`id_plataforma`,`id_linea`),
-  ADD KEY `id_linea` (`id_linea`);
+  ADD KEY `id_linea` (`id_linea`) USING BTREE;
 
 --
 -- Indexes for table `plataforma_lote`
@@ -691,7 +864,7 @@ ALTER TABLE `vehiculo_plataforma_lote`
 -- AUTO_INCREMENT for table `camionero`
 --
 ALTER TABLE `camionero`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `cliente`
@@ -703,49 +876,49 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT for table `linea`
 --
 ALTER TABLE `linea`
-  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `lote`
 --
 ALTER TABLE `lote`
-  MODIFY `id_lote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_lote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id_paquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_paquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `plataforma`
 --
 ALTER TABLE `plataforma`
-  MODIFY `id_plataforma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_plataforma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `recoleccion`
 --
 ALTER TABLE `recoleccion`
-  MODIFY `id_recoleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_recoleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `recorrido`
 --
 ALTER TABLE `recorrido`
-  MODIFY `id_recorrido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_recorrido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
