@@ -6,13 +6,15 @@
 
         if(isset($_GET['id_usuario'])){
             $id = $_GET['id_usuario'];
-
+            $query3 = "DELETE FROM camionero WHERE id_usuario = '$id'";
+            $resultado3 = mysqli_query($conn,$query3);
             $query = "DELETE FROM login WHERE id_usuario = '$id'";
             $resultado = mysqli_query($conn,$query);
             $query2 = "DELETE FROM usuario WHERE id_usuario = '$id'";
             $resultado2 = mysqli_query($conn,$query2);
             
-                if(!$resultado || !$resultado2){
+            
+                if(!$resultado || !$resultado2 || !$resultado3){
                     die("Error en la consulta");
                 }
 
