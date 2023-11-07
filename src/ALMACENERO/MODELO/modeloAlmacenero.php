@@ -248,6 +248,30 @@ class almaceneroModel
 
     }
 
+    public function plataformaLote($id_lote)
+    {
+        $query = "SELECT * FROM `plataforma_lote` WHERE id_lote = $id_lote;";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            return '';
+        }
+
+        $camion = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $camion[] = $fila;
+        }
+
+        if (count($camion) > 0) {
+            return $camion[0];
+        } else {
+            return "";
+        }
+
+    }
+
     public function crearLote($id_plataforma)
     {
         $query = "INSERT INTO `lote`(`id_lote`, `estado`, `fecha_cierre`, `fecha_abierto`) VALUES (NULL,'abierto',NULL,CURRENT_TIMESTAMP)";
@@ -589,7 +613,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los plataformas: " . mysqli_error($this->conn));
+            return '';
         }
 
         $plataformas = [];
@@ -599,6 +623,27 @@ class almaceneroModel
         }
 
         return $plataformas;
+    }
+
+    public function mostrarUnaPlataforma($id_plataforma)
+    {
+        $query = "SELECT *
+        FROM plataforma
+        WHERE id_plataforma = $id_plataforma ";
+        $result = mysqli_query($this->conn, $query);
+
+
+        if (!$result) {
+            return '';
+        }
+
+        $plataformas = [];
+
+        while ($fila = mysqli_fetch_array($result)) {
+            $plataformas[] = $fila;
+        }
+
+        return $plataformas[0];
     }
 
     public function paquetesEntregas($id_plataforma)

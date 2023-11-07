@@ -51,7 +51,8 @@ if (isset($_GET["id_lote"])) {
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="almacenero.php" data-i18n="profile">Perfil</a>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="paquetes.php" data-i18n="packages">Paquetes</a>
+                            <a class="nav-link " aria-current="page" href="paquetes.php"
+                                data-i18n="packages">Paquetes</a>
                         </li>
                         </li>
                         <li class="nav-item">
@@ -62,10 +63,12 @@ if (isset($_GET["id_lote"])) {
                                 data-i18n="collections">Recolecciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="troncales.php" data-i18n="trunks">Troncales</a>
+                            <a class="nav-link" aria-current="page" href="troncales.php"
+                                data-i18n="trunks">Troncales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="entregas.php" data-i18n="deliveries">Entregas</a>
+                            <a class="nav-link" aria-current="page" href="entregas.php"
+                                data-i18n="deliveries">Entregas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="vehiculos.php"
@@ -118,6 +121,10 @@ if (isset($_GET["id_lote"])) {
                     <tbody>
                         <?php
                         ($paquetes = $almaceneroModel->paquetesPlatafoma($almacenero['id_plataforma']));
+                        $plataformaLote = $almaceneroModel->plataformaLote($id_lote);
+                        $plataforma = $almaceneroModel->mostrarUnaPlataforma($plataformaLote['id_plataforma']);
+                        $nombre = $plataforma['nombre'];
+
                         $resultArray = [];
                         foreach ($paquetes as $fila) {
                             $paquete = $fila['id_paquete'];
@@ -132,25 +139,34 @@ if (isset($_GET["id_lote"])) {
                                 $entrega = '-';
                             }
 
-                            ?>
-                            <tr>
-                                <td>
-                                    <?php echo $paquete ?>
-                                </td>
-                                <td>
-                                    <?php echo $destino; ?>
-                                </td>
-                                <td>
-                                    <?php echo $estado; ?>
-                                </td>
-                                <td>
-                                    <?php echo $recibo; ?>
-                                </td>
-                                <td>
-                                    <?php echo $entrega; ?>
-                                </td>
-                            </tr>
-                            <?php
+                            // Extract the state from the 'destino' variable
+                            $patron = '/\w+,\s(\w+)$/';
+                            preg_match($patron, $destino, $coincidencias);
+                            $departamento = $coincidencias[1];
+
+                            // Check if the 'nombre' variable is the same as the state from 'destino'
+                            if ($nombre === $departamento) {
+                                ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $paquete ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $destino; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $estado; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $recibo; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $entrega; ?>
+                                    </td>
+                                </tr>
+
+                                <?php
+                            }
                         }
                         ?>
                     </tbody>

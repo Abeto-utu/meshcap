@@ -147,7 +147,6 @@
             <th scope="col">N° Paquete</th>
             <th scope="col">Destino</th>
             <th scope="col">Estado</th>
-            <th scope="col">Plataforma Actual</th>
             <th scope="col">Fecha de Recibo</th>
             <th scope="col">Fecha de Entrega</th>
             <th scope="col">Acciones</th>
@@ -169,7 +168,6 @@
               <td>
                 <?php echo $fila['estado'] ?>
               </td>
-              <td></td>
               <td>
                 <?php echo $fila['fecha_recibo'] ?>
               </td>
@@ -179,8 +177,14 @@
               <td class="align-middle">
                 <a href="../VISTA/editPaquetes.php?id_paquete=<?php echo $fila['id_paquete']; ?>"
                   class="btn btn-small btn-warning"><i class="fas fa-pen-nib"></i></a>
-                <a href="../CONTROLADOR/deleteCruds.php?id_paquete=<?php echo $fila['id_paquete']; ?>"
-                  class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>
+                <?php
+                if ($fila['estado'] == 'en plataforma') {
+                  ?> <a href="../CONTROLADOR/deleteCruds.php?id_paquete=<?php echo $fila['id_paquete']; ?>"
+                    class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>
+                  <?php
+                }
+                ?>
+
               </td>
             </tr>
           <?php } ?>
@@ -189,7 +193,7 @@
     </div>
   </div>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>

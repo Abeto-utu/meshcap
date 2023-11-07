@@ -138,12 +138,15 @@ if (isset($_SESSION['username'])) {
                                 </td>
                                 <td>
                                     <?php
-                                    if (isset($id_usuario)) { ?>
+                                    if (isset($id_usuario)) { 
+                                        if ($estado == 'con conductor' || $estado == 'fuera de servicio') {
+                                            # code...
+                                        ?>
                                         <a
                                             href="../CONTROLADOR/controladorAlmacenero.php?desasignarCamionero=desasignarCamionero&id_usuario=<?php echo $id_usuario ?>&matricula=<?php echo $matricula ?>"><button
                                                 type="button" class="btn btn-secondary" data-i18n="unassignDriver">Desasignar
                                                 camionero</button></a>
-                                    <?php } else { ?>
+                                    <?php }} else { ?>
                                         <a
                                             href="asignarCamionero.php?matricula=<?php echo $matricula ?>"><button
                                                 type="button" class="btn btn-secondary" data-i18n="assignDriver">Asignar
