@@ -77,6 +77,19 @@ if (isset($_SESSION['username'])) {
                 ($recorridosActivos = $camioneroModel->recorridosActivos($camionero["id_usuario"]));
                 if (count($recorridosActivos) == 1) {
                     ?>
+                    <?php
+                    if (isset($_GET["error"])) {
+                        if ($_GET["error"] == "entregarPaquete") {
+                            echo '<p class="text-danger">Error al entregar paquete</p>';
+                        }
+                        if ($_GET["error"] == "finalizarEntrega") {
+                            echo '<p class="text-danger">Error al finalizar entrega</p>';
+                        }
+                        if ($_GET["error"] == "iniciarEntrega") {
+                            echo '<p class="text-danger">Error al iniciar entrega</p>';
+                        }
+                    } ?>
+
                     <table class="table">
                         <thead>
                             <tr>

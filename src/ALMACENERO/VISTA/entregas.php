@@ -99,10 +99,10 @@ if (isset($_SESSION['username'])) {
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] == "asignarPaqueteAEntrega") {
-                        echo '<p class="text-warning">Error al asignar paquete a entrega</p>';
+                        echo '<p class="text-danger">Error al asignar paquete a entrega</p>';
                     }
                     if ($_GET["error"] == "crearEntrega") {
-                        echo '<p class="text-warning">Error al crear entrega</p>';
+                        echo '<p class="text-danger">Error al crear entrega</p>';
                     }
 
                 } ?>

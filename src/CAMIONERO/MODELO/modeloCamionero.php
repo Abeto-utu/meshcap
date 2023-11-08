@@ -23,7 +23,7 @@ class CamioneroModel
         // Lo de los muchos estados es para que no haya error cuando inicia sesion un camionero sin vehiculo. Cuando entra a la pagina no le deja hacer nada basicamente
 
         if (!$result) {
-            die("Error al obtener informacion de camionero: " . mysqli_error($this->conn));
+            return false;
         }
 
         while ($fila = mysqli_fetch_array($result)) {
@@ -64,7 +64,7 @@ class CamioneroModel
         $recolecciones = mysqli_query($this->conn, $query);
 
         if (!$recolecciones) {
-            die("Error: " . mysqli_error($this->conn));
+            return false;
         }
 
         $resultado = [];
@@ -87,7 +87,7 @@ class CamioneroModel
         $recoleccion = mysqli_query($this->conn, $query);
 
         if (!$recoleccion) {
-            die("Error: " . mysqli_error($this->conn));
+            return false;
         }
 
         $resultado = [];
@@ -162,7 +162,7 @@ class CamioneroModel
         $lotes = mysqli_query($this->conn, $query);
 
         if (!$lotes) {
-            die("Error: " . mysqli_error($this->conn));
+            return false;
         }
 
         $resultado = [];
@@ -193,7 +193,7 @@ class CamioneroModel
         $lotes = mysqli_query($this->conn, $query);
 
         if (!$lotes) {
-            die("Error: " . mysqli_error($this->conn));
+            return false;
         }
 
         $resultado = [];
@@ -215,7 +215,7 @@ class CamioneroModel
         $paqueteRecorrido = mysqli_query($this->conn, $query);
 
         if (!$paqueteRecorrido) {
-            die("Error: " . mysqli_error($this->conn));
+            return false;
         }
 
         $resultado = [];
@@ -239,7 +239,7 @@ class CamioneroModel
         $recorridosActivos = mysqli_query($this->conn, $query);
 
         if (!$recorridosActivos) {
-            die($id_usuario . " gdfgError: " . mysqli_error($this->conn));
+            return false;
         }
 
         $resultado = [];
@@ -519,7 +519,7 @@ class CamioneroModel
         if ($row = mysqli_fetch_assoc($resultado)) {
             $id_paquete = $row['highest_id_paquete'];
         } else {
-            die('error 1 en consultar ultimo paquete' . mysqli_error($this->conn));
+            return false;
         }
 
         return $id_paquete;

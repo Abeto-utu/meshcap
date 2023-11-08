@@ -76,8 +76,17 @@ if (isset($_SESSION['username'])) {
                 <h1 class="mb-4" data-i18n="routeHeading">Recorrido </h1>
                 <?php
                 if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "entregarLote") {
+                        echo '<p class="text-danger">Error al entregar lote</p>';
+                    }
+                    if ($_GET["error"] == "finalizarTroncal") {
+                        echo '<p class="text-danger">Error al finalizar</p>';
+                    }
+                    if ($_GET["error"] == "iniciarTroncal") {
+                        echo '<p class="text-danger">Error al iniciar</p>';
+                    }
                     if ($_GET["error"] == "subirLote") {
-                        echo '<p>Error al subir el lote</p>';
+                        echo '<p class="text-danger">Error al subir lote</p>';
                     }
                 } ?>
                 <table class="table">

@@ -95,7 +95,7 @@ if (isset($_GET["finalizarEntrega"])) {
         header("Location: ../VISTA/entrega.php");
         exit();
     } else {
-        header("Location: ../VISTA/entrega.php?error=iniciarEntrega");
+        header("Location: ../VISTA/entrega.php?error=finalizarEntrega");
         exit();
     }
 }

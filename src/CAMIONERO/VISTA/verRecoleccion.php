@@ -93,6 +93,18 @@ if (isset($_GET['id_recoleccion'])) {
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3 mt-5">
+                <?php
+                if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "agregarPaquete") {
+                        echo '<p class="text-danger">Error al agregar paquete</p>';
+                    }
+                    if ($_GET["error"] == "finalizarRecoleccion") {
+                        echo '<p class="text-danger">Error al finalizar recoleccion</p>';
+                    }
+                    if ($_GET["error"] == "iniciarRecoleccion") {
+                        echo '<p class="text-danger">Error al iniciar recoleccion</p>';
+                    }
+                } ?>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
