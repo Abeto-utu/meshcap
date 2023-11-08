@@ -94,9 +94,16 @@ if (isset($_SESSION['username'])) {
                 <h1 class="mb-4" data-i18n="notDeliveredLots">Lotes sin entregar</h1>
                 <?php
                 if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "subirLote") {
-                        echo '<p>Error al subir el lote</p>';
+                    if ($_GET["error"] == "cerrarLote") {
+                        echo '<p class="text-danger">Error al cerrar lote</p>';
                     }
+                    if ($_GET["error"] == "asignarPaqueteALote") {
+                        echo '<p class="text-danger">Error al asignar paquete a lote</p>';
+                    }
+                    if ($_GET["error"] == "crearLote") {
+                        echo '<p class="text-danger">Error al crear lote</p>';
+                    }
+
                 } ?>
                 <table class="table">
                     <thead>

@@ -93,9 +93,19 @@ if (isset($_SESSION['username'])) {
                 <h1 class="mb-4" data-i18n="vehiclesHeading">Vehículos</h1>
                 <?php
                 if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "subirLote") {
-                        echo '<p>Error al subir el lote</p>';
+                    if ($_GET["error"] == "tipoInvalido") {
+                        echo '<p class="text-warning">Tipo invalido de camion</p>';
                     }
+                    if ($_GET["error"] == "registrarCamion") {
+                        echo '<p class="text-warning">Error al registrar el camion</p>';
+                    }
+                    if ($_GET["error"] == "desasignarCamionero") {
+                        echo '<p class="text-warning">Error al desasignar camionero</p>';
+                    }
+                    if ($_GET["error"] == "asignarCamionero") {
+                        echo '<p class="text-warning">Error al asignar camionero</p>';
+                    }
+
                 } ?>
                 <table class="table">
                     <thead>

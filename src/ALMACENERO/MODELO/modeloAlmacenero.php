@@ -19,7 +19,7 @@ class almaceneroModel
         $result = mysqli_query($this->conn, $query);
 
         if (!$result) {
-            die("Error al obtener informacion de almacenero: " . mysqli_error($this->conn));
+            return false;
         }
 
         $almacenero = [];
@@ -55,7 +55,7 @@ class almaceneroModel
         }
 
         if (!$result) {
-            die("Error al obtener informacion de los paquetes en plataforma: " . mysqli_error($this->conn));
+            return false;
         }
 
         $paquetes = [];
@@ -103,7 +103,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de las recolecciones activas: " . mysqli_error($this->conn));
+            return false;
         }
 
         $recolecciones = [];
@@ -162,7 +162,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los lotes sin entregar: " . mysqli_error($this->conn));
+            return false;
         }
 
         $lotes = [];
@@ -186,7 +186,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los lotes: " . mysqli_error($this->conn));
+            return false;
         }
 
         $lotes = [];
@@ -209,7 +209,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los paquetes de un lote: " . mysqli_error($this->conn));
+            return false;
         }
 
         $paquetes = [];
@@ -231,7 +231,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener vehiculo de un lote: " . mysqli_error($this->conn));
+            return false;
         }
 
         $camion = [];
@@ -277,7 +277,7 @@ class almaceneroModel
         $query = "INSERT INTO `lote`(`id_lote`, `estado`, `fecha_cierre`, `fecha_abierto`) VALUES (NULL,'abierto',NULL,CURRENT_TIMESTAMP)";
         $resultado = mysqli_query($this->conn, $query);
         if (!$resultado) {
-            die("error 1 en crear lote" . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "SELECT MAX(id_lote) AS highest_id_lote FROM lote;";
@@ -286,13 +286,13 @@ class almaceneroModel
         if ($row = mysqli_fetch_assoc($resultado)) {
             $id_lote = $row['highest_id_lote'];
         } else {
-            die('error 2 en crear lote' . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "INSERT INTO `plataforma_lote`(`id_lote`, `id_plataforma`, `fecha_llegada`) VALUES ($id_lote,$id_plataforma,NULL)";
         $resultado = mysqli_query($this->conn, $query);
         if (!$resultado) {
-            die("error 3 en crear lote" . mysqli_error($this->conn));
+            return false;
         }
 
         if ($resultado) {
@@ -307,7 +307,7 @@ class almaceneroModel
         $query = "INSERT INTO `lote`(`id_lote`, `estado`, `fecha_cierre`, `fecha_abierto`) VALUES (NULL,'abierto',NULL,CURRENT_TIMESTAMP)";
         $resultado = mysqli_query($this->conn, $query);
         if (!$resultado) {
-            die("error 1 en crear lote" . mysqli_error($this->conn));
+            return false;
         }
 
         if ($resultado) {
@@ -353,7 +353,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de las entregas activas: " . mysqli_error($this->conn));
+            return false;
         }
 
         $entregas = [];
@@ -377,7 +377,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de las entregas: " . mysqli_error($this->conn));
+            return false;
         }
 
         $entregas = [];
@@ -401,7 +401,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los paquetes de un recorrido: " . mysqli_error($this->conn));
+            return false;
         }
 
         $paquetes = [];
@@ -418,7 +418,7 @@ class almaceneroModel
         $query = "INSERT INTO `recorrido`(`id_recorrido`, `estado`, `fecha_inicio`) VALUES (NULL,'no comenzado',NULL)";
         $resultado = mysqli_query($this->conn, $query);
         if (!$resultado) {
-            die("error 1 en crear entrega" . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "SELECT MAX(id_recorrido) AS highest_id_recorrido FROM recorrido;";
@@ -427,13 +427,13 @@ class almaceneroModel
         if ($row = mysqli_fetch_assoc($resultado)) {
             $id_recorrido = $row['highest_id_recorrido'];
         } else {
-            die('error 2 en crear recorrido' . mysqli_error($this->conn));
+            return false;
         }
 
         $query = "INSERT INTO `recorrido_vehiculo`(`id_recorrido`, `matricula`) VALUES ($id_recorrido,'$matricula')";
         $resultado = mysqli_query($this->conn, $query);
         if (!$resultado) {
-            die("error 3 en crear recorrido" . mysqli_error($this->conn));
+            return false;
         }
 
         if ($resultado) {
@@ -482,7 +482,7 @@ class almaceneroModel
         if ($row = mysqli_fetch_assoc($resultado)) {
             $id_paquete = $row['highest_id_paquete'];
         } else {
-            die('error 1 en consultar ultimo paquete' . mysqli_error($this->conn));
+            return false;
         }
 
         return $id_paquete;
@@ -524,7 +524,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los paquetes: " . mysqli_error($this->conn));
+            return false;
         }
 
         $paquetes = [];
@@ -549,7 +549,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de las recolecciones: " . mysqli_error($this->conn));
+            return false;
         }
 
         $recolecciones = [];
@@ -570,7 +570,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los clientes: " . mysqli_error($this->conn));
+            return false;
         }
 
         $clientes = [];
@@ -589,7 +589,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            die("Error al obtener informacion de los vehiculos: " . mysqli_error($this->conn));
+            return false;
         }
 
         $vehiculos = [];
@@ -634,7 +634,7 @@ class almaceneroModel
 
 
         if (!$result) {
-            return '';
+            return false;
         }
 
         $plataformas = [];
@@ -664,7 +664,7 @@ class almaceneroModel
         }
 
         if (!$result) {
-            die("Error al obtener informacion de los paquetes en plataforma: " . mysqli_error($this->conn));
+            return false;
         }
 
         $paquetes = [];

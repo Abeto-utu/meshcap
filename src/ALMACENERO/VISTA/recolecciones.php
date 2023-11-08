@@ -99,7 +99,7 @@ if (isset($_SESSION['username'])) {
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] == "crearRecoleccion") {
-                        echo '<p data-i18n="errorCreateCollection">Error al crear la recoleccion</p>';
+                        echo '<p class="text-danger" data-i18n="errorCreateCollection">Error al crear la recoleccion</p>';
                     }
                 } ?>
                 <table class="table">

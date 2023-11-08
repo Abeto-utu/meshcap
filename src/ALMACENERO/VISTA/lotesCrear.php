@@ -97,7 +97,7 @@ if (isset($_SESSION['username'])) {
         </div>
         <br>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h2 class="mb-4" data-i18n="platforms">Plataformas</h2>
                 <table class="table">
                     <thead>

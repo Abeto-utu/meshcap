@@ -105,7 +105,7 @@ if (isset($_GET['asignarCamionero'])) {
         header("Location: ../VISTA/vehiculos.php");
         exit();
     } else {
-        header("Location: ../VISTA/vehiculos.php?error=desasignarCamionero");
+        header("Location: ../VISTA/vehiculos.php?error=asignarCamionero");
     }
 }
 

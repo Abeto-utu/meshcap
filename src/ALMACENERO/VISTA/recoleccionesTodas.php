@@ -82,7 +82,7 @@ if (isset($_SESSION['username'])) {
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h1 class="mb-3" data-i18n="collections">Recolecciones</h1>
                 <table class="table centered-table">
                     <thead>

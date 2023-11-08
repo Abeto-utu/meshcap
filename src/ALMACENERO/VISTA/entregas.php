@@ -98,9 +98,13 @@ if (isset($_SESSION['username'])) {
                 <h1 class="mb-4" data-i18n="activeDeliveries">Entregas activas</h1>
                 <?php
                 if (isset($_GET["error"])) {
-                    if ($_GET["error"] == "subirLote") {
-                        echo '<p data-i18n="uploadError">Error al subir el lote</p>';
+                    if ($_GET["error"] == "asignarPaqueteAEntrega") {
+                        echo '<p class="text-warning">Error al asignar paquete a entrega</p>';
                     }
+                    if ($_GET["error"] == "crearEntrega") {
+                        echo '<p class="text-warning">Error al crear entrega</p>';
+                    }
+
                 } ?>
                 <table class="table">
                     <thead>
