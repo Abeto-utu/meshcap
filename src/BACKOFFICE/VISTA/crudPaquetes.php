@@ -91,54 +91,32 @@
           <option value="Treinta y Tres">Treinta y tres</option>
         </select>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Localidad:</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="localidad">
-        </div>
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Localidad:</label>
+  <input type="text" class="form-control" id="exampleInputPassword1" name="localidad">
+</div>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Calle:</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="calle">
-        </div>
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Calle:</label>
+  <input type="text" class="form-control" id="exampleInputPassword1" name="calle">
+</div>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Numero:</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="numero">
-        </div>
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Numero:</label>
+  <input type="text" class="form-control" id="exampleInputPassword1" name="numero">
+</div>
 
-        <label for="exampleInputEmail1" class="form-label">Plataforma Actual:</label>
-        <select class="form-select mb-3" aria-label="Default select example" name="plataforma_actual_paquete">
-          <option value="Artigas">Artigas</option>
-          <option value="Canelones">Canelones</option>
-          <option value="Cerro Largo">Cerro Largo</option>
-          <option value="Colonia">Colonia</option>
-          <option value="Durazno">Durazno</option>
-          <option value="Flores">Flores</option>
-          <option value="Florida">Florida</option>
-          <option value="Lavalleja">Lavalleja</option>
-          <option value="Maldonado">Maldonado</option>
-          <option value="Montevideo" selected>Montevideo</option>
-          <option value="Paysandu">Paysandú</option>
-          <option value="Rio negro">Rio Negro</option>
-          <option value="Rivera">Rivera</option>
-          <option value="Rocha">Rocha</option>
-          <option value="Salto">Salto</option>
-          <option value="San jose">San José</option>
-          <option value="Soriano">Soriano</option>
-          <option value="Tacuarembo">Tacuarembó</option>
-          <option value="Treinta y Tres">Treinta y tres</option>
-        </select>
+<label for="exampleInputEmail1" class="form-label">Estado del Paquete</label>
+<select class="form-select mb-3" aria-label="Default select example" name="estado_paquete">
+  <option value="en plataforma">En Plataforma</option>
+  <option value="en plataforma destino">En Plataforma Destino</option>
+  <option value="en lote">En Lote</option>
+  <option value="en recorrido">En Recorrido</option>
+  <option value="entregado">Entregado</option>
+</select>
 
-        <label for="exampleInputEmail1" class="form-label">Estado del Paquete</label>
-        <select class="form-select mb-3" aria-label="Default select example" name="estado_paquete">
-          <option value="De Camino al Almacen">De camino al almacen</option>
-          <option value="En almacen">En almacen</option>
-          <option value="De camino al destino">De camino al destino</option>
-          <option value="Entregado">Entregado</option>
-        </select>
-
-        <button type="submit" class="btn btn-secondary " name="guardar_paquete">Guardar</button>
-    </form>
+<button type="submit" class="btn btn-secondary " name="guardar_paquete">Guardar</button>
+</form>
   </div>
   <div class="col-8 p-5 text-center">
     <div style="max-height: 600px; overflow-y: auto;">
