@@ -151,6 +151,11 @@ if (isset($_SESSION['username'])) {
                                                 type="button" class="btn btn-secondary" data-i18n="add">+</button></a>
                                     </td>
                                     <?php
+                                }else {
+                                    ?>
+                                    <td>
+                                    </td>
+                                    <?php
                                 }
                                 ?>
                                 <td>
