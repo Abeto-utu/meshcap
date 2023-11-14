@@ -139,12 +139,12 @@ if (isset($_GET["id_lote"])) {
                                 $entrega = '-';
                             }
 
-                            // Extract the state from the 'destino' variable
+                            // Extraer estado de 'destino'
                             $patron = '/\w+,\s(\w+)$/';
                             preg_match($patron, $destino, $coincidencias);
                             $departamento = $coincidencias[1];
 
-                            // Check if the 'nombre' variable is the same as the state from 'destino'
+                            // Chequear si el nombre es el mismo que el destino
                             if ($nombre === $departamento) {
                                 ?>
                                 <tr>
@@ -164,7 +164,6 @@ if (isset($_GET["id_lote"])) {
                                         <?php echo $entrega; ?>
                                     </td>
                                 </tr>
-
                                 <?php
                             }
                         }

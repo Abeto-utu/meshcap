@@ -2,118 +2,144 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Usuarios</title>
-    <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crud Usuarios</title>
+  <link rel="stylesheet" href="../CSS/stylesCrudPaquetes.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="shortcut icon" href="../../IMAGES/gorraBlanca.png" type="image/x-icon">
 </head>
+
 <body>
-<nav class="navbar navbar-dark bg-dark p-4 ">
+  <nav class="navbar navbar-dark bg-dark p-4 ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="backoffice.html" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40" alt="">MeshCap</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel">Menu del Backoffice</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../VISTA/backoffice.html">Inicio</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Menus
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="../VISTA/crudPaquetes.php"> <i class="fas fa-thin fa-box"></i> Paquetes</a></li>
-              <li><a class="dropdown-item" href="../VISTA/crudLotes.php"> <i class="fas fa-thin fa-dolly"></i> Lotes</a></li>
-              <li><a class="dropdown-item" href="../VISTA/crudVehiculos.php"> <i class="fas fa-thin fa-truck"></i> Vehiculos</a></li>
-              <li><a class="dropdown-item" href="../VISTA/crudUsuarios.php"> <i class="fas fa-thin fa-user"></i> Usuarios</a></li>
-              <li><a class="dropdown-item" href="../VISTA/crudPlataformas.php"> <i class="fas fa-thin fa-warehouse"></i> Plataformas</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="../VISTA/inicioSesion.php">Log out</a></li>
-            </ul>
-          </li>
-        </ul>
+      <a class="navbar-brand" href="backoffice.html" id="logo"><img src="../../IMAGES/gorraBlanca.png" height="40"
+          alt="">MeshCap</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+        aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title text-center" id="offcanvasDarkNavbarLabel">Menu del Backoffice</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../VISTA/backoffice.html">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Menus
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="../VISTA/crudPaquetes.php"> <i class="fas fa-thin fa-box"></i>
+                    Paquetes</a></li>
+                <li><a class="dropdown-item" href="../VISTA/crudLotes.php"> <i class="fas fa-thin fa-dolly"></i>
+                    Lotes</a></li>
+                <li><a class="dropdown-item" href="../VISTA/crudVehiculos.php"> <i class="fas fa-thin fa-truck"></i>
+                    Vehiculos</a></li>
+                <li><a class="dropdown-item" href="../VISTA/crudUsuarios.php"> <i class="fas fa-thin fa-user"></i>
+                    Usuarios</a></li>
+                <li><a class="dropdown-item" href="../VISTA/crudPlataformas.php"> <i
+                      class="fas fa-thin fa-warehouse"></i> Plataformas</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="../VISTA/inicioSesion.php">Log out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-    <div class="container-fluid row" $id="container-total">
-      <form action="../CONTROLADOR/saveCruds.php" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
+  <div class="container-fluid row" $id="container-total">
+    <form action="../CONTROLADOR/saveCruds.php" method="POST" class="col-3 p-5 m-3 bg-dark text-light">
+      <div class="mb-3">
+        <h3 class="text-light text-center">Registro Usuarios</h3>
+
         <div class="mb-3">
-          <h3 class ="text-light text-center">Registro Usuarios</h3>
+          <label for="exampleInputPassword1" class="form-label">N° Funcionario:</label>
+          <input type="number" class="form-control" id="exampleInputPassword1" name="numero_funcionario" required>
+        </div>
 
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">N° Funcionario:</label>
-                <input type="number" class="form-control" id="exampleInputPassword1" name="numero_funcionario" required>
-            </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Nombre y apellido:</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" name="nombre" required>
+        </div>
 
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Nombre y apellido:</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" name="nombre" required>
-            </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="clave" required>
+        </div>
 
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="clave" required>
-            </div>
+        <label for="exampleInputEmail1" class="form-label">Tipo de funcionario:</label>
+        <select class="form-select mb-3" aria-label="Default select example" name="cargo" required>
+          <option value="funcionario">Almacenero</option>
+          <option value="camionero">Camionero</option>
+          <option value="repartidor">Repartidor</option>
+          <option value="administrador">Backoffice</option>
+        </select>
 
-            <label for="exampleInputEmail1" class="form-label">Tipo de funcionario:</label>
-              <select class="form-select mb-3" aria-label="Default select example" name="cargo" required>
-                <option value="funcionario">Almacenero</option>
-                <option value="camionero">Camionero</option>
-                <option value="repartidor">Repartidor</option> 
-                <option value="administrador">Backoffice</option>
-              </select>
+        <button type="submit" class="btn btn-secondary" name="guardar_usuario">Guardar</button>
+    </form>
+  </div>
 
-              <button type="submit" class="btn btn-secondary" name="guardar_usuario">Guardar</button>
-      </form>
-    </div>
-    
-    <div class="col-8 p-5 text-center">
-          <div style="max-height: 600px; overflow-y: auto;">
-              <table class="table col-8">
-              <thead class="table-dark fs-4">
-                  <tr class="align-middle">
-                    <th scope="col">N° Funcionario</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cargo</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-              </thead>
-              <tbody>
-                    <?php
-                    $query = "SELECT * FROM usuario";
-                    $usuario = mysqli_query($conn,$query);
+  <div class="col-8 p-5 text-center">
+    <div style="max-height: 600px; overflow-y: auto;">
+      <table class="table col-8">
+        <thead class="table-dark fs-4">
+          <tr class="align-middle">
+            <th scope="col">N° Funcionario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $query = "SELECT * FROM usuario";
+          $usuario = mysqli_query($conn, $query);
 
-                    while($fila = mysqli_fetch_array($usuario)){ ?>
-                            <tr class="align-middle">
-                                <td><?php echo $fila['id_usuario']?></td>
-                                <td><?php echo $fila['nombre']?></td>
-                                <td><?php echo $fila['cargo']?></td>
-                                 <td class="align-middle"> 
-                                 <a href="../VISTA/editUsuarios.php?id_usuario=<?php echo $fila['id_usuario']; ?>" class="btn btn-small btn-warning"><i class="fas fa-pen-nib"></i></a>
-                                 <a href="../CONTROLADOR/deleteCruds.php?id_usuario=<?php echo $fila['id_usuario']; ?>" class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>    
-                                </td>
-                            </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-          </div>
-    </div>
-
+          while ($fila = mysqli_fetch_array($usuario)) { ?>
+            <tr class="align-middle">
+              <td>
+                <?php echo $fila['id_usuario'] ?>
+              </td>
+              <td>
+                <?php echo $fila['nombre'] ?>
+              </td>
+              <td>
+                <?php echo $fila['cargo'] ?>
+              </td>
+              <td class="align-middle">
+                <a href="../VISTA/editUsuarios.php?id_usuario=<?php echo $fila['id_usuario']; ?>"
+                  class="btn btn-small btn-warning"><i class="fas fa-pen-nib"></i></a>
+                <a href="../CONTROLADOR/deleteCruds.php?id_usuario=<?php echo $fila['id_usuario']; ?>"
+                  class="btn btn-small btn-danger"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+    crossorigin="anonymous"></script>
 </body>
